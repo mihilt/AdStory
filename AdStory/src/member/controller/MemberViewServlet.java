@@ -40,6 +40,8 @@ public class MemberViewServlet extends HttpServlet {
 		System.out.println("member@servlet = " + member);
 		
 		//3. view단 처리
+		response.getWriter().append(member.getName() + "<br>" + member.getMemberId());
+		
 //		String view = "";
 //		if(member != null) {
 //			view = "/WEB-INF/views/member/memberView.jsp";

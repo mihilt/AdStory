@@ -1,0 +1,285 @@
+@CHARSET "UTF-8";
+
+/* 자주 사용하는 색깔 목록 */
+/* 
+우리 메인 하늘색 :  rgb(66, 153, 224);
+회색 border : rgb(161, 161, 161);
+메인 글씨 : rgb(100, 100, 100);
+*/
+
+
+body {
+    margin: 0;
+    padding: 0;
+    color: rgb(100, 100, 100);
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+.search-bar{
+  max-width: 250px;
+  margin:0 auto;
+}
+.search-bar-div{
+  
+}
+
+.article-content{
+  padding: 2% 3%;
+}
+
+.category-menu{
+  text-align: center;
+  font-weight: bold;
+  margin: 5% 0%;
+}
+
+.bottom-of-main{
+  height:50px;
+}
+
+.logout-div{
+  margin: 20px 3px;
+}
+
+.profile_img_div{
+  text-align: center;
+  
+}
+
+.profile_img{
+  margin: 0px auto;
+  max-width: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.LOGO{
+  color: rgb(66, 153, 224);
+  text-align: center;
+  margin: 13% 0%;
+  font-size: 30px;
+}
+
+.article-img{
+  max-height: 100%;
+  
+  border-radius: 5px;
+  border: 1px rgb(161, 161, 161);
+  border-style: solid;
+}
+
+.all-of-div{
+  margin:0px auto;
+  max-width: 1200px;
+}
+
+/* Assign grid instructions to our parent grid container, mobile-first (hide the sidenav) */
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px 1fr;
+  grid-template-areas:
+    'header'
+    'main';
+  height: 100vh;
+}
+
+.menu-icon {
+  position: fixed; /* Needs to stay visible for all mobile scrolling */
+  display: flex;
+  top: 5px;
+  left: 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: #DADAE3;
+  border-radius: 50%;
+  z-index: 1;
+  cursor: pointer;
+  padding: 12px;
+}
+
+/* Give every child element its grid name */
+.header {
+  grid-area: header;
+  /* display: flex; */
+  display: block;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0 16px;
+}
+
+.sidenav {
+  grid-area: sidenav;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 240px;
+  position: fixed;
+  overflow-y: auto;
+  transform: translateX(-245px);
+  transition: all .6s ease-in-out;
+  z-index: 2; /* Needs to sit above the hamburger menu icon */
+  background-color: white;
+
+
+  border-right: 1px rgb(161, 161, 161);
+  border-style: solid;
+
+}
+
+.sidenav.active {
+  transform: translateX(0);
+}
+
+.sidenav__close-icon {
+  position: absolute;
+  visibility: visible;
+  top: 8px;
+  right: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #ddd;
+}
+  
+.sidenav__list {
+  padding: 0;
+  margin-top: 85px;
+  list-style-type: none;
+}
+
+.sidenav__list-item {
+  padding: 20px 20px 20px 40px;
+  color: rgb(100, 100, 100);
+}
+
+.sidenav__list-item:hover {
+  background-color: rgb(66, 153, 224);
+  color:white;
+  cursor: pointer;
+}
+
+.main {
+  grid-area: main;
+  background-color: white;
+}
+
+.article-container {
+  display: flex;
+  /* justify-content: space-between; */
+  margin: 20px;
+  padding: 20px;
+  height: 250px;
+  
+  border-radius: 5px;
+  border: 1px rgb(161, 161, 161);
+  border-style: solid;
+
+  background-color: white;
+  color: rgb(100, 100, 100);;
+}
+  
+.article-container:hover{
+  background-color: rgb(219, 243, 255);
+  cursor: pointer;
+}
+
+/* moile options */
+
+.mobile-hide{
+  display: none;
+}
+
+.mobile-text-center{
+  text-align: center;
+}
+
+.mobile-display-block{
+  display: block;
+}
+
+/* moile options */
+
+
+
+
+
+
+
+
+/* 만료 */
+.done{
+  background-color: rgba(255, 211, 211, 0.5);
+  color: rgb(100, 100, 100, 0.25);;
+}
+
+.done-check-wapper {
+  display: flex;
+}
+.done-check-content{
+  text-align: center;
+  color:red;
+  margin: 0 auto;
+
+  position: relative;
+  
+  vertical-align: middle;
+}
+.done-check-content-align{
+  margin: 0;
+}
+
+
+
+
+/* Non-mobile styles, 750px breakpoint */
+@media only screen and (min-width: 46.875em) {
+  /* Show the sidenav */
+  .main-container {
+    grid-template-columns: 240px 1fr;
+    grid-template-areas:
+      "sidenav header"
+      "sidenav main";
+  }
+  .done-check-content-align{
+    margin: 70px 0;
+  }
+
+  .done-check-wapper {
+    display: contents;
+ }
+
+  .mobile-display-block{
+    display: flex;
+  }
+
+  .mobile-text-center{
+    text-align: left;
+  }
+
+
+  .sidenav {
+    position: relative;
+    transform: translateX(0);
+  }
+
+  .sidenav__close-icon {
+    visibility: hidden;
+  }
+  .menu-icon{
+    visibility: hidden;
+  }
+  .mobile-hide{
+    display: block;
+  }
+  
+
+}
+
+/* Medium screens breakpoint (1050px) */
+@media only screen and (min-width: 65.625em) {
+  /* Break out main cards into two columns */
+  .main-cards {
+    column-count: 2;
+  }
+}

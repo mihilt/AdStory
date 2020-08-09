@@ -23,7 +23,8 @@ public class EncodeFilter implements Filter{
 			throws IOException, ServletException {
 		//전처리
 		request.setCharacterEncoding("utf-8");
-		System.out.println("인코딩 필터 전처리 실행");
+//		response.setContentType("text/html; charset=utf-8");
+		System.out.println("request, response 인코딩 필터 전처리 실행");
 		
 		//FilterChain의 다음 필터의 doFilter메소드를 호출한다.
 		//다음 필터 객체가 없다면, Servlet의 service메소드를 호출한다.
