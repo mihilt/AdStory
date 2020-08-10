@@ -97,6 +97,360 @@
                         <div> 참여인원 : 5명 </div>
                     </div>
                 </div>
+                
+                
+                
+                
+                
+                
+                
+                <h1>게시판 형식 2</h1>
+                
+<div class="container my-12 mx-auto px-4 md:px-12">
+    <div class="flex flex-wrap -mx-1 lg:-mx-4">
+
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/test_img.jpg" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                        오렌지 상품 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             식품
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 마일리지 : 1,000,000P</p>
+                    <p>단가 : 500P</p>
+                    <p>참여인원 : 5명</p>
+                </div>
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                            (주)오렌지랜드   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/puppy.png" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                    유기견 사이트 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             웹사이트
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 마일리지 : 50,300P</p>
+                    <p>단가 : 200P</p>
+                    <p>참여인원 : 133명</p>
+                </div>
+
+
+      
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                                                    멍멍맨   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/test_img.jpg" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                        오렌지 상품 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             식품
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 마일리지 : 1,000,000P</p>
+                    <p>단가 : 500P</p>
+                    <p>참여인원 : 5명</p>
+                </div>
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                            (주)오렌지랜드   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/puppy.png" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                    유기견 사이트 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             웹사이트
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 마일리지 : 50,300P</p>
+                    <p>단가 : 200P</p>
+                    <p>참여인원 : 133명</p>
+                </div>
+
+
+      
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                                                    멍멍맨   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+   
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/test_img.jpg" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                        오렌지 상품 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             식품
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 마일리지 : 1,000,000P</p>
+                    <p>단가 : 500P</p>
+                    <p>참여인원 : 5명</p>
+                </div>
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                            (주)오렌지랜드   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/puppy.png" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                    유기견 사이트 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             웹사이트
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 마일리지 : 50,300P</p>
+                    <p>단가 : 200P</p>
+                    <p>참여인원 : 133명</p>
+                </div>
+
+
+      
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                                                    멍멍맨   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+   
+
+    </div>
+</div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
 
 
                 <div class="search-bar-div">

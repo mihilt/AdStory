@@ -15,6 +15,7 @@ body {
     font-family: 'Open Sans', Helvetica, sans-serif;
     box-sizing: border-box;
 }
+
 .search-bar{
   max-width: 250px;
   margin:0 auto;
@@ -46,6 +47,10 @@ body {
   
 }
 
+.profile_img_div:hover{
+  cursor: pointer;
+}
+
 .profile_img{
   margin: 0px auto;
   max-width: 50%;
@@ -53,11 +58,17 @@ body {
   overflow: hidden;
 }
 
+
+
 .LOGO{
   color: rgb(66, 153, 224);
   text-align: center;
   margin: 13% 0%;
   font-size: 30px;
+}
+
+.LOGO:hover {
+  cursor: pointer;
 }
 
 .article-img{
@@ -283,3 +294,51 @@ body {
     column-count: 2;
   }
 }
+
+
+
+
+/* ------------------------------------------------- */
+/* 로그인 모달 */
+-------------------------------------------------
+ .animated {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        .animated.faster {
+            -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+        }
+
+        .fadeIn {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+        }
+
+        .fadeOut {
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
