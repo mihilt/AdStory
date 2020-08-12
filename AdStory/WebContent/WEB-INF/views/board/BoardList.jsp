@@ -1,3 +1,6 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="board.model.vo.Board"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -31,7 +34,7 @@
                             오렌지 쇼핑몰 홍보
                         </div>
                         <div>　</div>
-                        <div> 잔여 마일리지 : 1,000,000P </div>
+                        <div> 잔여 : 1,000,000P </div>
                         <div> 단가 : 500P</div>
                         <div>　</div>
                         <div> 참여인원 : 5명 </div>
@@ -50,7 +53,7 @@
                             훈련 학원 웹페이지 홍보
                         </div>
                         <div> </div>
-                        <div> 잔여 마일리지 : 0P </div>
+                        <div> 잔여 : 0P </div>
                         <div> 단가 : 200P</div>
                         <div>　</div>
                         <div> 참여인원 : 125명 </div>
@@ -73,7 +76,7 @@
                             오렌지 상품홍보
                         </div>
                         <div>　</div>
-                        <div> 잔여 마일리지 : 1,000,000P </div>
+                        <div> 잔여 : 1,000,000P </div>
                         <div> 단가 : 500P</div>
                         <div>　</div>
                         <div> 참여인원 : 5명 </div>
@@ -91,7 +94,7 @@
                             오렌지 상품홍보
                         </div>
                         <div>　</div>
-                        <div> 잔여 마일리지 : 1,000,000P </div>
+                        <div> 잔여 : 1,000,000P </div>
                         <div> 단가 : 500P</div>
                         <div>　</div>
                         <div> 참여인원 : 5명 </div>
@@ -104,13 +107,15 @@
                 
                 
                 
-                <h1>게시판 형식 2</h1>
+                <h1>게시판 형식 2</h1> <h1>게시판 형식 2</h1> <h1>게시판 형식 2</h1>
                 
 <div class="container my-12 mx-auto px-4 md:px-12">
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
 
+
+
         <!-- Column -->
-        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
 
             <!-- Article -->
             <article class="overflow-hidden rounded-lg shadow-lg">
@@ -138,7 +143,7 @@
                 </div>
                 
                 <div class="text-sm leading-none p-2 md:px-4">
-                    <p>잔여 마일리지 : 1,000,000P</p>
+                    <p>잔여 : 1,000,000P</p>
                     <p>단가 : 500P</p>
                     <p>참여인원 : 5명</p>
                 </div>
@@ -162,7 +167,7 @@
         <!-- END Column -->
 
         <!-- Column -->
-        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
 
             <!-- Article -->
             <article class="overflow-hidden rounded-lg shadow-lg">
@@ -190,7 +195,7 @@
                 </div>
                 
                 <div class="text-sm leading-none p-2 md:px-4">
-                    <p>잔여 마일리지 : 50,300P</p>
+                    <p>잔여 : 50,300P</p>
                     <p>단가 : 200P</p>
                     <p>참여인원 : 133명</p>
                 </div>
@@ -218,7 +223,7 @@
 
 
         <!-- Column -->
-        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
 
             <!-- Article -->
             <article class="overflow-hidden rounded-lg shadow-lg">
@@ -246,7 +251,7 @@
                 </div>
                 
                 <div class="text-sm leading-none p-2 md:px-4">
-                    <p>잔여 마일리지 : 1,000,000P</p>
+                    <p>잔여 : 1,000,000P</p>
                     <p>단가 : 500P</p>
                     <p>참여인원 : 5명</p>
                 </div>
@@ -270,7 +275,7 @@
         <!-- END Column -->
 
         <!-- Column -->
-        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
 
             <!-- Article -->
             <article class="overflow-hidden rounded-lg shadow-lg">
@@ -298,7 +303,7 @@
                 </div>
                 
                 <div class="text-sm leading-none p-2 md:px-4">
-                    <p>잔여 마일리지 : 50,300P</p>
+                    <p>잔여 : 50,300P</p>
                     <p>단가 : 200P</p>
                     <p>참여인원 : 133명</p>
                 </div>
@@ -326,7 +331,7 @@
 
    
         <!-- Column -->
-        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
 
             <!-- Article -->
             <article class="overflow-hidden rounded-lg shadow-lg">
@@ -354,7 +359,7 @@
                 </div>
                 
                 <div class="text-sm leading-none p-2 md:px-4">
-                    <p>잔여 마일리지 : 1,000,000P</p>
+                    <p>잔여 : 1,000,000P</p>
                     <p>단가 : 500P</p>
                     <p>참여인원 : 5명</p>
                 </div>
@@ -378,7 +383,7 @@
         <!-- END Column -->
 
         <!-- Column -->
-        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
 
             <!-- Article -->
             <article class="overflow-hidden rounded-lg shadow-lg">
@@ -406,7 +411,113 @@
                 </div>
                 
                 <div class="text-sm leading-none p-2 md:px-4">
-                    <p>잔여 마일리지 : 50,300P</p>
+                    <p>잔여 : 50,300P</p>
+                    <p>단가 : 200P</p>
+                    <p>참여인원 : 133명</p>
+                </div>
+
+
+      
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                                                    멍멍맨   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+      <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/test_img.jpg" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                        오렌지 상품 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             식품
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 : 1,000,000P</p>
+                    <p>단가 : 500P</p>
+                    <p>참여인원 : 5명</p>
+                </div>
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                            (주)오렌지랜드   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/puppy.png" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                    유기견 사이트 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             웹사이트
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 : 50,300P</p>
                     <p>단가 : 200P</p>
                     <p>참여인원 : 133명</p>
                 </div>
@@ -432,6 +543,221 @@
         </div>
         <!-- END Column -->
 
+
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/test_img.jpg" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                        오렌지 상품 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             식품
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 : 1,000,000P</p>
+                    <p>단가 : 500P</p>
+                    <p>참여인원 : 5명</p>
+                </div>
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                            (주)오렌지랜드   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/puppy.png" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                    유기견 사이트 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             웹사이트
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 : 50,300P</p>
+                    <p>단가 : 200P</p>
+                    <p>참여인원 : 133명</p>
+                </div>
+
+
+      
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                                                    멍멍맨   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+   
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/test_img.jpg" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                        오렌지 상품 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             식품
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 : 1,000,000P</p>
+                    <p>단가 : 500P</p>
+                    <p>참여인원 : 5명</p>
+                </div>
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                            (주)오렌지랜드   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
+
+        <!-- Column -->
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
+
+            <!-- Article -->
+            <article class="overflow-hidden rounded-lg shadow-lg">
+
+                <a href="#">
+                    <img alt="Placeholder" class="block h-auto w-full" src="<%=request.getContextPath() %>/images/puppy.png" alt="홍보 사진">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="#">
+                                                    유기견 사이트 홍보
+                        </a>
+                    </h1>
+
+                </header>
+                
+                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+                    <a class="no-underline hover:underline text-black" href="#">
+                                             웹사이트
+                    </a>
+                    <p class="text-grey-darker text-sm">
+                        20/08/11
+                    </p>
+                </div>
+                
+                <div class="text-sm leading-none p-2 md:px-4">
+                    <p>잔여 : 50,300P</p>
+                    <p>단가 : 200P</p>
+                    <p>참여인원 : 133명</p>
+                </div>
+
+
+      
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+                        <p class="text-sm">
+                                                    멍멍맨   
+                        </p>
+                    </a>
+                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                        <span class="hidden">Like</span>
+                        <i class="fa fa-heart"></i>
+                    </a>
+                </footer>
+
+            </article>
+            <!-- END Article -->
+
+        </div>
+        <!-- END Column -->
    
 
     </div>
@@ -449,9 +775,15 @@
                 
                 
                 
-                
-                
-
+                <div class = "flow-root px-12">               
+	                <div>
+	                        <button
+	                        class="float-right bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded"
+	                        onclick="글쓰자()">
+	                                                      글쓰기
+	                        </button>
+	                </div>
+                </div>
 
                 <div class="search-bar-div">
                     <div class="search-bar relative text-lg bg-transparent text-gray-800">
@@ -494,6 +826,139 @@
     
     
     
+    
+<br/><br/><br/><br/><br/><br/><br/><br/>
+  
+가자 게시판 DB 연동
+   
+<%
+    List<Board> list = (List<Board>)request.getAttribute("list");
+%>    
+    <h2>게시판 </h2>
+    
+    <%  if(memberLoggedIn != null){ %>
+    <input type="button" value="글쓰기" id="btn-add" 
+           onclick="location.href='<%= request.getContextPath() %>/board/insert';" />
+    <%  } %>    
+    
+    
+    <div class="container my-12 mx-auto px-4 md:px-12">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+	        <%  if(list == null || list.isEmpty()){  %>     
+	        <tr>
+	            <th colspan="6">조회된 게시물이 없습니다.</th>
+	        </tr>
+	        <%  
+	            } else {
+	            	DecimalFormat Commas = new DecimalFormat("#,###");
+
+	                for(Board b : list){
+	        %>      
+
+	               <!-- Column -->
+			        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4">
+			
+			            <!-- Article -->
+			            <article class="overflow-hidden rounded-lg shadow-lg">
+			
+			                <a href="#">
+			                    <img alt="Placeholder" class="block h-auto w-full"
+			                    <% if (b.getMainImage() == null){ %>
+				                    <img src="<%= request.getContextPath() %>/images/defaultImg.png" alt="홍보 사진"/>
+				                <% } else {%>
+			                         src="<%=request.getContextPath() %><%=b.getMainImage()%>"/>
+			                    <% } %>
+			                    
+			                </a>
+			
+			                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+			                    <h1 class="text-lg">
+			                        <a class="no-underline hover:underline text-black" href="#">
+			                          <%= b.getTitle() %>
+			                        </a>
+			                    </h1>
+			
+			                </header>
+			                
+			                <div class="flex items-center justify-between leading-tight p-2 md:px-4">
+			                    <a class="no-underline hover:underline text-black" href="#">
+			                      <%= b.getRefBoardCategoryName() %>
+			                    </a>
+			                    <p class="text-grey-darker text-sm">
+			                        <%= b.getEnrollDate() %>
+			                    </p>
+			                </div>
+			                
+			                <div class="text-sm leading-none p-2 md:px-4">
+			                    <p>잔여 : <%=(String)Commas.format(b.getPoint())%>P</p>
+			                    <p>단가 : <%=(String)Commas.format(b.getClickPrice())%>P</p>
+			                    <p>참여인원 : <%=b.getApplyNum() %></p>
+			                </div>
+			
+			
+			      
+			
+			                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+			                    <a class="flex items-center no-underline hover:underline text-black" href="#">
+			                        <p class="text-sm">
+			                          <%= b.getRefMemberName() %>   
+			                        </p>
+			                    </a>
+			                    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+			                        <span class="hidden">Like</span>
+			                        <i class="fa fa-heart"></i>
+			                    </a>
+			                </footer>
+			
+			            </article>
+			            <!-- END Article -->
+			
+			        </div>
+			        <!-- END Column -->
+
+		    <%
+			        }
+			    } 
+		    %>    
+        
+        </div>
+    </div>
+
+<%  if(list == null || list.isEmpty()){  %>     
+        <tr>
+            <th colspan="6">조회된 게시물이 없습니다.</th>
+        </tr>
+<%  
+    } else {
+        for(Board b : list){
+%>      
+        <tr>
+            <td><%= b.getKey() %></td>
+            <td>
+                <a href="<%= request.getContextPath() %>/board/view?boardNo=<%= b.getKey() %>">
+                <%= b.getTitle() %>
+                </a>
+            </td>
+            <td><%= b.getUserKey() %></td>
+            <td><%= b.getEnrollDate() %></td>
+            <td>
+                <% if (b.getMainImage() == null){ %>
+                <img src="<%= request.getContextPath() %>/images/file.png" alt="첨부파일" width="16px"/>
+                <% } %>
+            </td>
+        </tr>   
+<%
+        }
+    } 
+%>      
+    </table>
+
+    <div id='pageBar'>
+        <%= request.getAttribute("pageBar") %>
+    </div>
+
+
+
     
     
     

@@ -87,6 +87,31 @@ public class MemberDAO {
 		
 		return member;
 	}
+
+
+	public int updateMemberPoint(Connection conn, String userId, int pointAmount) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateMemberPoint"); 
+		
+		System.out.println(query);
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, pointAmount);
+			pstmt.setString(2, userId);
+
+			System.out.println(pstmt);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println("result@DAO = " + result);
+		return result;
+	}
 	
 	
 	

@@ -18,16 +18,19 @@ public class Board implements Serializable {
 	private String originalFileName;
 	private String renamedFileName;
 	private String applyNum;
+	private String mainImage;
 	
+	private String refMemberName;
+	private String refBoardCategoryName;
 	
 	public Board() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Board(int key, int categoryKey, int userKey, String title, String content, Date enrollDate, String status,
-			int clickPrice, int point, String url, String originalFileName, String renamedFileName, String applyNum) {
+			int clickPrice, int point, String url, String originalFileName, String renamedFileName, String applyNum,
+			String mainImage, String refMemberName, String refBoardCategoryName) {
 		super();
 		this.key = key;
 		this.categoryKey = categoryKey;
@@ -42,147 +45,146 @@ public class Board implements Serializable {
 		this.originalFileName = originalFileName;
 		this.renamedFileName = renamedFileName;
 		this.applyNum = applyNum;
+		this.mainImage = mainImage;
+		this.refMemberName = refMemberName;
+		this.refBoardCategoryName = refBoardCategoryName;
 	}
-
 
 	public int getKey() {
 		return key;
 	}
 
-
 	public void setKey(int key) {
 		this.key = key;
 	}
-
 
 	public int getCategoryKey() {
 		return categoryKey;
 	}
 
-
 	public void setCategoryKey(int categoryKey) {
 		this.categoryKey = categoryKey;
 	}
-
 
 	public int getUserKey() {
 		return userKey;
 	}
 
-
 	public void setUserKey(int userKey) {
 		this.userKey = userKey;
 	}
-
 
 	public String getTitle() {
 		return title;
 	}
 
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 	public String getContent() {
 		return content;
 	}
 
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 
 	public Date getEnrollDate() {
 		return enrollDate;
 	}
 
-
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
-
 
 	public String getStatus() {
 		return status;
 	}
 
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 
 	public int getClickPrice() {
 		return clickPrice;
 	}
 
-
 	public void setClickPrice(int clickPrice) {
 		this.clickPrice = clickPrice;
 	}
-
 
 	public int getPoint() {
 		return point;
 	}
 
-
 	public void setPoint(int point) {
 		this.point = point;
 	}
-
 
 	public String getUrl() {
 		return url;
 	}
 
-
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
 
 	public String getOriginalFileName() {
 		return originalFileName;
 	}
 
-
 	public void setOriginalFileName(String originalFileName) {
 		this.originalFileName = originalFileName;
 	}
-
 
 	public String getRenamedFileName() {
 		return renamedFileName;
 	}
 
-
 	public void setRenamedFileName(String renamedFileName) {
 		this.renamedFileName = renamedFileName;
 	}
-
 
 	public String getApplyNum() {
 		return applyNum;
 	}
 
-
 	public void setApplyNum(String applyNum) {
 		this.applyNum = applyNum;
 	}
 
+	public String getMainImage() {
+		return mainImage;
+	}
+
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
+	}
+
+	public String getRefMemberName() {
+		return refMemberName;
+	}
+
+	public void setRefMemberName(String refMemberName) {
+		this.refMemberName = refMemberName;
+	}
+
+	public String getRefBoardCategoryName() {
+		return refBoardCategoryName;
+	}
+
+	public void setRefBoardCategoryName(String refBoardCategoryName) {
+		this.refBoardCategoryName = refBoardCategoryName;
+	}
 
 	@Override
 	public String toString() {
 		return "Board [key=" + key + ", categoryKey=" + categoryKey + ", userKey=" + userKey + ", title=" + title
 				+ ", content=" + content + ", enrollDate=" + enrollDate + ", status=" + status + ", clickPrice="
 				+ clickPrice + ", point=" + point + ", url=" + url + ", originalFileName=" + originalFileName
-				+ ", renamedFileName=" + renamedFileName + ", applyNum=" + applyNum + "]";
+				+ ", renamedFileName=" + renamedFileName + ", applyNum=" + applyNum + ", mainImage=" + mainImage
+				+ ", refMemberName=" + refMemberName + ", refBoardCategoryName=" + refBoardCategoryName + "]";
 	}
 
-	
-	
 }

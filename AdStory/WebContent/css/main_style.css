@@ -81,7 +81,7 @@ body {
 
 .all-of-div{
   margin:0px auto;
-  max-width: 1200px;
+  /* max-width: 1200px; */
 }
 
 /* Assign grid instructions to our parent grid container, mobile-first (hide the sidenav) */
@@ -155,7 +155,7 @@ body {
   
 .sidenav__list {
   padding: 0;
-  margin-top: 85px;
+  margin-top: 30px;
   list-style-type: none;
 }
 

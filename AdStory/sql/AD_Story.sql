@@ -21,6 +21,7 @@ CREATE TABLE "MEMBER" (
 	"MEMBER_ROLE"	CHAR(1)	DEFAULT 'U'	NOT NULL,
 	"POINT"	NUMBER	DEFAULT 0	NOT NULL,
 	"PHONE_NUM"	CHAR(11)		NOT NULL,
+	"ACCOUNT_NAME"	VARCHAR2(20)		NOT NULL,
 	"ACCOUNT_NUM"	CHAR(30)		NOT NULL,
 	"BUSINESS_NUM"	CHAR(10)		NULL,
 	"NAME"	VARCHAR2(30)		NOT NULL,
@@ -49,7 +50,8 @@ CREATE TABLE "AD_POST" (
 	"URL"	VARCHAR2(100)		NOT NULL,
 	"ORIGINAL_FILE_NAME"	VARCHAR2(200)		NULL,
 	"RENAMED_FILE_NAME"	VARCHAR2(200)		NULL,
-	"APPLY_NUM"	NUMBER	DEFAULT 0	NOT NULL
+	"APPLY_NUM"	NUMBER	DEFAULT 0	NOT NULL,
+	"MAIN_IMAGE"	VARCHAR2(200)		NULL
 );
 
 CREATE TABLE "PNT_EX_LOG" (
@@ -112,7 +114,6 @@ CREATE TABLE "PNT_LOG" (
 	"STATUS"	CHAR(1)		NOT NULL,
 	"REAMIN_POINT"	NUMBER		NOT NULL
 );
-
 
 
 CREATE TABLE "AD_POST_COMM" (
@@ -269,9 +270,14 @@ REFERENCES "MEMBER" (
 
 
 
+
+
+
 ALTER TABLE "MEMBER" ADD CONSTRAINT "CK_MEMBER_ROLE" CHECK (MEMBER_ROLE IN ('A', 'U', 'C'));
 
 ALTER TABLE "MEMBER" ADD CONSTRAINT "UQ_MEMBER_ID" UNIQUE (MEMBER_ID);
+
+ALTER TABLE "PNT_LOG" ADD CONSTRAINT "CK_STATUS" CHECK (STATUS IN ('I', 'O', 'E', 'C', 'A'));
 
 --====================================
 -- SEQUENCE
@@ -308,11 +314,11 @@ CREATE SEQUENCE SEQ_AD_POST_COMM;
 SELECT * FROM USER_SEQUENCES;
 
 -- ======================================
--- 관리자 회원 추가 JDBC 테스트
+--  회원 추가
 -- ======================================
-INSERT INTO MEMBER VALUES(SEQ_MEMBER.NEXTVAL,'kimdh','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','A',DEFAULT,'01000000000','110-392-442372',NULL,'김관리자','kimdh@naver.com','서울시 강남',DEFAULT );
-INSERT INTO MEMBER VALUES(SEQ_MEMBER.NEXTVAL,'honggd','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','U',DEFAULT,'01000000000','110-392-442372',NULL,'홍지디','kimdh@naver.com','서울시 강남',DEFAULT );
-INSERT INTO MEMBER VALUES(SEQ_MEMBER.NEXTVAL,'sinsa','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','C',DEFAULT,'01000000000','110-392-442372',NULL,'신사','kimdh@naver.com','서울시 강남',DEFAULT );
+INSERT INTO MEMBER VALUES(SEQ_MEMBER.NEXTVAL,'kimdh','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','A',DEFAULT,'01000000000','신한은행','110-392-442372',NULL,'김관리자','kimdh@naver.com','서울시 강남',DEFAULT );
+INSERT INTO MEMBER VALUES(SEQ_MEMBER.NEXTVAL,'honggd','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','U',DEFAULT,'01000000000','신한은행','110-392-442372',NULL,'홍지디','kimdh@naver.com','서울시 강남',DEFAULT );
+INSERT INTO MEMBER VALUES(SEQ_MEMBER.NEXTVAL,'sinsa','1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==','C',DEFAULT,'01000000000','신한은행','110-392-442372',NULL,'신사','kimdh@naver.com','서울시 강남',DEFAULT );
 
 --DELETE FROM MEMBER WHERE MEMBER_ID = 'sinsa';
 
@@ -320,23 +326,32 @@ SELECT*FROM MEMBER;
 
 
 --모든 행의 비밀번호를 암호화 처리 (1234)
-update member 
-set password = '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==';
-commit;
+--update member 
+--set password = '1ARVn2Auq2/WAqx2gNrL+q3RNjAzXpUfCXrzkA6d4Xa22yhRLy4AC50E+6UTPoscbo31nbOoq51gvkuXzJ6B2w==';
+--commit;
 
 COMMIT;
 --COMMIT 꼭하자 ㅠ
 
+-- ======================================
+--  게시글 카테고리 추가
+-- ======================================
+INSERT INTO AD_POST_CATEG VALUES(SEQ_AD_POST_CATEG.NEXTVAL, '식품');
+INSERT INTO AD_POST_CATEG VALUES(SEQ_AD_POST_CATEG.NEXTVAL, '교육');
+
+
+SELECT * FROM AD_POST_CATEG;
+
+-- ======================================
+--  게시글 추가
+-- ======================================
+
+INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 1, 1, '오렌지 상품 홍보','오렌지 어쩌구저쩌구 ㅁㄴㅇㄹ',SYSDATE, DEFAULT, 500, 1000000, 'https://kr.sunkist.com/', NULL, NULL, DEFAULT, NULL);
+INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 2, 2, '강아지 훈련 사이트','강아지 훈련 잘해요 저희사이트 좋아요',SYSDATE, DEFAULT, 300, 2000000, 'https://www.bodeum.co.kr/html/edu_movie/', NULL, NULL, DEFAULT, NULL);
 
 
 
-
-
-
-
-
-
-
+SELECT * FROM AD_POST;
 
 
 
@@ -372,3 +387,74 @@ DROP TABLE AD_POST_COMM CASCADE CONSTRAINTS;
 SELECT * FROM ALL_OBJECTS WHERE OBJECT_TYPE = 'TABLE';
 SELECT * FROM tabs;
 
+
+
+
+--시퀀스 일괄 삭제
+DROP SEQUENCE SEQ_AD_POST;
+DROP SEQUENCE SEQ_AD_POST_CATEG;
+DROP SEQUENCE SEQ_AD_POST_COMM;
+DROP SEQUENCE SEQ_FIXED_URL;
+DROP SEQUENCE SEQ_IP_LOG;
+DROP SEQUENCE SEQ_MEMBER;
+DROP SEQUENCE SEQ_M_POST;
+DROP SEQUENCE SEQ_M_POST_CATEG;
+DROP SEQUENCE SEQ_PNT_EX_LOG;
+DROP SEQUENCE SEQ_PNT_LOG;
+DROP SEQUENCE SEQ_REPORT;
+DROP SEQUENCE SEQ_WISH_LIST;
+
+
+
+--========================= 
+-- 연습장
+--=========================
+select * from ( select rownum as rnum, v.* from( select * from board order by date desc) v ) v where rnum between ? and ?;
+
+
+SELECT * FROM AD_POST WHERE KEY = 2;
+
+SELECT * 
+FROM ( 
+    select rownum as rnum, 
+        v.* from( 
+            select * 
+            from AD_POST 
+            order by ENROLL_DATE desc
+            ) v 
+        ) v 
+where rnum between 1 and 12;
+
+
+select count(*) as "cnt" from AD_POST;
+
+
+UPDATE MEMBER SET POINT = POINT +(3000) WHERE MEMBER_ID = 'sinsa';
+
+SELECT * FROM MEMBER;
+
+
+
+SELECT *
+FROM (
+SELECT P.*,
+              C.CATEGORY_NAME
+FROM(
+SELECT P.*,
+              M.NAME 
+FROM AD_POST P
+LEFT OUTER JOIN MEMBER M ON P.USER_KEY = M.KEY)P
+LEFT OUTER JOIN AD_POST_CATEG C ON P.CATEGORY_KEY = C.KEY)
+WHERE KEY = 1;
+
+--SELECT * FROM ( SELECT P.*, C.CATEGORY_NAME FROM( SELECT P.*, M.NAME FROM AD_POST P LEFT OUTER JOIN MEMBER M ON P.USER_KEY = M.KEY)P LEFT OUTER JOIN AD_POST_CATEG C ON P.CATEGORY_KEY = C.KEY) WHERE KEY = ?
+
+select * 
+    from ( select rownum as rnum, v.* 
+            from( SELECT * FROM ( SELECT P.*, C.CATEGORY_NAME FROM( SELECT P.*, M.NAME FROM AD_POST P LEFT OUTER JOIN MEMBER M ON P.USER_KEY = M.KEY)P LEFT OUTER JOIN AD_POST_CATEG C ON P.CATEGORY_KEY = C.KEY) 
+                        order by ENROLL_DATE desc
+                        ) v 
+            ) v 
+where rnum between 1 and 10;
+
+--select * from ( select rownum as rnum, v.* from( SELECT * FROM ( SELECT P.*, C.CATEGORY_NAME FROM( SELECT P.*, M.NAME FROM AD_POST P LEFT OUTER JOIN MEMBER M ON P.USER_KEY = M.KEY)P LEFT OUTER JOIN AD_POST_CATEG C ON P.CATEGORY_KEY = C.KEY) order by ENROLL_DATE desc) v ) v where rnum between ? and ?

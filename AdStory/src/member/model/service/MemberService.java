@@ -31,6 +31,25 @@ public class MemberService {
 		
 		return member; 
 	}
+
+	public int updateMemberPoint(String userId, int pointAmount) {
+		//1. DB Connection객체 생성
+		Connection conn = getConnection();
+		System.out.println("conn = " + conn);
+		//2. DAO 처리 요청
+		int result = memberDAO.updateMemberPoint(conn, userId, pointAmount);
+		
+		//3. DML요청인 경우, Transaction 처리
+		//4. Connection 반납(close)
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
 	
 }
 
