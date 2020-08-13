@@ -183,14 +183,15 @@
                     
 					<li class="sidenav__list-item"
 						onclick="location.href='<%= request.getContextPath() %>/';">홈</li>
-					<li class="sidenav__list-item"
-						onclick="location.href='<%= request.getContextPath() %>/board/list';">게시판</li>
+					
 					<li class="sidenav__list-item">마이페이지</li>
-					<li class="sidenav__list-item">회사소개</li>
-					<li class="sidenav__list-item">광고하기</li>
-					<li class="sidenav__list-item">포인트랭킹</li>
+					
+					<li class="sidenav__list-item"
+						onclick="location.href='<%= request.getContextPath() %>/board/list';">광고 게시판</li>
+					
 					<li class="sidenav__list-item">문의게시판</li>
-					<li class="sidenav__list-item">공지사항</li>
+					
+					
 				</ul>
 			</aside>
 

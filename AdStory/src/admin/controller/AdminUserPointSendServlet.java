@@ -36,6 +36,7 @@ public class AdminUserPointSendServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		int pointAmount = Integer.parseInt(request.getParameter("pointAmount"));
 		String radio = request.getParameter("radio");
+
 		
 		System.out.println("userId = " + userId);
 		System.out.println("pointAmount = " + pointAmount);
@@ -54,7 +55,7 @@ public class AdminUserPointSendServlet extends HttpServlet {
 		String loc = request.getContextPath() + "/admin/userPoint";
 		
 		if(result>0){
-			msg = userId + " 회원에게 " + pointAmount + " 만큼 성공적으로 포인트의 증감이 이루어졌습니다.";
+			msg = "성공적으로 " + userId + " 회원에게 " + pointAmount + " 만큼 포인트의 증감이 이루어졌습니다.";
 		}
 		else { 
 			msg = "실패했습니다.";	

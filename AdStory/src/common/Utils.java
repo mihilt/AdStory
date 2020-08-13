@@ -76,27 +76,27 @@ public class Utils {
 			
 		}
 		else {
-			pageBar.append("<a href='" + url + "cPage=" + (pageNo - 1) + "'>이전</a>\n");
+			pageBar.append("<a href='" + url + "cPage=" + (pageNo - 1) + "' class=\"py-2 px-4 leading-tight bg-white border border-gray-500 text-gray-700 border-r-0 ml-0 rounded-l hover:bg-blue-500 hover:text-white\">이전</a>\n");
 		}
 		
 		//PageNo
 		while(pageNo <= pageEnd && pageNo <= totalPage) {
 			//현재페이지인 경우
 			if(pageNo == cPage) {
-				pageBar.append("<span class='cPage'>" + pageNo + "</span>\n");
+				pageBar.append("<span class=\"py-2 px-4 leading-tight bg-blue-500 border border-gray-500 text-white border-r-0 \">" + pageNo + "</span>\n");
 			}
 			//현재페이지가 아닌 경우
 			else {
-				pageBar.append("<a href='" + url + "cPage=" + pageNo + "'>" + pageNo + "</a>\n");
+				pageBar.append("<a href='" + url + "cPage=" + pageNo + "' class=\"py-2 px-4 leading-tight bg-white border border-gray-500 text-gray-700 border-r-0 hover:bg-blue-500 hover:text-white\">" + pageNo + "</a>\n");
 			}
 			pageNo++;
 		}
 		//다음
 		if(pageNo > totalPage) {
-			
+			pageBar.append("<span class=\"py-2 px-4 leading-tight border-l border-gray-500 \"></span>\n");
 		}
 		else {
-			pageBar.append("<a href='" + url + "cPage=" + pageNo + "'>다음</a>\n");
+			pageBar.append("<a class=\"py-2 px-4 leading-tight bg-white border border-gray-500 text-gray-700 rounded-r hover:bg-blue-500 hover:text-white\" href='" + url + "cPage=" + pageNo + "'>다음</a>\n");
 		}
 		
 		return pageBar.toString();

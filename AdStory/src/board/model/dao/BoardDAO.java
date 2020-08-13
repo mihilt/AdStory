@@ -113,6 +113,7 @@ public class BoardDAO {
 				b.setOriginalFileName(rset.getString("original_file_name"));
 				b.setRenamedFileName(rset.getString("renamed_file_name"));
 				b.setApplyNum(rset.getString("apply_num"));
+				b.setMainImage(rset.getString("main_image"));
 				
 				b.setRefMemberName(rset.getString("name"));
 				b.setRefBoardCategoryName(rset.getString("category_name"));

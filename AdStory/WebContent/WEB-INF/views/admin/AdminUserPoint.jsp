@@ -6,15 +6,16 @@
 function pointSendValidate(){
     const $userId = $("[name=userId]");
     const $pointAmount = $("[name=pointAmount]");
+    const $message = $("[name=message]");
     
 
     if(/^.+$/.test($userId.val()) == false){
         alert("정확한 아이디를 입력하세요.");
         return false;
     }
-    if((/[0-9]/g.test($pointAmount.val()) == false) && ($pointAmount.val()==null)){
+    if((/[^0-9]/g.test($pointAmount.val()) == true) | ($pointAmount.val()=="")){
     	
-        alert("적립할 마일리지를 정확하게 입력하세요.");
+        alert("적립할 포인트를 정확하게 입력하세요.");
         return false;
     }
     
@@ -48,12 +49,15 @@ function pointSendValidate(){
                 </div>
             </div>                               
                                                       
-                                                      
-            <input name ="userId" class="m-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="inline-full-name" type="text" placeholder="아이디">
-            <input name ="pointAmount" class="m-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="inline-full-name" type="text" placeholder="적립 마일리지">
+            <div>                                          
+                <input name ="userId" class="m-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="아이디">
+            </div>
+            <div>    
+                <input name ="pointAmount" class="m-2 bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="적립 포인트">
+            </div>
             
 
-			<button value="등록하기" class="m-2 text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1" type="submit"
+			<button class="m-2 text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1" type="submit"
             onclick="return pointSendValidate();"/>
                             확인
             </button>

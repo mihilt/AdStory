@@ -7,11 +7,40 @@
     
     
     <div class = "my-10">
+        <button class="text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1" type="button"
+        onclick="location.href = '<%= request.getContextPath() %>/admin/userPoint';"/>
+                회원 포인트 관리
+        </button>    
+    
 	    <button class="text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1" type="button"
 	    onclick="location.href = '<%= request.getContextPath() %>/admin/userPoint';"/>
-		  회원 포인트 관리
+		  asfasfasf
 		</button>
+		
+		
+		<button class="text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1" type="button"
+        onclick="location.href = '<%= request.getContextPath() %>/admin/userPoint';"/>
+          qweqwbwe
+        </button>
+        <button class="text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1" type="button"
+        onclick="location.href = '<%= request.getContextPath() %>/admin/userPoint';"/>
+                 회vvqwecqw
+        </button>
     </div>
+    
+    <div class = "my-10">
+        <button class="text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1" type="button"
+        onclick="location.href = '<%= request.getContextPath() %>/admin/userPointLogView';"/>
+                포인트 로그 조회
+        </button>    
+    </div>
+    <div class = "my-10">
+        <button class="text-blue-500 bg-transparent border border-solid border-blue-500 hover:bg-blue-500 hover:text-white active:bg-blue-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1" type="button"
+        onclick="location.href = '<%= request.getContextPath() %>/admin/userPoint';"/>
+                회eqwccased
+        </button>    
+    </div>
+    
 </div>
 
 
