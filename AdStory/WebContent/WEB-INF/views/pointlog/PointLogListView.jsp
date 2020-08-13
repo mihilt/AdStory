@@ -27,9 +27,6 @@
     List<PointLog> list = (List<PointLog>)request.getAttribute("list");
     
     String realStatus = "";
-    
-    
-
 %>    
   
 
@@ -87,9 +84,9 @@
           
           <!-- 포인트 -->
     <% if(l.getPoint() > 0){ %>        
-          <td class="text-blue-600 border px-4 py-2">+<%=l.getPoint() %>P</td>
+          <td class="text-blue-600 border px-4 py-2">+<%=(String)Commas.format(l.getPoint()) %>P</td>
     <% } else { %>      
-          <td class="text-red-700 border px-4 py-2"><%=l.getPoint() %>P</td>
+          <td class="text-red-700 border px-4 py-2"><%=(String)Commas.format(l.getPoint()) %>P</td>
     <% } %>
     
                   <!-- 게시글 -->

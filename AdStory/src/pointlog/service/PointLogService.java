@@ -10,6 +10,7 @@ import board.model.dao.BoardDAO;
 import board.model.vo.Board;
 import pointlog.DAO.PointLogDAO;
 import pointlog.vo.PointLog;
+import pointlog.vo.PointLogRanking;
 
 public class PointLogService {
 	private PointLogDAO pointLogDAO = new PointLogDAO();
@@ -26,6 +27,13 @@ public class PointLogService {
 		int totalBoardCount = pointLogDAO.selectPointLogCount(conn);
 		close(conn);
 		return totalBoardCount;
+	}
+
+	public List<PointLogRanking> PointLogRankingTodayList() {
+		Connection conn = getConnection();
+		List<PointLogRanking> list= pointLogDAO.PointLogRankingTodayList(conn);
+		close(conn);
+		return list;
 	}
 
 }

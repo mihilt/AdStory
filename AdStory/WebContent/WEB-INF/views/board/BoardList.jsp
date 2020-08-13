@@ -30,8 +30,7 @@
 
             <%  
                 } else {
-                    DecimalFormat Commas = new DecimalFormat("#,###");
-
+                	
                     for(Board b : list){
             %>      
 
@@ -107,6 +106,8 @@
 	                </div>
                 </div>
     <%  } %>  
+    
+
                 <div class="search-bar-div">
                     <div class="search-bar relative text-lg bg-transparent text-gray-800">
                         <div class="flex items-center border-b border-b-2 border-gray-500 py-2">

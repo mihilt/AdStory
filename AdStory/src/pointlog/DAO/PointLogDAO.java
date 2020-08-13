@@ -16,6 +16,7 @@ import java.util.Properties;
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
 import pointlog.vo.PointLog;
+import pointlog.vo.PointLogRanking;
 
 public class PointLogDAO {
 	private Properties prop = new Properties();
@@ -128,7 +129,38 @@ public class PointLogDAO {
 		return result;
 
 	}
-	
+
+	public List<PointLogRanking> PointLogRankingTodayList(Connection conn) {
+		List<PointLogRanking> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("PointLogRankingTodayList");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				PointLogRanking l = new PointLogRanking();
+
+				l.setMemberId(rset.getString("member_id"));
+				l.setSumPoint(rset.getInt("sum_point"));
+				
+				list.add(l);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("list@boardDAO = " + list);
+		return list;
+	}
+
+
 	
 	
 	
