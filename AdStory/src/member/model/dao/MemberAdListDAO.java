@@ -57,6 +57,7 @@ public class MemberAdListDAO {
 				l.setName(rset.getString("name"));
 				l.setStatus(rset.getString("status"));
 				l.setPoint(rset.getInt("point"));
+				l.setRevenue(rset.getInt("revenue"));
 
 				list.add(l);
 			}
