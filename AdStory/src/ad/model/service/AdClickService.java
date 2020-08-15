@@ -36,7 +36,7 @@ public class AdClickService {
 				
 				int userKey = adClick.getUserKey(); //광고 따간 유저의 키값
 				int clickPrice = adClick.getClickPrice(); //단가
-				int postKey = adClick.getPostKey();
+				int postKey = adClick.getPostKey(); //게시글 키값
 				
 //				아이피 목록에 추가
 //				Boolean insertIP = adClickDAO.insertIP(conn, adListKey ,clientIp);
@@ -59,10 +59,20 @@ public class AdClickService {
 				Boolean updateAdListRevenue = adClickDAO.updateAdListRevenue(conn, clickPrice, userKey, postKey);
 				System.out.println("updateAdListRevenue@Service = " + updateAdListRevenue);
 				
+				//광고게시글 조회를 통해 잔액이 0인 경우 게시글 마감상태로 변경시키고, 아 게시글 리스트 마감게시글 안보이게 처리하자..
+				int checkAdPostRemainPoint = adClickDAO.checkAdPostRemainPoint(conn, postKey);
+				System.out.println("checkAdPostRemainPoint@Service = " + checkAdPostRemainPoint);
 				
+				if(checkAdPostRemainPoint <= 0) {
+					System.out.println("게시글 마감");
+					Boolean updatePostState = adClickDAO.updatePostState(conn, postKey);
+					System.out.println("updatePostState@Service = " + updatePostState);
+				}
 			}
 			
-		}
+		} else {System.out.println("마감된 게시글입니다.");}
+		
+		//나중에 결과 모아서 오류시 롤백 여기 추가.
 		
 		
 		close(conn);

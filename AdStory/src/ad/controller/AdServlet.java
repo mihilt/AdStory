@@ -38,7 +38,8 @@ public class AdServlet extends HttpServlet {
 		
 		AdClick adClick = new AdClickService().click(num ,clientIp);
 		
-
+		System.out.println(adClick.getURL());
+		response.sendRedirect(adClick.getURL());
 
 //		일단 광고 URL 접속시
 		

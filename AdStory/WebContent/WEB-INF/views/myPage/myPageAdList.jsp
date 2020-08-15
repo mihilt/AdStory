@@ -55,8 +55,8 @@
                 <td class="border px-4 py-2"><%= l.getTitle() %></td>
                 <td class="border px-4 py-2"><%= l.getName() %></td>
                 <td class="border px-4 py-2"><%= l.getStatus() %></td>
-                <td class="border px-4 py-2"><%= l.getPoint() %></td>
-                <td class="border px-4 py-2"><%= l.getRevenue() %></td>
+                <td class="border px-4 py-2"><%= (String)Commas.format(l.getPoint()) %></td>
+                <td class="border px-4 py-2"><%= (String)Commas.format(l.getRevenue()) %></td>
                 <td class="border px-4 py-2">http://<%= request.getServerName() %>:<%= request.getServerPort() %><%= request.getContextPath() %>/AD?num=<%= l.getKey() %></td>
                 
             </tr>

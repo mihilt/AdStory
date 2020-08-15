@@ -82,6 +82,6 @@
         
     </div>
     
-    <p class = "text-center my-10 text-red-600 text-sm">*일반회원이 게시글 홍보를 통해 얻은 포인트만 집계 처리한 순위입니다.</p>
+    <p class = "text-center my-10 text-red-600 text-sm">*일반회원이 게시글 홍보를 통해 오늘 얻은 포인트만 집계 처리한 순위입니다.</p>
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

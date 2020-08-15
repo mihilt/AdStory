@@ -221,4 +221,53 @@ public class AdClickDAO {
 		return (resultPstmt>0) ? true : false;
 	}
 
+	public int checkAdPostRemainPoint(Connection conn, int postKey) {
+		int point = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("checkAdPostRemainPoint");
+
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postKey);
+		
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				point = rset.getInt("point");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return point;
+	}
+
+	public Boolean updatePostState(Connection conn, int postKey) {
+		int resultPstmt = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updatePostState"); 
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, postKey);
+
+			resultPstmt = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return (resultPstmt>0) ? true : false;
+	}
+
 }
