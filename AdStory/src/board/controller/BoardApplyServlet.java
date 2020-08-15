@@ -42,7 +42,7 @@ public class BoardApplyServlet extends HttpServlet {
 				//2.비지니스로직 호출
 				//게시글 하나 가져오기
 				BoardService boardService = new BoardService();
-				int result = boardService.insertFixedUrl(postKey,userKey);
+				int result = boardService.insertAdList(postKey,userKey);
 
 				
 				String view = request.getContextPath()+"/board/view?boardNo="+postKey;

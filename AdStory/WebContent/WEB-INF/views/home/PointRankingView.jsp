@@ -52,13 +52,13 @@
 		    	int num = 0;
 		        for(PointLogRanking l : list){ %>
 		        
-            <% num++; %>
+                    <% num++; %>
 
-    <% if(num%2==0){ %>
-				<tr>
-    <%} else {%>
-				<tr class="bg-gray-100">
-    <% } %>
+                    <% if(num%2==0){ %>
+				        <tr>
+                    <%} else {%>
+				        <tr class="bg-gray-100">
+                    <% } %>
      
      
     <% if(num == 1 ){ %>  
@@ -73,10 +73,10 @@
 
                
             
+                <% } %>
                 </tr>
          </tbody>
         </table>
-                <% } %>
             <% } %> 
         </div>
         

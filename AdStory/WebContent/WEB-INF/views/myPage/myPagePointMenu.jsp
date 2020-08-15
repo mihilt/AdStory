@@ -36,7 +36,7 @@
                 </div>
 
 <%  
-    } else { %>
+    } else { boolean color = false;%>
     	
         <table class="table-auto m-auto">
         <thead>
@@ -49,7 +49,7 @@
           </tr>
         </thead>
         <tbody>
-        
+   
          <% for(PointLog l : list){
             switch(l.getStatus()){
             case "I":
@@ -69,9 +69,9 @@
                 break;      
             }
 %>      
-   <%if(l.getKey()%2==0){ %>
+   <%if(color == true){ color = false; %>
         <tr>
-   <%} else {%>
+   <%} else { color = true; %>
         <tr class="bg-gray-100">
    <% } %>
         
@@ -93,7 +93,7 @@
           <td class="text-red-700 border px-4 py-2"><%=(String)Commas.format(l.getPoint()) %>P</td>
     <% } %>
     
-          <td class="border px-4 py-2"><%=(String)Commas.format(l.getRemainPoint()) %>P</td>
+          <td class="border px-4 py-2 font-bold"><%=(String)Commas.format(l.getRemainPoint()) %>P</td>
 
         </tr>
                 
@@ -116,8 +116,8 @@
 <div class="m-12">
 
      <div class = "border-8">
-     <button class = "border-8">포인트 충전</button>
-     <button class = "border-8">포인트 출금</button>
+     <button class = "border-8" onclick="location.href='<%= request.getContextPath() %>/myPage/point/charge?memberId=<%= memberLoggedIn.getMemberId()%>'">포인트 충전</button>
+     <button class = "border-8" onclick="location.href='<%= request.getContextPath() %>/myPage/point/withdraw?memberId=<%= memberLoggedIn.getMemberId()%>'">포인트 출금</button>
      </div>
      
 </div>

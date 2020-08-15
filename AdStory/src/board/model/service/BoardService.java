@@ -67,9 +67,9 @@ public class BoardService {
 
 	}
 
-	public int insertFixedUrl(int postKey, int userKey) {
+	public int insertAdList(int postKey, int userKey) {
 		Connection conn = getConnection();
-		int result = boardDAO.insertFixedUrl(conn, postKey,userKey);
+		int result = boardDAO.insertAdList(conn, postKey,userKey);
 		if (result > 0)
 			commit(conn);
 		else
@@ -80,9 +80,9 @@ public class BoardService {
 		return result;
 	}
 
-	public int selectFixedUrl(int userKey, int postKey) {
+	public int selectAdList(int userKey, int postKey) {
 		Connection conn = getConnection();
-		int result = boardDAO.selectFixedUrl(conn, userKey,postKey);
+		int result = boardDAO.selectAdList(conn, userKey,postKey);
 		if (result > 0)
 			commit(conn);
 		else
@@ -92,7 +92,6 @@ public class BoardService {
 
 		return result;
 	}
-
 
 
 }

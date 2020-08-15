@@ -267,10 +267,10 @@ public class BoardDAO {
 		
 		return boardNo;
 	}
-	public int insertFixedUrl(Connection conn, int postKey, int userKey) {
+	public int insertAdList(Connection conn, int postKey, int userKey) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertFixedUrl");
+		String sql = prop.getProperty("insertAdList");
 //		insert into pnt_log values (seq_pnt_log.nextval,?,?,sysdate,?,?,(select point from member where key=?)-?)
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -289,11 +289,11 @@ public class BoardDAO {
 		return result;
 	}
 
-	public int selectFixedUrl(Connection conn, int userKey, int postKey) {
+	public int selectAdList(Connection conn, int userKey, int postKey) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result=0;
-		String query = prop.getProperty("selectFixedUrl");
+		String query = prop.getProperty("selectAdList");
 		try{
 			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(query);
@@ -312,7 +312,7 @@ public class BoardDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("selectFixedUrl@dao = "+result);
+		System.out.println("selectAdList@dao = "+result);
 		return result;
 	}
 }

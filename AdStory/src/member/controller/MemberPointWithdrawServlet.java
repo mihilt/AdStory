@@ -1,26 +1,25 @@
-package ajax.text;
+package member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-
 /**
- * Servlet implementation class TextServlet
+ * Servlet implementation class MemberPointWithdrawServlet
  */
-@WebServlet("/text/test.do")
-public class TextServlet extends HttpServlet {
+@WebServlet("/myPage/point/withdraw")
+public class MemberPointWithdrawServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TextServlet() {
+    public MemberPointWithdrawServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,21 +28,10 @@ public class TextServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.사용자입력값처리
-		int userKey = Integer.parseInt(request.getParameter("userKey"));
-		int postKey = Integer.parseInt(request.getParameter("postKey"));
-		System.out.println("userKey = " + userKey);
-		System.out.println("postKey = " + postKey);
+		String view = "/WEB-INF/views/myPage/myPagePointWithdraw.jsp";
 		
-		//2.업무로직
-		int result = new BoardService().selectAdList(userKey,postKey);
-		
-		//3.view단 처리
-		response.setContentType("text/plain; charset=utf-8");
-		response.getWriter().append(String.valueOf(result));
-		
-		
-		
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
+		reqDispatcher.forward(request, response);
 	}
 
 	/**

@@ -155,11 +155,9 @@ public class PointLogDAO {
 		String query = prop.getProperty("selectMemberPointLogCount");
 		
 		try{
-			//미완성쿼리문을 가지고 객체생성. 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, memberId);
 			
-			//쿼리문실행
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()){
