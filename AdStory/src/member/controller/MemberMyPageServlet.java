@@ -1,7 +1,6 @@
-package home.controller;
+package member.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pointlog.service.PointLogService;
-import pointlog.vo.PointLogRanking;
-
 /**
- * Servlet implementation class PointRankingViewServlet
+ * Servlet implementation class MemberMyPage
  */
-@WebServlet("/home/pointRanking/today")
-public class PointRankingViewTodayServlet extends HttpServlet {
+@WebServlet("/myPage")
+public class MemberMyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PointRankingViewTodayServlet() {
+    public MemberMyPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +28,8 @@ public class PointRankingViewTodayServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String view = "/WEB-INF/views/myPage/myPage.jsp";
 		
-		List<PointLogRanking> list = new PointLogService().PointLogRankingTodayList();
-		
-		System.out.println("list@servlet = " + list);
-		
-		String view = "/WEB-INF/views/home/PointRankingView.jsp";
-		
-		request.setAttribute("list",list);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
 	}

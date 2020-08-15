@@ -1,6 +1,6 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@page import="member.model.vo.Member"%>
 <%
     DecimalFormat Commas = new DecimalFormat("#,###");
@@ -19,7 +19,19 @@
             }
         }
     }
-%>	
+    
+    String changedMemberRole = "";
+    if(memberLoggedIn != null){
+        if(memberLoggedIn.getMemberRole()=="A"){
+            changedMemberRole="관리자";
+        } else if(memberLoggedIn.getMemberRole()=="C") {
+            changedMemberRole="기업회원";
+        } else {
+            changedMemberRole="일반회원";
+        }
+    }
+    
+%>  
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -29,46 +41,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="icon"
-	href="<%=request.getContextPath() %>/images/favicon.ico"
-	type="image/x-icon">
+    href="<%=request.getContextPath() %>/images/favicon.ico"
+    type="image/x-icon">
 <link rel="shortcut icon"
-	href="<%=request.getContextPath() %>/images/favicon.ico"
-	type="image/x-icon">
+    href="<%=request.getContextPath() %>/images/favicon.ico"
+    type="image/x-icon">
 
 <link rel="stylesheet"
     href="<%=request.getContextPath() %>/css/main_style.css" />
 
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-	rel="stylesheet">
+    rel="stylesheet">
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300"
-	rel="stylesheet">
+    rel="stylesheet">
 
 <link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-	crossorigin="anonymous">
+    href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+    crossorigin="anonymous">
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans"
-	rel="stylesheet">
+    rel="stylesheet">
 
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 <title>AD STORY</title>
 
 </head>
 <body>
-	<div class="all-of-div">
-		<div class="main-container">
-			<div class="menu-icon">
-				<i class="fas fa-bars header__menu"></i>
-			</div>
+    <div class="all-of-div">
+        <div class="main-container">
+            <div class="menu-icon">
+                <i class="fas fa-bars header__menu"></i>
+            </div>
 
-			<header class="header">
-				<div class="logout-div">
-				
+            <header class="header">
+                <div class="logout-div">
+                
 <% if(memberLoggedIn == null){ %> 
                        <button
                         class="float-right bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded"
@@ -81,17 +93,17 @@
                         onclick="location.href = '<%= request.getContextPath() %>/member/logout';"/>
                                                       로그아웃
                         </button>
-<% } %>				
-			</header>
+<% } %>             
+            </header>
 
-			<aside class="sidenav overflow-x">
-				<div class="sidenav__close-icon">
-					<i class="fas fa-times sidenav__brand-close"></i>
-				</div>
-				<div class="LOGO" onclick="location.href='<%= request.getContextPath() %>/';" >
-					<b>AD STORY</b>
-				</div>
-				
+            <aside class="sidenav overflow-x">
+                <div class="sidenav__close-icon">
+                    <i class="fas fa-times sidenav__brand-close"></i>
+                </div>
+                <div class="LOGO" onclick="location.href='<%= request.getContextPath() %>/';" >
+                    <b>AD STORY</b>
+                </div>
+                
 <% if(memberLoggedIn == null){ %> 
                 <div class="profile_img_div border-b mx-4 py-10" 
                 onclick="openModal()">
@@ -103,7 +115,8 @@
                 </div>
 <%} else { %>
 
-                <div class="profile_img_div border-b mx-4 py-10">
+                <div class="profile_img_div border-b mx-4 py-10"
+                onclick="location.href='<%= request.getContextPath() %>/myPage';">
                      <img class="profile_img"
                      src="<%=request.getContextPath() %>/images/<%
                      if("C".equals(memberLoggedIn.getMemberRole())){
@@ -129,28 +142,29 @@
                      <p class="text-indigo-700"><%= (String)Commas.format(memberLoggedIn.getPoint()) %>P</p>
                      <% } %>
                 </div>
-<% } %>				
+<% } %>             
 
 
-				<ul class="sidenav__list">
-					<%if(memberLoggedIn != null&&"A".equals(memberLoggedIn.getMemberRole())){%>
+                <ul class="sidenav__list">
+                    <%if(memberLoggedIn != null&&"A".equals(memberLoggedIn.getMemberRole())){%>
                     <li class="font-bold text-indigo-700 sidenav__list-item"
                     onclick="location.href='<%= request.getContextPath() %>/admin/main';">관리자 페이지 <i class="fas fa-tools"></i></li>
                     <br>
-                    <% } %>	
+                    <% } %> 
                     
-					<li class="sidenav__list-item"
-						onclick="location.href='<%= request.getContextPath() %>/';">홈</li>
-					
-					<li class="sidenav__list-item">마이페이지</li>
-					
-					<li class="sidenav__list-item"
-						onclick="location.href='<%= request.getContextPath() %>/board/list';">광고 게시판</li>
-					
-					<li class="sidenav__list-item">문의게시판</li>
-					
-					
-				</ul>
-			</aside>
+                    <li class="sidenav__list-item"
+                        onclick="location.href='<%= request.getContextPath() %>/';">홈</li>
+                    
+                    <li class="sidenav__list-item"
+                        onclick="location.href='<%= request.getContextPath() %>/myPage';">마이페이지</li>
+                    
+                    <li class="sidenav__list-item"
+                        onclick="location.href='<%= request.getContextPath() %>/board/list';">광고 게시판</li>
+                    
+                    <li class="sidenav__list-item">문의게시판</li>
+                    
+                    
+                </ul>
+            </aside>
 
-			<main class="main">
+            <main class="main">

@@ -17,7 +17,7 @@ public class Board implements Serializable {
 	private String url;
 	private String originalFileName;
 	private String renamedFileName;
-	private String applyNum;
+	private int applyNum;
 	private String mainImage;
 	
 	private String refMemberName;
@@ -27,9 +27,31 @@ public class Board implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public Board(int key, int categoryKey, int userKey, String title, String content, Date enrollDate, String status,
-			int clickPrice, int point, String url, String originalFileName, String renamedFileName, String applyNum,
+			int clickPrice, int point, String url, String originalFileName, String renamedFileName, int applyNum,
+			String mainImage) {
+		super();
+		this.key = key;
+		this.categoryKey = categoryKey;
+		this.userKey = userKey;
+		this.title = title;
+		this.content = content;
+		this.enrollDate = enrollDate;
+		this.status = status;
+		this.clickPrice = clickPrice;
+		this.point = point;
+		this.url = url;
+		this.originalFileName = originalFileName;
+		this.renamedFileName = renamedFileName;
+		this.applyNum = applyNum;
+		this.mainImage = mainImage;
+	}
+
+
+	public Board(int key, int categoryKey, int userKey, String title, String content, Date enrollDate, String status,
+			int clickPrice, int point, String url, String originalFileName, String renamedFileName, int applyNum,
 			String mainImage, String refMemberName, String refBoardCategoryName) {
 		super();
 		this.key = key;
@@ -146,11 +168,11 @@ public class Board implements Serializable {
 		this.renamedFileName = renamedFileName;
 	}
 
-	public String getApplyNum() {
+	public int getApplyNum() {
 		return applyNum;
 	}
 
-	public void setApplyNum(String applyNum) {
+	public void setApplyNum(int applyNum) {
 		this.applyNum = applyNum;
 	}
 

@@ -30,59 +30,54 @@
             <%
 		    List<PointLogRanking> list = (List<PointLogRanking>)request.getAttribute("list");
             %> 
+              
+<%  if(list == null || list.isEmpty()){  %>     
+            <div class = "m-auto text-xl text-red-700">오늘 날짜 기준 조회된 랭킹목록이 없습니다.</div>
             
             
-            
-            
-            <table class="table-auto m-auto">
-		      <thead>
-		        <tr>
-		          <th class="px-4 py-2">순위</th>
-		          <th class="px-4 py-2">아이디</th>
-		          <th class="px-4 py-2">포인트</th>
-
-		        </tr>
-		      </thead>
-		      <tbody>
-            
-            
-            <%  if(list == null || list.isEmpty()){  %>     
-            <div class = "m-auto text-xl">조회된 랭킹목록이 없습니다.</div>
-            
-            
-            <%  
-		    } else {
-		        
+<%  } else { %>
+	
+		    <table class="table-auto m-auto">
+		    <thead>
+		      <tr>
+		        <th class="px-4 py-2">순위</th>
+		        <th class="px-4 py-2">아이디</th>
+		        <th class="px-4 py-2">포인트</th>
+		
+		      </tr>
+		    </thead>
+		    <tbody>
+		    
+		    <%
 		    	int num = 0;
-		        for(PointLogRanking l : list){
-            %>
-                <% num++; %>
-                
-                
-<% if(num%2==0){ %>
+		        for(PointLogRanking l : list){ %>
+		        
+            <% num++; %>
+
+    <% if(num%2==0){ %>
 				<tr>
-<%} else {%>
+    <%} else {%>
 				<tr class="bg-gray-100">
-<% } %>
+    <% } %>
      
      
-<% if(num == 1 ){ %>  
+    <% if(num == 1 ){ %>  
                 <td class="border px-4 py-2 bg-indigo-100 font-bold text-blue-700"><%=num %>위</td>
                 <td class="border px-4 py-2 bg-indigo-100 font-bold text-blue-700"><%=l.getMemberId() %></td>
                 <td class="border px-4 py-2 bg-indigo-100 font-bold text-blue-700"><%=(String)Commas.format(l.getSumPoint()) %>P</td>
-<%} else {%>     
+    <%} else {%>     
                 <td class="border px-4 py-2"><%=num %>위</td>
                 <td class="border px-4 py-2"><%=l.getMemberId() %></td>
                 <td class="border px-4 py-2"><%=(String)Commas.format(l.getSumPoint()) %>P</td>
-<% } %>       
+    <% } %>       
 
                
             
                 </tr>
-                <% } %>
-            <% } %> 
          </tbody>
         </table>
+                <% } %>
+            <% } %> 
         </div>
         
     </div>

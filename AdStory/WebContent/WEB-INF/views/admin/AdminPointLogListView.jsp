@@ -30,27 +30,30 @@
 %>    
   
 
-<div class="p-10">
-	<table class="table-auto m-auto">
-	  <thead>
-	    <tr>
-	      <th class="px-4 py-2">시간</th>
-	      <th class="px-4 py-2">아이디</th>
-	      <th class="px-4 py-2">상황</th>
-	      <th class="px-4 py-2">포인트</th>
-	      <th class="px-4 py-2">해당 게시글</th>
-	    </tr>
-	  </thead>
-	  <tbody>
+<div class="pt-10">
+
 	  
 	  
 <%  if(list == null || list.isEmpty()){  %>     
-      
-                <div class = "m-auto text-xl">조회된 로그가 없습니다.</div>
-
+                <div class= text-center>
+                    <div class = "m-auto text-xl text-red-700">조회된 로그가 없습니다.</div>
+                </div>
 <%  
-    } else {
+    } else { %>
         
+    	
+    	   <table class="table-auto m-auto">
+    	      <thead>
+    	        <tr>
+    	          <th class="px-4 py-2">시간</th>
+    	          <th class="px-4 py-2">아이디</th>
+    	          <th class="px-4 py-2">상황</th>
+    	          <th class="px-4 py-2">해당 게시글</th>
+    	          <th class="px-4 py-2">입출내역</th>
+    	        </tr>
+    	      </thead>
+    	      <tbody>
+<%    
         for(PointLog l : list){
             switch(l.getStatus()){
             case "I":
@@ -70,11 +73,11 @@
                 break;      
             }
 %>      
-   <%if(l.getKey()%2==0){ %>
+        <%if(l.getKey()%2==0){ %>
         <tr>
-   <%} else {%>
+        <%} else {%>
         <tr class="bg-gray-100">
-   <% } %>
+        <% } %>
         
           <td class="border px-4 py-2"><%=l.getLogDateTime() %></td>
           
@@ -82,27 +85,27 @@
           
           <td class="border px-4 py-2"><%= realStatus %></td>
           
+          
+        <!-- 게시글 -->
+	    <%if(null == l.getRefPostTitle()){ %>
+	          <td class="border px-4 py-2"></td>
+	    <% } else { %>
+	          <td class="border px-4 py-2"><%=l.getRefPostTitle() %></td>
+	    <% } %>
+          
           <!-- 포인트 -->
-    <% if(l.getPoint() > 0){ %>        
-          <td class="text-blue-600 border px-4 py-2">+<%=(String)Commas.format(l.getPoint()) %>P</td>
-    <% } else { %>      
-          <td class="text-red-700 border px-4 py-2"><%=(String)Commas.format(l.getPoint()) %>P</td>
-    <% } %>
+         <% if(l.getPoint() > 0){ %>        
+         <td class="text-blue-600 border px-4 py-2">+<%=(String)Commas.format(l.getPoint()) %>P</td>
+         <% } else { %>      
+         <td class="text-red-700 border px-4 py-2"><%=(String)Commas.format(l.getPoint()) %>P</td>
+         <% } %>
     
-                  <!-- 게시글 -->
-    <%if(null == l.getRefPostTitle()){ %>
-          <td class="border px-4 py-2"></td>
-    <% } else { %>
-          <td class="border px-4 py-2"><%=l.getRefPostTitle() %></td>
-    <% } %>
+
     
     
         </tr>
-                
-                
     <% } %> 
-<% } %> 
-	    
+                
 		  </tbody>
 		</table>
 
@@ -112,6 +115,9 @@
 	             <%= request.getAttribute("pageBar") %>
 	         </div>
 	    </div>
+                
+<% } %> 
+	    
 
     </div>  
 

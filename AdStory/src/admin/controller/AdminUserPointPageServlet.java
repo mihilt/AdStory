@@ -28,7 +28,7 @@ public class AdminUserPointPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String view = "/WEB-INF/views/admin/AdminUserPoint.jsp";
+		String view = "/WEB-INF/views/admin/AdminUserPointSend.jsp";
 		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);

@@ -1,6 +1,7 @@
 package common.filter;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,19 +12,20 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet Filter implementation class SessionUpdateFilter
+ * 
  */
-@WebFilter("/*")
-public class SessionUpdateFilter implements Filter {
+@WebFilter(urlPatterns = {
+	"/myPage","/board/view"
+})
+public class LoginFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public SessionUpdateFilter() {
+    public LoginFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -37,29 +39,27 @@ public class SessionUpdateFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	@Override
-	public void doFilter(ServletRequest request, 
-						 ServletResponse response, 
-						 FilterChain chain)
-			throws IOException, ServletException {
-
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		//전처리
 		HttpServletRequest httpReq = (HttpServletRequest)request;
 		HttpSession session = httpReq.getSession();
-		
 		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
 		
 		
-		if( memberLoggedIn != null) {
-			String memberId = memberLoggedIn.getMemberId();
-			Member updateMember = new MemberService().selectOne(memberId);
-			session.setAttribute("memberLoggedIn", updateMember);
+		
+		if(memberLoggedIn == null) {
+			request.setAttribute("msg", "로그인 후 이용하실 수 있습니다.");
+			request.setAttribute("loc", ((HttpServletRequest) request).getHeader("Referer"));
+			
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
+				   .forward(request, response);
+			
+			return;
 		}
 		
-	
+		
 		chain.doFilter(request, response);
-		
 		//후처리
-		
 	}
 
 	/**

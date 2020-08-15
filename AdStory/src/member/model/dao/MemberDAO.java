@@ -67,6 +67,7 @@ public class MemberDAO {
 				member.setMemberRole(rset.getString("member_role"));
 				member.setPoint(rset.getInt("point"));
 				member.setPhoneNum(rset.getString("phone_num"));
+				member.setAccountName(rset.getString("account_name"));
 				member.setAccountNum(rset.getString("account_num"));
 				member.setBussinessNum(rset.getString("business_num"));
 				member.setName(rset.getString("name"));

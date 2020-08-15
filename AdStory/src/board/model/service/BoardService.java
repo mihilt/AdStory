@@ -10,6 +10,8 @@ import java.util.List;
 
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
+import board.model.vo.BoardCategory;
+import member.model.dao.MemberDAO;
 
 public class BoardService {
 
@@ -34,6 +36,61 @@ public class BoardService {
 		List<Board> list= boardDAO.selectBoardList(conn, cPage, numPerPage);
 		close(conn);
 		return list;
+	}
+
+	public List<BoardCategory> selectCategoryList() {
+		Connection conn = getConnection();
+		List<BoardCategory> categoryList = boardDAO.selectCategoryList(conn);
+		close(conn);
+		return categoryList;
+	}
+
+	public int insertBoard(Board board,String memberId,int userKey, int point) {
+		Connection conn = getConnection();
+
+		int result = boardDAO.insertBoard(conn, board);
+//		System.out.println("insertResult@service="+result);
+		// 방금 추가된 게시글 번호 가져오기
+		int boardNo = boardDAO.selectBoardLastSeq(conn);
+		board.setKey(boardNo);
+		int pointr = boardDAO.insertPointLog(conn,userKey,boardNo,-point);
+//		System.out.println("point@service = "+pointr);
+		int updater = new MemberDAO().updateMemberPoint(conn, memberId, -point);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+
+		close(conn);
+
+		return result;
+
+	}
+
+	public int insertFixedUrl(int postKey, int userKey) {
+		Connection conn = getConnection();
+		int result = boardDAO.insertFixedUrl(conn, postKey,userKey);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+
+		close(conn);
+
+		return result;
+	}
+
+	public int selectFixedUrl(int userKey, int postKey) {
+		Connection conn = getConnection();
+		int result = boardDAO.selectFixedUrl(conn, userKey,postKey);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+
+		close(conn);
+
+		return result;
 	}
 
 

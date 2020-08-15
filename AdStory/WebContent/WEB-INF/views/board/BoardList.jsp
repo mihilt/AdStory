@@ -40,11 +40,11 @@
                         <!-- Article -->
                         <article class="overflow-hidden rounded-lg shadow-lg">
             
-                            <a href="#">
+                            <a href="<%=request.getContextPath()%>/board/view?boardNo=<%=b.getKey()%>">
                                 <img alt="Placeholder" class="block h-auto w-full"
                                 
                                 <% if (b.getMainImage() == null){ %>
-                                    <img src="<%= request.getContextPath() %>/images/defaultImg.png" alt="홍보 사진"/>
+                                     src="<%= request.getContextPath() %>/images/defaultImg.png" alt="홍보 사진"/>
                                 <% } else {%>
                                      src="<%=request.getContextPath() %>/upload/board-images/<%=b.getMainImage()%>"/>
                                 <% } %>
@@ -53,7 +53,7 @@
             
                             <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                                 <h1 class="text-lg">
-                                    <a class="no-underline hover:underline text-black" href="#">
+                                    <a class="no-underline hover:underline text-black" href="<%=request.getContextPath()%>/board/view?boardNo=<%=b.getKey()%>">
                                       <%= b.getTitle() %>
                                     </a>
                                 </h1>
@@ -92,20 +92,21 @@
             
                <% } %> 
         
-               
         </div>
+           
+               <% if(memberLoggedIn != null&& !memberLoggedIn.getMemberRole().equals("U")){ %>
+               <div class = "flow-root mt-5">               
+                   <div>
+	                    <button
+	                    class="float-right bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded"
+	                    onclick="location.href='<%= request.getContextPath() %>/board/insert';">
+	                                                  글쓰기
+	                    </button>
+                   </div>
+               </div>
+               <% } %> 
     </div>         
-      <%  if(memberLoggedIn != null){ %>
-                <div class = "flow-root px-12">               
-	                <div>
-	                        <button
-	                        class="float-right bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded"
-	                        onclick="글쓰자()">
-	                                                      글쓰기
-	                        </button>
-	                </div>
-                </div>
-    <%  } %>  
+
     
 
                 <div class="search-bar-div">

@@ -11,6 +11,7 @@ public class Member implements Serializable{
 	private String memberRole;
 	private int point;
 	private String phoneNum;
+	private String accountName;
 	private String accountNum;
 	private String bussinessNum;
 	private String name;
@@ -24,7 +25,8 @@ public class Member implements Serializable{
 	}
 
 	public Member(int key, String memberId, String password, String memberRole, int point, String phoneNum,
-			String accountNum, String bussinessNum, String name, String email, String address, Date enrollDate) {
+			String accountName, String accountNum, String bussinessNum, String name, String email, String address,
+			Date enrollDate) {
 		super();
 		this.key = key;
 		this.memberId = memberId;
@@ -32,6 +34,7 @@ public class Member implements Serializable{
 		this.memberRole = memberRole;
 		this.point = point;
 		this.phoneNum = phoneNum;
+		this.accountName = accountName;
 		this.accountNum = accountNum;
 		this.bussinessNum = bussinessNum;
 		this.name = name;
@@ -39,6 +42,8 @@ public class Member implements Serializable{
 		this.address = address;
 		this.enrollDate = enrollDate;
 	}
+	
+	
 
 	public int getKey() {
 		return key;
@@ -86,6 +91,14 @@ public class Member implements Serializable{
 
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
+	}
+
+	public String getAccountName() {
+		return accountName;
+	}
+
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
 
 	public String getAccountNum() {
@@ -139,9 +152,9 @@ public class Member implements Serializable{
 	@Override
 	public String toString() {
 		return "Member [key=" + key + ", memberId=" + memberId + ", password=" + password + ", memberRole=" + memberRole
-				+ ", point=" + point + ", phoneNum=" + phoneNum + ", accountNum=" + accountNum + ", bussinessNum="
-				+ bussinessNum + ", name=" + name + ", email=" + email + ", address=" + address + ", enrollDate="
-				+ enrollDate + "]";
+				+ ", point=" + point + ", phoneNum=" + phoneNum + ", accountName=" + accountName + ", accountNum="
+				+ accountNum + ", bussinessNum=" + bussinessNum + ", name=" + name + ", email=" + email + ", address="
+				+ address + ", enrollDate=" + enrollDate + "]";
 	}
 
 	

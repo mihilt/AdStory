@@ -37,7 +37,7 @@ public class BoardViewServlet extends HttpServlet {
 		
 		//1.파리미터 글번호
 		int boardNo  = Integer.parseInt(request.getParameter("boardNo"));
-		
+		System.out.println("게시글등록 후boardNo@servlet = "+boardNo);
 		
 		//2.비지니스로직 호출
 		//게시글 하나 가져오기
@@ -45,11 +45,11 @@ public class BoardViewServlet extends HttpServlet {
 		Board board = boardService.selectOne(boardNo);
 
 		
-		String view = "/WEB-INF/views/board/BoardList.jsp";
+		String view = "/WEB-INF/views/board/boardView.jsp";
 		//게시글 가져오기에 실패한경우
 		if(board == null){
 			request.setAttribute("msg", "조회한 게시글이 존재하지 않습니다.");
-			request.setAttribute("loc", "/board/list");
+			request.setAttribute("loc", request.getContextPath()+"/board/list");
 			view = "/WEB-INF/views/common/msg.jsp";
 		}
 		else {
@@ -64,9 +64,11 @@ public class BoardViewServlet extends HttpServlet {
 			boardContent = Utils.getSecureString(boardContent);
 			boardContent = Utils.getStringWithBr(boardContent);
 			board.setContent(boardContent);
+			
+			board.setKey(boardNo);
 		}
 	
-		
+		request.setAttribute("board", board);
 		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);

@@ -38,7 +38,7 @@ public class PointLogDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = prop.getProperty("selectBoardList");
+		String query = prop.getProperty("selectPointLogList");
 		
 		try{
 			pstmt = conn.prepareStatement(query);
@@ -74,6 +74,53 @@ public class PointLogDAO {
 		System.out.println("list@boardDAO = " + list);
 		return list;
 	}
+	
+	public List<PointLog> selectMemberPointLogList(Connection conn, int cPage, int numPerPage, String memberId) {
+		List<PointLog> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectMemberPointLogList");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+	
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				PointLog l = new PointLog();
+
+				l.setKey(rset.getInt("key"));
+				l.setUserKey(rset.getInt("user_key"));
+				l.setPostKey(rset.getInt("post_key"));
+				l.setLogDate(rset.getDate("log_date"));
+				l.setPoint(rset.getInt("point"));
+				l.setStatus(rset.getString("status"));
+				l.setRemainPoint(rset.getInt("remain_point"));
+				
+				l.setRefPostTitle(rset.getString("title"));
+				l.setRefMemberId(rset.getString("member_id"));
+				l.setLogDateTime(rset.getString("log_date_time"));
+				
+				list.add(l);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("list@boardDAO = " + list);
+		return list;
+	}
+	
+	
+	
+	
 
 	public int selectPointLogCount(Connection conn) {
 		PreparedStatement pstmt = null;
@@ -84,6 +131,33 @@ public class PointLogDAO {
 		try{
 			//미완성쿼리문을 가지고 객체생성. 
 			pstmt = conn.prepareStatement(query);
+			
+			//쿼리문실행
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				totalLog = rset.getInt("cnt");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalLog;
+	}
+	
+	public int selectMemberPointLogCount(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		int totalLog = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectMemberPointLogCount");
+		
+		try{
+			//미완성쿼리문을 가지고 객체생성. 
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
 			
 			//쿼리문실행
 			rset = pstmt.executeQuery();
@@ -148,8 +222,10 @@ public class PointLogDAO {
 				l.setMemberId(rset.getString("member_id"));
 				l.setSumPoint(rset.getInt("sum_point"));
 				
+				
 				list.add(l);
 			}
+			System.out.println("list@DAO = " + list);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -159,6 +235,10 @@ public class PointLogDAO {
 		System.out.println("list@boardDAO = " + list);
 		return list;
 	}
+
+
+
+
 
 
 	

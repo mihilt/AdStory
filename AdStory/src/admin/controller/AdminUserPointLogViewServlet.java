@@ -36,7 +36,7 @@ public class AdminUserPointLogViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int numPerPage = 20;//한페이지당 수
 		int cPage = 1;//요청페이지
-		
+	
 		try{
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		} catch(NumberFormatException e){
@@ -55,7 +55,7 @@ public class AdminUserPointLogViewServlet extends HttpServlet {
 		//4.뷰단 포워딩		
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar",pageBar);	
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/pointlog/PointLogListView.jsp");
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/admin/AdminPointLogListView.jsp");
 		reqDispatcher.forward(request, response);
 		
 	}

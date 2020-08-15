@@ -21,10 +21,24 @@ public class PointLogService {
 		close(conn);
 		return list;
 	}
-
+	
+	public List<PointLog> selectMemberPointLogList(int cPage, int numPerPage, String memberId) {
+		Connection conn = getConnection();
+		List<PointLog> list= pointLogDAO.selectMemberPointLogList(conn, cPage, numPerPage, memberId);
+		close(conn);
+		return list;
+	}
+	
 	public int selectPointLogCount() {
 		Connection conn = getConnection();
 		int totalBoardCount = pointLogDAO.selectPointLogCount(conn);
+		close(conn);
+		return totalBoardCount;
+	}
+	
+	public int selectMemberPointLogCount(String memberId) {
+		Connection conn = getConnection();
+		int totalBoardCount = pointLogDAO.selectMemberPointLogCount(conn, memberId);
 		close(conn);
 		return totalBoardCount;
 	}
@@ -32,8 +46,15 @@ public class PointLogService {
 	public List<PointLogRanking> PointLogRankingTodayList() {
 		Connection conn = getConnection();
 		List<PointLogRanking> list= pointLogDAO.PointLogRankingTodayList(conn);
+		
+		System.out.println("list@service = " + list);
+		
 		close(conn);
 		return list;
 	}
+
+
+
+
 
 }
