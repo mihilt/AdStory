@@ -147,6 +147,20 @@ public class MemberService {
 		close(conn);
 		return totalContents;
 	}
+
+	public List<Member> searchMember(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Member> list = memberDAO.searchMember(conn, param); 
+		close(conn);
+		return list;
+	}
+
+	public int getTotalContents(Map<String, Object> param) {
+		Connection conn = getConnection();
+		int totalContents = memberDAO.getTotalContents(conn, param);
+		close(conn);
+		return totalContents;
+	}
 	
 	
 	

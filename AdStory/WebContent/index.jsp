@@ -21,8 +21,8 @@
                     style="background-image: url(<%=request.getContextPath() %>/images/carousel_1.jpg)">
             <p class="font-bold text-sm uppercase">JHT그룹의 혁신 서비스</p>
             <p class="text-3xl font-bold">바이럴마케팅 선도 기업</p>
-            <p class="text-2xl mb-10 leading-none">올바른 광고문화 형성을 위한 어쩍구저쩌구 무튼 </p>
-            <a href="#" class="bg-blue-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">회원가입 하러가기</a>
+            <p class="text-2xl mb-10 leading-none">AD STORY는 올바른 광고문화 형성을 위해 노력합니다.</p>
+            <a href="#" class="bg-blue-700 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">회원가입 하러가기</a>
         </div> 
         <br>
     </div>

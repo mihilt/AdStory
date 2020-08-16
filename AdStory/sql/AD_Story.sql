@@ -836,13 +836,12 @@ SELECT * FROM( SELECT ROWNUM "RNUM" ,V.*  FROM( SELECT V.*,TO_CHAR(APPLY_DATE,'Y
 SELECT * FROM PNT_EX_LOG;
 -- UPDATE PNT_EX_LOG SET STATUS = 'T' WHERE KEY = ?
 
+SELECT * FROM PNT_EX_LOG WHERE STATUS = 'T';
+SELECT COUNT(*) "cnt" FROM PNT_EX_LOG WHERE STATUS = 'F';
 
+DELETE FROM PNT_EX_LOG;
 
-
-
-
-
-
-
+select * from ( select row_number() over (order by enroll_date desc) rnum,  M.* from member M ) M where rnum between 1 and 100;
+select count(*) total_contents from member;
 
 

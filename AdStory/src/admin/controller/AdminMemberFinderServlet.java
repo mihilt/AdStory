@@ -1,11 +1,19 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import common.Utils;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class AdminMemberFinderServlet
@@ -40,14 +48,31 @@ public class AdminMemberFinderServlet extends HttpServlet {
 		System.out.println(searchType);
 		System.out.println(searchKeyword);
 		
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchType", searchType);
+		param.put("searchKeyword", searchKeyword);
+		param.put("cPage", cPage);
+		param.put("numPerPage", numPerPage);
+		System.out.println("param = " + param);
 		
+		List<Member> list = new MemberService().searchMember(param);
+		System.out.println("list@servlet = " + list);
 		
+		int totalContents = new MemberService().getTotalContents(param);
+		System.out.println("totalContents@servlet = " + totalContents);
 		
+		//페이지바 문자열을 리턴할 static메소드 호출
+		String url = request.getRequestURI() 
+				   + "?searchType=" + searchType
+				   + "&searchKeyword=" + searchKeyword;
+					
+		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);
 		
-		
-		
-		
-		
+		//3. view handling
+		request.setAttribute("list", list);
+		request.setAttribute("pageBar", pageBar);
+		request.getRequestDispatcher("/WEB-INF/views/admin/memberFinder.jsp")
+			   .forward(request, response);		
 	}
 
 	/**

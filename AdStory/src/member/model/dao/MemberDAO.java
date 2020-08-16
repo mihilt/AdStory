@@ -401,6 +401,95 @@ public class MemberDAO {
 		return totalContents;
 	}
 
+
+	public List<Member> searchMember(Connection conn, Map<String, Object> param) {
+		List<Member> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("searchMemberPaging");
+		String col = "";
+		switch(String.valueOf(param.get("searchType"))) {
+		case "memberId" : col = "member_id"; break;
+		case "memberName" : col = "name"; break;
+		}
+		sql = sql.replace("●", col);
+		System.out.println("sql@dao = " + sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + param.get("searchKeyword") + "%");
+			
+			int cPage = (int)param.get("cPage");
+			int numPerPage = (int)param.get("numPerPage");			
+			pstmt.setInt(2, (cPage-1) * numPerPage + 1);
+			pstmt.setInt(3, cPage * numPerPage);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setKey(rset.getInt("key"));				
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("password"));
+				member.setMemberRole(rset.getString("member_role"));
+				member.setPoint(rset.getInt("point"));
+				member.setPhoneNum(rset.getString("phone_num"));
+				member.setAccountName(rset.getString("account_name"));
+				member.setAccountNum(rset.getString("account_num"));
+				member.setBussinessNum(rset.getString("business_num"));
+				member.setName(rset.getString("name"));
+				member.setEmail(rset.getString("email"));
+				member.setAddress(rset.getString("address"));
+				member.setEnrollDate(rset.getDate("enroll_date"));
+				
+				list.add(member);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("list@dao = " + list);
+		return list;
+	}
+
+
+	public int getTotalContents(Connection conn, Map<String, Object> param) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("getSearchTotalContents");
+		System.out.println(sql);
+		String col = "";
+		switch(String.valueOf(param.get("searchType"))) {
+		case "memberId" : col = "member_id"; break;
+		case "memberName" : col = "name"; break;
+		}
+		sql = sql.replace("●", col);
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + param.get("searchKeyword") + "%");
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalContents = rset.getInt("total_contents");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContents;
+	}
+
 	
 
 }
