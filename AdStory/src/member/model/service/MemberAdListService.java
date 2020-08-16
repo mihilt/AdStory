@@ -15,7 +15,7 @@ public class MemberAdListService {
 	
 	public List<MemberAdList> selectMemberAdList(int cPage, int numPerPage, String memberId) {
 		Connection conn = getConnection();
-		List<MemberAdList> list= memberAdListDAO.selectMemberPointLogList(conn, cPage, numPerPage, memberId);
+		List<MemberAdList> list= memberAdListDAO.selectMemberAdList(conn, cPage, numPerPage, memberId);
 		close(conn);
 		return list;
 	}

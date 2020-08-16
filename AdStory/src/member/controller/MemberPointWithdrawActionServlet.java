@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,7 +32,8 @@ public class MemberPointWithdrawActionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("memberId");
-		int pointAmount = Integer.parseInt(request.getParameter("pointAmount"));
+		int pointAmount = Integer.parseInt(request.getParameter("pointAmount"));	
+		
 		String requirements = request.getParameter("requirements");
 		
 		if("".equals(requirements)) {
@@ -52,8 +54,10 @@ public class MemberPointWithdrawActionServlet extends HttpServlet {
 		String msg = "";
 		String loc = request.getContextPath() + "/myPage/point/withdraw?memberId=" + memberId;
 		
+		DecimalFormat Commas = new DecimalFormat("#,###");
+		
 		if(result>0){
-			msg = "성공적으로 " + pointAmount + "P 만큼 출금신청이 이루어졌습니다.";
+			msg = "성공적으로 " + (String)Commas.format(pointAmount) + "P 만큼 출금신청이 이루어졌습니다.";
 		}
 		else { 
 			msg = "실패했습니다.";	

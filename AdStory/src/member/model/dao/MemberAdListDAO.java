@@ -33,12 +33,12 @@ public class MemberAdListDAO {
 	}
 
 
-	public List<MemberAdList> selectMemberPointLogList(Connection conn, int cPage, int numPerPage, String memberId) {
+	public List<MemberAdList> selectMemberAdList(Connection conn, int cPage, int numPerPage, String memberId) {
 		List<MemberAdList> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = prop.getProperty("selectMemberPointLogList");
+		String query = prop.getProperty("selectMemberAdList");
 		
 		try{
 			pstmt = conn.prepareStatement(query);

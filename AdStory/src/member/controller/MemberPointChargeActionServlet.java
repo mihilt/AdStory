@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,8 +44,10 @@ public class MemberPointChargeActionServlet extends HttpServlet {
 		String msg = "";
 		String loc = request.getContextPath() + "/myPage/point/charge?memberId=" + memberId;
 		
+		DecimalFormat Commas = new DecimalFormat("#,###");
+		
 		if(result>0){
-			msg = "성공적으로 " + pointAmount + "P 만큼 충전이 이루어졌습니다.";
+			msg = "성공적으로 " + (String)Commas.format(pointAmount) + "P 만큼 충전이 이루어졌습니다.";
 		}
 		else { 
 			msg = "실패했습니다.";	

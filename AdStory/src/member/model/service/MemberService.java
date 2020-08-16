@@ -6,7 +6,9 @@ import java.util.Map;
 
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
+import member.model.vo.MemberWithdraw;
 import pointlog.DAO.PointLogDAO;
+import pointlog.vo.PointLog;
 
 import static common.JDBCTemplate.*;
 
@@ -84,6 +86,22 @@ public class MemberService {
 			rollback(conn);
 		close(conn);
 		return result*result2;
+	}
+
+	public List<MemberWithdraw> showMemberWithdraw(int cPage, int numPerPage, String memberId) {
+		Connection conn = getConnection();
+		
+		List<MemberWithdraw> list= memberDAO.selectMemberWithdrawList(conn, cPage, numPerPage,memberId);
+		
+		close(conn);
+		return list;
+	}
+
+	public int showMemberWithdrawCount(String memberId) {
+		Connection conn = getConnection();
+		int totalWithdrawCount = memberDAO.showMemberWithdrawCount(conn, memberId);
+		close(conn);
+		return totalWithdrawCount;
 	}
 	
 	
