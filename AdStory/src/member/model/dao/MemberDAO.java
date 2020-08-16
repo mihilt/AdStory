@@ -243,10 +243,93 @@ public class MemberDAO {
 	}
 
 
+	
+	public List<MemberWithdraw> selectAllWithdraw(Connection conn, int cPage, int numPerPage) {
+		List<MemberWithdraw> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectAllWithdraw");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+	
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				MemberWithdraw w = new MemberWithdraw();
+
+				w.setKey(rset.getInt("key"));
+				w.setDateTime(rset.getString("date_time"));
+				w.setMemberId(rset.getString("member_id"));
+				w.setAccountName(rset.getString("account_name"));
+				w.setAccountNum(rset.getString("account_num"));
+				w.setWithdraw(rset.getString("withdraw"));
+				w.setRequirements(rset.getString("requirements"));
+				w.setStatus(rset.getString("status"));
+				w.setName(rset.getString("name"));
+
+				list.add(w);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("list@boardDAO = " + list);
+		return list;
+	}
 
 
-	
-	
+	public int showAllWithdrawCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		int totalWithdrawCount = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("showAllWithdrawCount");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()){
+				totalWithdrawCount = rset.getInt("cnt");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalWithdrawCount;
+	}
+
+
+	public int updateWithdrawStatus(Connection conn, int key) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("updateWithdrawStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, key);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
 	
 	
 

@@ -7,6 +7,7 @@ public class MemberWithdraw implements Serializable{
 	private int key;
 	private String dateTime;
 	private String memberId;
+	private String name;
 	private String accountName;
 	private String accountNum;
 	private String withdraw;
@@ -18,19 +19,20 @@ public class MemberWithdraw implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberWithdraw(int key, String dateTime, String memberId, String accountName, String accountNum,
+	public MemberWithdraw(int key, String dateTime, String memberId, String name, String accountName, String accountNum,
 			String withdraw, String requirements, String status) {
 		super();
 		this.key = key;
 		this.dateTime = dateTime;
 		this.memberId = memberId;
+		this.name = name;
 		this.accountName = accountName;
 		this.accountNum = accountNum;
 		this.withdraw = withdraw;
 		this.requirements = requirements;
 		this.status = status;
 	}
-
+	
 	public int getKey() {
 		return key;
 	}
@@ -53,6 +55,14 @@ public class MemberWithdraw implements Serializable{
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAccountName() {
@@ -97,11 +107,9 @@ public class MemberWithdraw implements Serializable{
 
 	@Override
 	public String toString() {
-		return "MemberWithdraw [key=" + key + ", dateTime=" + dateTime + ", memberId=" + memberId + ", accountName="
-				+ accountName + ", accountNum=" + accountNum + ", withdraw=" + withdraw + ", requirements="
-				+ requirements + ", status=" + status + "]";
+		return "MemberWithdraw [key=" + key + ", dateTime=" + dateTime + ", memberId=" + memberId + ", name=" + name
+				+ ", accountName=" + accountName + ", accountNum=" + accountNum + ", withdraw=" + withdraw
+				+ ", requirements=" + requirements + ", status=" + status + "]";
 	}
-
-	
 
 }

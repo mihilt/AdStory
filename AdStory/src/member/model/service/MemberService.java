@@ -103,6 +103,36 @@ public class MemberService {
 		close(conn);
 		return totalWithdrawCount;
 	}
+
+	public List<MemberWithdraw> showAllWithdraw(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		
+		List<MemberWithdraw> list= memberDAO.selectAllWithdraw(conn, cPage, numPerPage);
+		
+		close(conn);
+		return list;
+	}
+
+	public int showAllWithdrawCount() {
+		Connection conn = getConnection();
+		int totalWithdrawCount = memberDAO.showAllWithdrawCount(conn);
+		close(conn);
+		return totalWithdrawCount;
+	}
+
+	public int checkWithdraw(int key) {
+		// TODO Auto-generated method stub
+		
+		Connection conn = getConnection();
+		int result = memberDAO.updateWithdrawStatus(conn, key);
+		
+		if(result > 0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
 	
 	
 	
