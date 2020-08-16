@@ -113,6 +113,59 @@ public class MemberDAO {
 		System.out.println("result@DAO = " + result);
 		return result;
 	}
+
+
+	public int insertWithdrawLog(Connection conn, String memberId, int pointAmount, String requirements) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertWithdrawLog");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, pointAmount);
+			pstmt.setString(3, requirements);
+
+			System.out.println(pstmt);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int insertPointLog(Connection conn, String memberId, int pointAmount, String status) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertPointLog"); 
+		
+		try {
+
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, pointAmount);
+			pstmt.setString(3, status);
+			pstmt.setString(4, memberId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 	
 	
 	

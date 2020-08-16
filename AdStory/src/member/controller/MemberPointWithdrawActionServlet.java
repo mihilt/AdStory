@@ -1,7 +1,6 @@
-package admin.controller;
+package member.controller;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,22 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
-import member.model.vo.Member;
 
 /**
- * Servlet implementation class AdminUserPointSendServlet
+ * Servlet implementation class MemberPointWithdrawActionServlet
  */
-@WebServlet("/admin/userPoint/send")
-public class AdminUserPointSendServlet extends HttpServlet {
+@WebServlet("/myPage/point/withdraw/action")
+public class MemberPointWithdrawActionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminUserPointSendServlet() {
+    public MemberPointWithdrawActionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +30,30 @@ public class AdminUserPointSendServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
+		String memberId = request.getParameter("memberId");
 		int pointAmount = Integer.parseInt(request.getParameter("pointAmount"));
-		String radio = request.getParameter("radio");
-
+		String requirements = request.getParameter("requirements");
 		
-		System.out.println("userId = " + userId);
-		System.out.println("pointAmount = " + pointAmount);
-		System.out.println("radio = " + radio);
+		if("".equals(requirements)) {
+			requirements = " ";
+		} 
 		
-		if("decrease".equals(radio)) {
-			pointAmount = -pointAmount; 
-		}
-		System.out.println("라디오 변환 후 pointAmount = " + pointAmount);
+		System.out.println(memberId);
+		System.out.println(pointAmount);
+		System.out.println(requirements);
 		
-		int result = new MemberService().updateMemberPoint(userId, pointAmount); 
-		System.out.println("result@servlet = " +result);
+		int result = new MemberService().applyWithdraw(memberId, pointAmount, requirements);
+		System.out.println("result@Servlet = "+result);
+		
+		
+		
 		
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
-		String loc = request.getContextPath() + "/admin/userPoint";
+		String loc = request.getContextPath() + "/myPage/point/withdraw?memberId=" + memberId;
 		
 		if(result>0){
-			msg = "성공적으로 " + userId + " 회원에게 " + pointAmount + "P 만큼 포인트의 증감이 이루어졌습니다.";
+			msg = "성공적으로 " + pointAmount + "P 만큼 출금신청이 이루어졌습니다.";
 		}
 		else { 
 			msg = "실패했습니다.";	

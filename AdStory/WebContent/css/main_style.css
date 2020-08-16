@@ -196,6 +196,11 @@ body {
   display: none;
 }
 
+.mobile-hide-table{
+  display: none;
+}
+
+
 .mobile-text-center{
   text-align: center;
 }
@@ -275,10 +280,14 @@ body {
   .menu-icon{
     visibility: hidden;
   }
+  
   .mobile-hide{
     display: block;
   }
   
+  .mobile-hide-table{
+    display: table-cell;
+  }
 
 }
 

@@ -53,6 +53,38 @@ public class MemberService {
 		close(conn);
 		return result*result2;
 	}
+
+	public int applyWithdraw(String memberId, int pointAmount, String requirements) {
+		Connection conn = getConnection();
+		
+		int result = memberDAO.insertWithdrawLog(conn, memberId, pointAmount, requirements);
+
+		int result2 = memberDAO.updateMemberPoint(conn, memberId, -pointAmount);
+		
+		int result3 = memberDAO.insertPointLog(conn, memberId, -pointAmount,"O");
+		
+		if(result>0 && result2>0 && result3>0 )
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result*result2*result3;
+	}
+
+	public int memberChargePoint(String memberId, int pointAmount) {
+		Connection conn = getConnection();
+		
+		int result = memberDAO.updateMemberPoint(conn, memberId, pointAmount);
+		
+		int result2 = memberDAO.insertPointLog(conn, memberId, pointAmount,"I");
+		
+		if(result>0 && result2>0 )
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result*result2;
+	}
 	
 	
 	

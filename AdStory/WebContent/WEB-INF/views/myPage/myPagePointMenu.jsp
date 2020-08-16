@@ -41,9 +41,9 @@
         <table class="table-auto m-auto">
         <thead>
           <tr>
-            <th class="px-4 py-2">시간</th>
+            <th class="mobile-hide-table px-4 py-2">시간</th>
             <th class="px-4 py-2">상황</th>
-            <th class="px-4 py-2">해당 게시글</th>
+            <th class="mobile-hide-table px-4 py-2">해당 게시글</th>
             <th class="px-4 py-2">입출내역</th>
             <th class="px-4 py-2">잔액</th>
           </tr>
@@ -75,15 +75,15 @@
         <tr class="bg-gray-100">
    <% } %>
         
-          <td class="border px-4 py-2"><%=l.getLogDateTime() %></td>
+          <td class="mobile-hide-table border px-4 py-2"><%=l.getLogDateTime() %></td>
           
           <td class="border px-4 py-2"><%= realStatus %></td>
 
                   <!-- 게시글 -->
     <%if(null == l.getRefPostTitle()){ %>
-          <td class="border px-4 py-2"></td>
+          <td class="mobile-hide-table border px-4 py-2"></td>
     <% } else { %>
-          <td class="border px-4 py-2"><%=l.getRefPostTitle() %></td>
+          <td class="mobile-hide-table border px-4 py-2"><%=l.getRefPostTitle() %></td>
     <% } %>
     
               <!-- 포인트 -->
@@ -115,9 +115,22 @@
 
 <div class="m-12">
 
-     <div class = "border-8">
-     <button class = "border-8" onclick="location.href='<%= request.getContextPath() %>/myPage/point/charge?memberId=<%= memberLoggedIn.getMemberId()%>'">포인트 충전</button>
-     <button class = "border-8" onclick="location.href='<%= request.getContextPath() %>/myPage/point/withdraw?memberId=<%= memberLoggedIn.getMemberId()%>'">포인트 출금</button>
+     <div class = "">
+        <div class="flex mb-4">
+  
+          <div class="text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/2 h-12 m-2">
+              <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/point/charge?memberId=<%= memberLoggedIn.getMemberId()%>'">
+                                 포인트 충전
+              </button>
+          </div>
+          
+          <div class="text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/2 h-12 m-2">
+              <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/point/withdraw?memberId=<%= memberLoggedIn.getMemberId()%>'">
+                                 포인트 출금
+              </button>
+          </div>
+          
+        </div>
      </div>
      
 </div>

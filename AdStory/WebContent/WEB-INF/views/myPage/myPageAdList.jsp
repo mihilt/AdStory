@@ -36,10 +36,10 @@
           <tr>
             <th class="px-4 py-2">광고 제목</th>
             <th class="px-4 py-2">기업명</th>
-            <th class="px-4 py-2">마감</th>
-            <th class="px-4 py-2">광고 잔여액</th>
+            <th class="mobile-hide-table px-4 py-2">마감</th>
+            <th class="mobile-hide-table px-4 py-2">광고 잔여액</th>
             <th class="px-4 py-2">총 수익</th>
-            <th class="px-4 py-2">URL</th>
+            <th class="mobile-hide-table px-4 py-2">URL</th>
           </tr>
         </thead>
         <tbody>
@@ -54,10 +54,25 @@
   
                 <td class="border px-4 py-2"><%= l.getTitle() %></td>
                 <td class="border px-4 py-2"><%= l.getName() %></td>
-                <td class="border px-4 py-2"><%= l.getStatus() %></td>
-                <td class="border px-4 py-2"><%= (String)Commas.format(l.getPoint()) %></td>
-                <td class="border px-4 py-2"><%= (String)Commas.format(l.getRevenue()) %></td>
-                <td class="border px-4 py-2">http://<%= request.getServerName() %>:<%= request.getServerPort() %><%= request.getContextPath() %>/AD?num=<%= l.getKey() %></td>
+            <% if("T".equals(l.getStatus())) {%>
+                <td class="mobile-hide-table border px-4 py-2 text-red-600">마감</td>
+            <% } else { %>
+                <td class="mobile-hide-table border px-4 py-2"></td>
+            <% } %>    
+                
+                <td class="mobile-hide-table border px-4 py-2"><%= (String)Commas.format(l.getPoint()) %>P</td>
+            <%if(l.getRevenue() == 0) {%>
+                <td class="border px-4 py-2 text-blue-600"></td>
+            <% } else { %>   
+                <td class="border px-4 py-2 text-blue-600">+<%= (String)Commas.format(l.getRevenue()) %>P</td>
+            <% } %>
+            
+            <% if("T".equals(l.getStatus())) {%>
+                <td class="mobile-hide-table border px-4 py-2 text-red-600">마감</td>
+            <% } else { %>
+                <td class="mobile-hide-table border px-4 py-2">http://<%= request.getServerName() %>:<%= request.getServerPort() %><%= request.getContextPath() %>/AD?num=<%= l.getKey() %></td>
+            <% } %>    
+                
                 
             </tr>
             
