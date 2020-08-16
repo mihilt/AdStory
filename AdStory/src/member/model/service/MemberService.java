@@ -133,6 +133,20 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
+	public List<Member> selectAll(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Member> list = memberDAO.selectAll(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+	public int getTotalContents() {
+		Connection conn = getConnection();
+		int totalContents = memberDAO.getTotalContents(conn);
+		close(conn);
+		return totalContents;
+	}
 	
 	
 	

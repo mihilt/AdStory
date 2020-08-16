@@ -27,4 +27,11 @@ public class MemberAdListService {
 		return totalBoardCount;
 	}
 
+	public int selectWithdrawNum() {
+		Connection conn = getConnection();
+		int num = memberAdListDAO.selectWithdrawNum(conn);
+		close(conn);
+		return num;
+	}
+
 }

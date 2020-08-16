@@ -1,27 +1,23 @@
 package admin.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberAdListService;
-
 /**
- * Servlet implementation class AdminPageViewServlet
+ * Servlet implementation class AdminMemberFinderServlet
  */
-@WebServlet("/admin/main")
-public class AdminPageMainServlet extends HttpServlet {
+@WebServlet("/admin/memberFinder")
+public class AdminMemberFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPageMainServlet() {
+    public AdminMemberFinderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +26,28 @@ public class AdminPageMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String searchType = request.getParameter("searchType");
+		String searchKeyword = request.getParameter("searchKeyword");
 		
-		int numPointWithdrawLogT = new MemberAdListService().selectWithdrawNum();
+		int cPage = 1;
+		int numPerPage = 20;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));			
+		} catch(NumberFormatException e) {
+			
+		}
 		
-		request.setAttribute("withdrawNum", new Integer(numPointWithdrawLogT));
+		System.out.println(searchType);
+		System.out.println(searchKeyword);
 		
-		String view = "/WEB-INF/views/admin/AdminPageView.jsp";
 		
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
-		reqDispatcher.forward(request, response);
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	/**

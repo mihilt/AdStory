@@ -99,4 +99,29 @@ public class MemberAdListDAO {
 		return totalLog;
 	}
 
+
+	public int selectWithdrawNum(Connection conn) {
+		PreparedStatement pstmt = null;
+		int num = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectWithdrawNum");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+	
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				num = rset.getInt("cnt");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return num;
+	}
+
 }

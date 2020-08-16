@@ -41,7 +41,7 @@
                     <div class = "m-auto text-xl text-red-700">조회된 로그가 없습니다.</div>
                 </div>
 <%  
-    } else { %>
+    } else { boolean color = false;%>
         
         
            <table class="table-auto m-auto">
@@ -75,11 +75,11 @@
                 break;      
             }
 %>      
-        <%if(l.getKey()%2==0){ %>
-        <tr>
-        <%} else {%>
-        <tr class="bg-gray-100">
-        <% } %>
+           <%if(color == true){ color = false; %>
+                <tr>
+           <%} else { color = true; %>
+                <tr class="bg-gray-100">
+           <% } %>
         
           <td class="border px-4 py-2"><%=l.getLogDateTime() %></td>
           

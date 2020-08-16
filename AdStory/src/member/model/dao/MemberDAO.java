@@ -330,7 +330,77 @@ public class MemberDAO {
 	}
 
 
+	public List<Member> selectAll(Connection conn, int cPage, int numPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Member> list = null;
+		String sql = prop.getProperty("selectAllPaging");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
 	
+			int startRnum = (cPage-1) * numPerPage + 1;
+			int endRnum = cPage * numPerPage;
+			pstmt.setInt(1, startRnum);
+			pstmt.setInt(2, endRnum);
+			
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<>();
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setKey(rset.getInt("key"));				
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("password"));
+				member.setMemberRole(rset.getString("member_role"));
+				member.setPoint(rset.getInt("point"));
+				member.setPhoneNum(rset.getString("phone_num"));
+				member.setAccountName(rset.getString("account_name"));
+				member.setAccountNum(rset.getString("account_num"));
+				member.setBussinessNum(rset.getString("business_num"));
+				member.setName(rset.getString("name"));
+				member.setEmail(rset.getString("email"));
+				member.setAddress(rset.getString("address"));
+				member.setEnrollDate(rset.getDate("enroll_date"));
+
+				list.add(member);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+
+	public int getTotalContents(Connection conn) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("getTotalContents");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalContents = rset.getInt("total_contents");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContents;
+	}
+
 	
 
 }
