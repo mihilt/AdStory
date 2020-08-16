@@ -21,13 +21,17 @@
     }
     
     String changedMemberRole = "";
+    String profileImageName = "";
     if(memberLoggedIn != null){
-        if(memberLoggedIn.getMemberRole()=="A"){
+        if("A".equals(memberLoggedIn.getMemberRole())){
             changedMemberRole="관리자";
-        } else if(memberLoggedIn.getMemberRole()=="C") {
+            profileImageName="profile_A.png";
+        } else if("C".equals(memberLoggedIn.getMemberRole())) {
             changedMemberRole="기업회원";
+            profileImageName="profile_C.png";
         } else {
             changedMemberRole="일반회원";
+            profileImageName="profile_U.png";
         }
     }
     
@@ -118,20 +122,16 @@
                 <div class="profile_img_div border-b mx-4 py-10"
                 onclick="location.href='<%= request.getContextPath() %>/myPage';">
                      <img class="profile_img"
-                     src="<%=request.getContextPath() %>/images/<%
-                     if("C".equals(memberLoggedIn.getMemberRole())){
-                     %>profile_C.png<%
-                     }else if("A".equals(memberLoggedIn.getMemberRole())){
-                     %>profile_A.png<%
-                     }else{
-                     %>profile_U.png<%
-                     }%>"alt="프로필사진"> 
+                     src="<%=request.getContextPath() %>/images/<%=profileImageName %>" alt="프로필사진"> 
+                     
+
+                     
                      
                      <br> 
                      <p class="font-bold text-xl"><%= memberLoggedIn.getName() %></p>
                      
                      <%if("A".equals(memberLoggedIn.getMemberRole())){%>
-                     <p class = "text-sm">관리자 계정</p>
+                     <p class = "text-sm">관리자</p>
                      <%} else if("C".equals(memberLoggedIn.getMemberRole())){ %>
                      <p class = "text-sm">기업회원</p>
                      <br />
@@ -154,10 +154,10 @@
                     
                     <li class="sidenav__list-item"
                         onclick="location.href='<%= request.getContextPath() %>/';">홈</li>
-                    
+                    <% if(memberLoggedIn == null || !("A".equals(memberLoggedIn.getMemberRole()))) {%>
                     <li class="sidenav__list-item"
                         onclick="location.href='<%= request.getContextPath() %>/myPage';">마이페이지</li>
-                    
+                    <% } %>
                     <li class="sidenav__list-item"
                         onclick="location.href='<%= request.getContextPath() %>/board/list';">광고 게시판</li>
                     

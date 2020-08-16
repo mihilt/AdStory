@@ -91,7 +91,7 @@ function pointWithdrawValidate(){
 
 <%  if(list == null || list.isEmpty()){  %>     
                 <div class= text-center>
-                    <div class = "m-auto text-xl text-red-700"><%= memberLoggedIn.getMemberId() %>님은 아직 처리되지 않은 출금 신청 목록이 없습니다.</div>
+                    <div class = "m-auto text-xl text-red-700"><%= memberLoggedIn.getMemberId() %>님은 처리되지 않은 출금 신청 목록이 없습니다.</div>
                 </div>
 <%  
     } else { boolean color = false; %>
@@ -103,7 +103,7 @@ function pointWithdrawValidate(){
           <tr>
             <th class="px-4 py-2">시간</th>
             <th class="px-4 py-2">출금 신청 액수</th>
-            <th class="mobile-hide-table px-4 py-2">요구사항</th>
+            <th class="px-4 py-2">요구사항</th>
         </thead>
         <tbody>      
 
@@ -114,9 +114,9 @@ function pointWithdrawValidate(){
 		   <%} else { color = true; %>
 		        <tr class="bg-gray-100">
 		   <% } %>
-			      <td class="mobile-hide-table border px-4 py-2"><%=w.getDateTime() %></td>
-			      <td class="mobile-hide-table border px-4 py-2"><%=(String)Commas.format(Integer.parseInt(w.getWithdraw())) %>원</td>
-			      <td class="mobile-hide-table border px-4 py-2"><%=w.getRequirements() %></td>
+			      <td class="border px-4 py-2"><%=w.getDateTime() %></td>
+			      <td class="border px-4 py-2"><%=(String)Commas.format(Integer.parseInt(w.getWithdraw())) %>원</td>
+			      <td class="border px-4 py-2"><%=w.getRequirements() %></td>
                 </tr>
     <% } %> 
           </tbody>

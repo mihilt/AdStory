@@ -234,14 +234,6 @@ public class PointLogDAO {
 		return list;
 	}
 
-
-
-
-
-
-	
-	
-	
 	
 	
 }

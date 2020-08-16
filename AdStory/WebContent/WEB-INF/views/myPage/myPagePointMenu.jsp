@@ -117,7 +117,7 @@
 
      <div class = "">
         <div class="flex mb-4">
-  
+        <% if("C".equals(memberLoggedIn.getMemberRole())) { %>     
           <div class="text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/2 h-12 m-2">
               <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/point/charge?memberId=<%= memberLoggedIn.getMemberId()%>'">
                                  포인트 충전
@@ -129,7 +129,14 @@
                                  포인트 출금
               </button>
           </div>
+        <% } else if("U".equals(memberLoggedIn.getMemberRole())){ %>
+          <div class="text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/2 h-12 m-auto">
+              <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/point/withdraw?memberId=<%= memberLoggedIn.getMemberId()%>'">
+                                 포인트 출금
+              </button>
+          </div>
           
+        <% } %>
         </div>
      </div>
      

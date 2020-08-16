@@ -27,11 +27,11 @@
 	                                      id="loginFrm">
 	                  <div class="mb-4">
 	                    <label class="block text-md font-light mb-2" for="username">아이디</label>
-	                    <input class="w-full bg-drabya-gray border-gray-500 appearance-none border p-4 font-light leading-tight focus:outline-none focus:shadow-outline" type="text" name="memberId" id="" placeholder="Username">
+	                    <input class="w-full bg-drabya-gray border-gray-500 appearance-none border p-4 font-light leading-tight focus:outline-none focus:shadow-outline" type="text" name="memberId" id="" placeholder="아이디">
 	                  </div>
 	                  <div class="mb-4">
 	                    <label class="block text-md font-light mb-2" for="password">비밀번호</label>
-	                    <input class="w-full bg-drabya-gray border-gray-500 appearance-none border p-4 font-light leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" id="" placeholder="Password">
+	                    <input class="w-full bg-drabya-gray border-gray-500 appearance-none border p-4 font-light leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" id="" placeholder="비밀번호">
 	                  </div>
 	                
 	                  <div class="flex items-center justify-between mb-5">

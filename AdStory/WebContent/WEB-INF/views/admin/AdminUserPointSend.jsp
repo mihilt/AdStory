@@ -22,13 +22,13 @@ function pointSendValidate(){
 </script>
 
 <div class="m-12">
-    <p class = "text-3xl border-b-2">관리자 - 유저 포인트 관리</p>
+    <p class = "text-3xl border-b-2">관리자 - 회원 포인트 증가 / 차감</p>
     
     <p class = "my-5">
         <a class = "text-blue-600 hover:underline" href="<%= request.getContextPath() %>/admin/main">
                     메인
         </a> 
-        > 유저 포인트 관리
+        > 회원 포인트 증가 / 차감
     </p>
  
     
