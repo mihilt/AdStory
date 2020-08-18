@@ -35,14 +35,15 @@ public class BoardApplyServlet extends HttpServlet {
 		//1.파리미터 글번호
 				int postKey  = Integer.parseInt(request.getParameter("postKey"));
 				int userKey = Integer.parseInt(request.getParameter("userKey"));
-				System.out.println("postKey@servlet="+postKey);
-				System.out.println("userKey@servlet="+userKey);
+//				System.out.println("postKey@servlet="+postKey);
+//				System.out.println("userKey@servlet="+userKey);
 //				System.out.println("게시글신청 후boardNo@servlet = "+boardNo);
 				
 				//2.비지니스로직 호출
 				//게시글 하나 가져오기
 				BoardService boardService = new BoardService();
 				int result = boardService.insertAdList(postKey,userKey);
+				int postR = boardService.updateBoardApply(postKey);
 
 				
 				String view = request.getContextPath()+"/board/view?boardNo="+postKey;

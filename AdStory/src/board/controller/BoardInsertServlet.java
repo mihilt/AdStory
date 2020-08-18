@@ -94,7 +94,7 @@ public class BoardInsertServlet extends HttpServlet {
 		String renamedFileName
 			= multipartRequest.getFilesystemName("upFile");
 		Board board = new Board(0, categoryKey, userKey, title, content, null,null,
-				clickPrice, point, url, originalFileName, renamedFileName, 0,null);
+				clickPrice, point, url, originalFileName, renamedFileName, 0,null,null);
 		
 		//2.업무로직
 		int insertResult = 0;
