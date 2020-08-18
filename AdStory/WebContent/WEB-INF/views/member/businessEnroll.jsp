@@ -27,7 +27,7 @@
 
 	<section id=enroll-container>
 	<h2>회원 가입 정보 입력</h2>
-	<form name="memberEnrollFrm" 
+	<form name="bussinessEnrollFrm" 
 		  action="<%= request.getContextPath() %>/member/businessEnroll" 
 		  method="post">
 		<table>
@@ -145,7 +145,7 @@ $("#BusinessNum_").change(function(){
 });
 
 
-$("[name=memberEnrollFrm]").submit(function(){
+$("[name=bussinessEnrollFrm]").submit(function(){
 	var $BusinessNum = $("BusinessNum_");
 	
 	//1.memberId
@@ -155,7 +155,14 @@ $("[name=memberEnrollFrm]").submit(function(){
 	}
 	
 	//2.password
+	var $pw = $("#password_");
+	var $pwconfirm = $("#password2");
 	
+	if($pw.val() != $pwconfirm.val()) {
+		alert("비밀번호가 일치하지 않습니다");
+		return false;
+	}
+	ㅋㅋㅋ되네요사업자도되나요갑자기? 뭐지 근데 저거 건든적 없는데;;; 왜 혼자 바뀐거죠?? 다되는거에요?잠시만여
 	//3.중복검사 여부
 	var $BuisinessNumValid = $("#BuisinessNumValid");
 	if($BuisinessNumValid.val() == 0){
@@ -186,7 +193,7 @@ function checkIdDuplicate(){
 	//2.폼관련
 	var $frm = $("[name=checkIdDuplicateFrm]");
 	$frm.attr("action", 
-			  "<%= request.getContextPath() %>/member/checkBuisinessIdDuplicate");
+			  "<%= request.getContextPath() %>/member/checkBusinessIdDuplicate");
 	$frm.attr("method", "POST");
 	$frm.attr("target", title);//폼과 팝업창 연결
 	$frm.find("[name=memberId]").val($memberId.val());
@@ -205,7 +212,7 @@ $("#memberId_").change(function(){
 });
 
 
-$("[name=memberEnrollFrm]").submit(function(){
+$("[name=bussinessEnrollFrm]").submit(function(){
 	var $memberId = $("#memberId_");
 	
 	//1.memberId
@@ -215,11 +222,26 @@ $("[name=memberEnrollFrm]").submit(function(){
 	}
 	
 	//2.password
+	var $pw = $("#password_");
+	var $pwconfirm = $("#password2");
+	
+	if($pw.val() != $pwconfirm.val()) {
+		alert("비밀번호가 일치하지 않습니다");
+		return false;
+	}
 	
 	//3.중복검사 여부
 	var $idValid = $("#idValid");
-	if($idValid.val() == 0){
+	if($idValid.val() == 0){ 
 		alert("아이디 중복 검사 해주세요.");
+		console.log($idValid.val()); 
+		return false;
+	}
+	
+	//4.사업자번호 검사여부
+	var $BuisinessNumValid = $("#BuisinessNumValid");
+	if($BuisinessNumValid.val() == 0){
+		alert("사업자번호 중복 검사 해주세요.");
 		return false;
 	}
 	

@@ -13,7 +13,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class checkBuisinessIdDuplicateServlet
  */
-@WebServlet("/member/checkBuisinessIdDuplicate")
+@WebServlet("/member/checkBusinessIdDuplicate")
 public class checkBuisinessIdDuplicateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,7 +41,7 @@ public class checkBuisinessIdDuplicateServlet extends HttpServlet {
 
 				//3. view단 처리
 				request.setAttribute("isUsable", isUsable);
-				request.getRequestDispatcher("/WEB-INF/views/member/checkBuisinessIdDuplicate.jsp")
+				request.getRequestDispatcher("/WEB-INF/views/member/checkBusinessIdDuplicate.jsp")
 					   .forward(request, response);
 
 			

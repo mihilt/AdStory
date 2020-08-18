@@ -21,7 +21,7 @@
 			var $memberId = $("#memberId");
 			
 			if(/^\w{4,}$/.test($memberId.val()) == false){
-				alert("유효한 아이디를 입력해주세요.");
+				alert("유효한 사업자번호를 입력해주세요.");
 				$memberId.select();
 				return false;
 			}
@@ -41,14 +41,14 @@
 		var $businessNum = $("[name=BusinessNum]");
 		console.log("numtest");
 	
-		var $frm = $(opener.document.memberEnrollFrm);
+		var $frm = $(opener.document.bussinessEnrollFrm);
 		/* $frm.find("#BusinessNum_").val($businessNum.val()); */
 		$frm.find("#BuisinessNumValid").val(1);
 		
 		console.log($businessNum.val());
 		console.log($frm.find("#BusinessNum_"));
 		
-		
+	
 		self.close();
 		
 		
