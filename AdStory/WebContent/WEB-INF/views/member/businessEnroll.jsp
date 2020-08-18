@@ -162,7 +162,7 @@ $("[name=bussinessEnrollFrm]").submit(function(){
 		alert("비밀번호가 일치하지 않습니다");
 		return false;
 	}
-	ㅋㅋㅋ되네요사업자도되나요갑자기? 뭐지 근데 저거 건든적 없는데;;; 왜 혼자 바뀐거죠?? 다되는거에요?잠시만여
+
 	//3.중복검사 여부
 	var $BuisinessNumValid = $("#BuisinessNumValid");
 	if($BuisinessNumValid.val() == 0){
