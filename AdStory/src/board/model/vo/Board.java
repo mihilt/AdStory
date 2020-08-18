@@ -18,6 +18,7 @@ public class Board implements Serializable {
 	private String originalFileName;
 	private String renamedFileName;
 	private int applyNum;
+	
 	private String mainImageOrigin;
 	private String mainImageRename;
 

@@ -48,14 +48,15 @@
 	* popup창을 닫기전에 부모창(opener)의 
 	* memeberEnrollFrm의 memberId, idValid값을 셋팅한다.
 	*/
-	function closePopup(){
+	function closePopupZ(){
 		//opener : 현재팝업을 open한 window객체를 리턴
-		var $frm = $(opener.document.memberEnrollFrm);
+		var $frm = $(opener.document.bussinessEnrollFrm);
+		console.log("ddf"); 
 		$frm.find("#memberId_").val("<%= memberId %>");
-		$frm.find("#idValid").val(1);
-		
+		$frm.find("#idValid").val(1); 
+		console.log($frm.find("#idValid").val());
 		self.close();
-		
+
 	}
 	
 	</script>
@@ -67,7 +68,7 @@
 	<p>
 		[ <span><%= memberId %></span> ]는 사용가능합니다.
 	</p>
-	<button type="button" onclick="closePopup();">닫기</button>
+	<button type="button" onclick="closePopupZ();">닫기</button>
 	
 <%  } else { %>
 
@@ -79,8 +80,8 @@
 	<!-- 중복아이디 확인 폼 -->
 	<form name="checkIdDuplicateFrm"
 		  method="POST"
-		  action="<%= request.getContextPath() %>/member/checkIdDuplicate">
-		<input type="text" name="memberId" id="memberId" 
+		  action="<%= request.getContextPath() %>/member/checkBusinessIdDuplicate">
+		<input type="text" name="memberId" id="memberId"
 			   placeholder="아이디를 입력하세요."/>
 		<input type="submit" value="아이디 중복검사" />	   
 	</form>
