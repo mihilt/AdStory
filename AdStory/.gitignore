@@ -6,7 +6,6 @@
 .metadata
 bin/
 tmp/
-*.java
 *.tmp
 *.bak
 *.swp
