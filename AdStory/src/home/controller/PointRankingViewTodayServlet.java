@@ -39,6 +39,7 @@ public class PointRankingViewTodayServlet extends HttpServlet {
 		
 		String view = "/WEB-INF/views/home/PointRankingView.jsp";
 		
+		request.setAttribute("servletType","today");
 		request.setAttribute("list",list);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);

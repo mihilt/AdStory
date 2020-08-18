@@ -14,7 +14,7 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class MemberViewServlet
  */
-@WebServlet("/member/view")
+@WebServlet("/myPage/view")
 public class MemberViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,21 +40,19 @@ public class MemberViewServlet extends HttpServlet {
 		System.out.println("member@servlet = " + member);
 		
 		//3. view단 처리
-		response.getWriter().append(member.getName() + "<br>" + member.getMemberId());
+		String view = "";
+		if(member != null) {
+			view = "/WEB-INF/views/myPage/myPageMemberView.jsp";
+			request.setAttribute("member", member);
+		}
+		else {
+			view = "/WEB-INF/views/common/msg.jsp";
+			request.setAttribute("msg", "해당하는 회원이 없습니다");
+			request.setAttribute("loc", request.getContextPath());
+		}
 		
-//		String view = "";
-//		if(member != null) {
-//			view = "/WEB-INF/views/member/memberView.jsp";
-//			request.setAttribute("member", member);
-//		}
-//		else {
-//			view = "/WEB-INF/views/common/msg.jsp";
-//			request.setAttribute("msg", "해당하는 회원이 없습니다");
-//			request.setAttribute("loc", request.getContextPath());
-//		}
-//		
-//		request.getRequestDispatcher(view)
-//			   .forward(request, response);
+		request.getRequestDispatcher(view)
+			   .forward(request, response);
 	}
 
 	/**

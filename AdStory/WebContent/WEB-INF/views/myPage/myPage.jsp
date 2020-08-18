@@ -38,8 +38,8 @@
         <div class="flex mb-4">
         <% if("U".equals(memberLoggedIn.getMemberRole())){%>
 		  <div class=" text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/3 h-12 m-2">
-		      <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/update?memberId=<%= memberLoggedIn.getMemberId()%>'">
-		                  내정보 변경
+		      <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/view?memberId=<%= memberLoggedIn.getMemberId()%>'">
+		                  내정보 보기
 		      </button>
 		  </div>
 		  
@@ -56,8 +56,8 @@
 		  </div>
 		<% } else if("C".equals(memberLoggedIn.getMemberRole())) { %>
 		            <div class=" text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/2 h-12 m-2">
-              <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/update?memberId=<%= memberLoggedIn.getMemberId()%>'">
-                          내정보 변경
+              <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/view?memberId=<%= memberLoggedIn.getMemberId()%>'">
+                          내정보 보기
               </button>
           </div>
           

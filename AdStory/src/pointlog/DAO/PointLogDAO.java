@@ -223,7 +223,67 @@ public class PointLogDAO {
 				
 				list.add(l);
 			}
-			System.out.println("list@DAO = " + list);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public List<PointLogRanking> PointLogRankingWeekList(Connection conn) {
+		List<PointLogRanking> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("PointLogRankingWeekList");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				PointLogRanking l = new PointLogRanking();
+
+				l.setMemberId(rset.getString("member_id"));
+				l.setSumPoint(rset.getInt("sum_point"));
+				
+				
+				list.add(l);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("list@boardDAO = " + list);
+		return list;
+	}
+
+	public List<PointLogRanking> PointLogRankingYearList(Connection conn) {
+		List<PointLogRanking> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("PointLogRankingYearList");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				PointLogRanking l = new PointLogRanking();
+
+				l.setMemberId(rset.getString("member_id"));
+				l.setSumPoint(rset.getInt("sum_point"));
+				
+				
+				list.add(l);
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

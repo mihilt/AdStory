@@ -7,6 +7,10 @@
 메인 글씨 : rgb(100, 100, 100);
 */
 
+input:focus{
+	outline:none;
+}
+
 
 body {
     margin: 0;
