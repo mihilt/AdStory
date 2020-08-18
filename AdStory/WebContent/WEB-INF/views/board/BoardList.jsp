@@ -43,10 +43,10 @@
                             <a href="<%=request.getContextPath()%>/board/view?boardNo=<%=b.getKey()%>">
                                 <img alt="Placeholder" class="block h-auto w-full"
                                 
-                                <% if (b.getMainImage() == null){ %>
+                                <% if (b.getMainImageRename() == null){ %>
                                      src="<%= request.getContextPath() %>/images/defaultImg.png" alt="홍보 사진"/>
                                 <% } else {%>
-                                     src="<%=request.getContextPath() %>/upload/board-images/<%=b.getMainImage()%>"/>
+                                     src="<%=request.getContextPath() %>/upload/board-images/<%=b.getMainImageRename()%>"/>
                                 <% } %>
                                 
                             </a>
