@@ -7,10 +7,12 @@ import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
 import board.model.vo.BoardCategory;
+import board.model.vo.BoardComment;
 import member.model.dao.MemberDAO;
 import member.model.vo.MemberAdList;
 
@@ -108,6 +110,82 @@ public class BoardService {
 		return totalBoardCount;
 	}
 
+	public List<Board> searchBoard(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<Board> list = boardDAO.searchBoard(conn, param); 
+		close(conn);
+		return list;
+	}
+
+	public int getTotalContents(Map<String, Object> param) {
+		Connection conn = getConnection();
+
+		int totalContents = boardDAO.getTotalContents(conn, param);
+		close(conn);
+		return totalContents;
+	}
+
+	public int deleteBoardComment(int boardCommentNo) {
+		Connection conn = getConnection();
+		int result = boardDAO.deleteBoardComment(conn, boardCommentNo);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	public int insertBoardComment(BoardComment boardComment) {
+		Connection conn = getConnection();
+		int result = boardDAO.insertBoardComment(conn, boardComment);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public List<BoardComment> selectCommentList(int boardNo) {
+		Connection conn = getConnection();
+		List<BoardComment> commentList
+			= boardDAO.selectCommentList(conn, boardNo);
+		close(conn);
+		return commentList;
+	}
+
+	public int updateBoard(Board board) {
+		Connection conn = getConnection();
+		int result = boardDAO.updateBoard(conn, board);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int deleteBoard(int boardNo) {
+		Connection conn = getConnection();
+		int result = boardDAO.deleteBoard(conn, boardNo);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateBoardApply(int postKey) {
+		Connection conn = getConnection();
+		int result = boardDAO.updateBoardApply(conn, postKey);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 
 }
 

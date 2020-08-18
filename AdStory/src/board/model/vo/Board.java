@@ -29,9 +29,31 @@ public class Board implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Board(int key, int categoryKey, int userKey, String title, String content, Date enrollDate, String status,
+			int clickPrice, int point, String url, String originalFileName, String renamedFileName, int applyNum,
+			String mainImageOrigin, String mainImageRename) {
+		super();
+		this.key = key;
+		this.categoryKey = categoryKey;
+		this.userKey = userKey;
+		this.title = title;
+		this.content = content;
+		this.enrollDate = enrollDate;
+		this.status = status;
+		this.clickPrice = clickPrice;
+		this.point = point;
+		this.url = url;
+		this.originalFileName = originalFileName;
+		this.renamedFileName = renamedFileName;
+		this.applyNum = applyNum;
+		this.mainImageOrigin = mainImageOrigin;
+	}
+	
 	public Board(int key, int categoryKey, int userKey, String title, String content, Date enrollDate, String status,
 			int clickPrice, int point, String url, String originalFileName, String renamedFileName, int applyNum,
 			String mainImageOrigin, String mainImageRename, String refMemberName, String refBoardCategoryName) {
+		
 		super();
 		this.key = key;
 		this.categoryKey = categoryKey;

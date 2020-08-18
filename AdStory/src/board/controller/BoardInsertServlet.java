@@ -93,7 +93,6 @@ public class BoardInsertServlet extends HttpServlet {
 		//실제 서버컴퓨터에 저장된 파일명
 		String renamedFileName
 			= multipartRequest.getFilesystemName("upFile");
-		Board board = new Board();// 일단 게시글 등록 오류 
 
 		//2.업무로직
 		int insertResult = 0;
