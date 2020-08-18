@@ -12,6 +12,7 @@ import board.model.dao.BoardDAO;
 import board.model.vo.Board;
 import board.model.vo.BoardCategory;
 import member.model.dao.MemberDAO;
+import member.model.vo.MemberAdList;
 
 public class BoardService {
 
@@ -91,6 +92,20 @@ public class BoardService {
 		close(conn);
 
 		return result;
+	}
+
+	public List<Board> selectMemberBoardList(int cPage, int numPerPage, String memberId) {
+		Connection conn = getConnection();
+		List<Board> list= boardDAO.selectMemberBoardList(conn, cPage, numPerPage, memberId);
+		close(conn);
+		return list;
+	}
+
+	public int selectMemberBoardListCount(String memberId) {
+		Connection conn = getConnection();
+		int totalBoardCount = boardDAO.selectMemberBoardListCount(conn, memberId);
+		close(conn);
+		return totalBoardCount;
 	}
 
 

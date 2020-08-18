@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 import board.model.vo.Board;
 import board.model.vo.BoardCategory;
+import member.model.vo.MemberAdList;
 public class BoardDAO {
 	private Properties prop = new Properties();
 	
@@ -107,7 +108,8 @@ public class BoardDAO {
 				b.setOriginalFileName(rset.getString("original_file_name"));
 				b.setRenamedFileName(rset.getString("renamed_file_name"));
 				b.setApplyNum(rset.getInt("apply_num"));
-				b.setMainImage(rset.getString("main_image"));
+				b.setMainImageOrigin(rset.getString("main_image_origin"));
+				b.setMainImageRename(rset.getString("main_image_rename"));
 				
 				b.setRefMemberName(rset.getString("name"));
 				b.setRefBoardCategoryName(rset.getString("category_name"));
@@ -314,5 +316,64 @@ public class BoardDAO {
 		}
 		System.out.println("selectAdList@dao = "+result);
 		return result;
+	}
+
+	public List<Board> selectMemberBoardList(Connection conn, int cPage, int numPerPage, String memberId) {
+		List<Board> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectMemberBoardList");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+	
+			pstmt.setString(1, memberId);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
+
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				Board b = new Board();
+				b.setKey(rset.getInt("key"));
+				b.setTitle(rset.getString("title"));
+				b.setStatus(rset.getString("status"));
+				b.setPoint(rset.getInt("point"));
+
+				list.add(b);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int selectMemberBoardListCount(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		int totalLog = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectMemberBoardListCount");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				totalLog = rset.getInt("cnt");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalLog;
 	}
 }

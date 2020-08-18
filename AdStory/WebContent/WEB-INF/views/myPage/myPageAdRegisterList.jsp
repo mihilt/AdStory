@@ -1,3 +1,4 @@
+<%@page import="board.model.vo.Board"%>
 <%@page import="member.model.vo.MemberAdList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,7 +18,7 @@
     </div>
 
 <%
-    List<MemberAdList> list = (List<MemberAdList>)request.getAttribute("list");
+    List<Board> list = (List<Board>)request.getAttribute("list");
     
     String realStatus = "";
 %>    
@@ -35,45 +36,33 @@
         <thead>
           <tr>
             <th class="px-4 py-2">광고 제목</th>
-            <th class="px-4 py-2">기업명</th>
-            <th class="mobile-hide-table px-4 py-2">마감</th>
-            <th class="mobile-hide-table px-4 py-2">광고 잔여액</th>
-            <th class="px-4 py-2">총 수익</th>
-            <th class="mobile-hide-table px-4 py-2">URL</th>
+            <th class="px-4 py-2">마감</th>
+            <th class="px-4 py-2">잔여 포인트</th>
+  
           </tr>
         </thead>
         <tbody>
   
-        <% for(MemberAdList l : list){ %>
+        <% for(Board b : list){ %>
         
            <%if(color == true){ color = false; %>
 		        <tr>
 		   <%} else { color = true; %>
 		        <tr class="bg-gray-100">
 		   <% } %>
-  
-                <td class="border px-4 py-2"><%= l.getTitle() %></td>
-                <td class="border px-4 py-2"><%= l.getName() %></td>
-            <% if("T".equals(l.getStatus())) {%>
-                <td class="mobile-hide-table border px-4 py-2 text-red-600">마감</td>
-            <% } else { %>
-                <td class="mobile-hide-table border px-4 py-2"></td>
-            <% } %>    
                 
-                <td class="mobile-hide-table border px-4 py-2"><%= (String)Commas.format(l.getPoint()) %>P</td>
-            <%if(l.getRevenue() == 0) {%>
-                <td class="border px-4 py-2 text-blue-600"></td>
-            <% } else { %>   
-                <td class="border px-4 py-2 text-blue-600">+<%= (String)Commas.format(l.getRevenue()) %>P</td>
-            <% } %>
+                <td class="border px-4 py-2"><%= b.getTitle() %></td>
             
-            <% if("T".equals(l.getStatus())) {%>
-                <td class="mobile-hide-table border px-4 py-2 text-red-600">마감</td>
-            <% } else { %>
-                <td class="mobile-hide-table border px-4 py-2">http://<%= request.getServerName() %>:<%= request.getServerPort() %><%= request.getContextPath() %>/AD?num=<%= l.getKey() %></td>
+            
+            
+            
+            <% if ("F".equals(b.getStatus())){ %>
+            	<td class="border px-4 py-2"></td>
+            <%} else {%>
+            	<td class="border px-4 py-2 text-red-600">마감</td>
             <% } %>    
-                
-                
+                <td class="border px-4 py-2"><%= (String)Commas.format(b.getPoint()) %>P</td>
+                    
             </tr>
             
     <% } %> 

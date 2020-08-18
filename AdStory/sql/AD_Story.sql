@@ -1,4 +1,3 @@
-08-18
 --======================================
 -- 일단 관리자계정으로 접속하세요
 --======================================
@@ -355,10 +354,10 @@ SELECT * FROM AD_POST_CATEG;
 --  게시글 추가
 -- ======================================
 
-INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 1, 1, '오렌지 상품 홍보','오렌지 어쩌구저쩌구 ㅁㄴㅇㄹ',SYSDATE, DEFAULT, 500, 1000000, 'https://kr.sunkist.com/', NULL, NULL, DEFAULT, 'test_img.jpg');
-INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 2, 2, '강아지 훈련 사이트','강아지 훈련 잘해요 저희사이트 좋아요',SYSDATE, DEFAULT, 300, 2000000, 'https://www.bodeum.co.kr/html/edu_movie/', NULL, NULL, DEFAULT, 'puppy.png');
-INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 2, 2, 'KH정보교육원','공부 잘되는곳임',SYSDATE, DEFAULT, 400, 3000000, 'https://www.iei.or.kr/main/main.kh', NULL, NULL, DEFAULT, 'kh.png');
-INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 2, 2, '테스트','테스트',SYSDATE, DEFAULT, 123, 44000, '#', NULL, NULL, DEFAULT, NULL);
+INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 1, 1, '5오렌지 상품 홍보','오렌지 어쩌구저쩌구 ㅁㄴㅇㄹ',SYSDATE, DEFAULT, 500, 1000000, 'https://kr.sunkist.com/', NULL, NULL, DEFAULT, 'test_img.jpg','test_img.jpg');
+INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 2, 2, '강아지 훈련 사이트','강아지 훈련 잘해요 저희사이트 좋아요',SYSDATE, DEFAULT, 300, 2000000, 'https://www.bodeum.co.kr/html/edu_movie/', NULL, NULL, DEFAULT, 'puppy.png','puppy.png');
+INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 2, 2, 'KH정보교육원','공부 잘되는곳임',SYSDATE, DEFAULT, 400, 3000000, 'https://www.iei.or.kr/main/main.kh', NULL, NULL, DEFAULT, 'kh.png', 'kh.png');
+INSERT INTO AD_POST VALUES (SEQ_AD_POST.NEXTVAL, 2, 2, '테스트','테스트',SYSDATE, DEFAULT, 123, 44000, '#', NULL, NULL, DEFAULT, NULL,NULL);
 
 
 
@@ -850,3 +849,9 @@ select * from member where member_id= 'asdf';
 delete from member where member_id= 'asdf';
 
 select * from AD_LIST;
+
+SELECT * FROM(SELECT ROWNUM "RNUM", V.* FROM AD_POST V WHERE USER_KEY = (SELECT KEY FROM MEMBER WHERE MEMBER_ID = ? ) ORDER BY KEY DESC) WHERE RNUM BETWEEN ? AND ?;
+
+
+SELECT COUNT(*) "cnt" FROM AD_POST WHERE USER_KEY = (SELECT KEY FROM MEMBER WHERE MEMBER_ID = 'honggd' );
+SELECT COUNT(*) "cnt" FROM AD_POST WHERE USER_KEY = (SELECT KEY FROM MEMBER WHERE MEMBER_ID = 'sinsa');
