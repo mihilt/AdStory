@@ -53,13 +53,13 @@
 			<tr>
 				<th>패스워드</th>
 				<td>
-					<input type="password" name="password" id="password_" required><br>
+					<input type="password" name="password" id="password_"  required><br>
 				</td>
 			</tr>
 			<tr>
 				<th>패스워드확인</th>
 				<td>	
-					<input type="password" id="password2" required><br>
+					<input type="password" name="PWConfirm"id="password2"  required><br>
 				</td>
 			</tr>  
 			<tr>
@@ -180,6 +180,7 @@ $("#memberId_").change(function(){
 $("[name=nomalEnrollFrm]").submit(function(){
 	var $memberId = $("#memberId_");
 	
+	
 	//1.memberId
 	if(/^[\w]{4,}$/.test($memberId.val()) == false){
 		alert("4글자이상 유효한 아이디를 입력하세요.");
@@ -187,6 +188,13 @@ $("[name=nomalEnrollFrm]").submit(function(){
 	}
 	
 	//2.password
+	var $pw = $("#password_");
+	var $pwconfirm = $("#password2");
+	
+	if($pw.val() != $pwconfirm.val()) {
+		alert("비밀번호가 일치하지 않습니다");
+		return false;
+	}
 	
 	//3.중복검사 여부
 	var $idValid = $("#idValid");
@@ -201,7 +209,7 @@ $("[name=nomalEnrollFrm]").submit(function(){
 );
 
 
- 
+
  
 
 </script>
