@@ -1,4 +1,3 @@
-<%@page import="oracle.net.aso.b"%>
 <%@page import="board.model.vo.BoardCategory"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="board.model.vo.Board"%>
