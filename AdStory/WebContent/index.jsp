@@ -22,7 +22,7 @@
             <p class="font-bold text-sm uppercase">JHT그룹의 혁신 서비스</p>
             <p class="text-3xl font-bold">바이럴마케팅 선도 기업</p>
             <p class="text-2xl mb-10 leading-none">AD STORY는 올바른 광고문화 형성을 위해 노력합니다.</p>
-            <a href="#" class="bg-blue-700 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">회원가입 하러가기</a>
+            <a href="<%= request.getContextPath() %>/member/SelectRole" class="bg-blue-700 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">회원가입 하러가기</a>
         </div> 
         <br>
     </div>
