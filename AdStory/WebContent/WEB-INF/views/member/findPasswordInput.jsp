@@ -54,7 +54,7 @@
 			</tr>
 		</table>
 		<input type="submit" value="확인" />
-		<button class="return" onclick="location.href='<%= request.getContextPath() %>';">비동의</button>
+		<button class="return" onclick="location.href='<%= request.getContextPath() %>';">취소</button>
 	</form>
 	</section>
 

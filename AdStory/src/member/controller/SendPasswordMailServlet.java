@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.MyAuthentication;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class SendPasswordMail
@@ -39,6 +41,23 @@ public class SendPasswordMailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		String email = request.getParameter("receiver");
+		System.out.println("email@servlet = " + email);
+		
+		Member member = new MemberService().selectEmail(email);
+		
+		System.out.println(member);
+		
+		boolean isUsable = member == null ? true : false;
+		System.out.println("isUsable@servlet = " + isUsable);
+		
+		
+		
+		
+		
+		if(isUsable != false ) {
 		//키벨류형식으로 메일보내는 상태를 저장해서 꺼내쓴다?? 이정도 인것같음 뭔가 보내야해서 입력할때 이 값을 꺼내쓸듯.
 				Properties props = System.getProperties();
 				props.put("mail.smtp.user", "jmleeh819@gmail.com");
@@ -67,7 +86,7 @@ public class SendPasswordMailServlet extends HttpServlet {
 					msg.setFrom(from);
 					
 					//이메일 수신자
-					String email = request.getParameter("receiver"); //사용자가 입력한 이메일 받아오기
+					                     //사용자가 입력한 이메일 받아오기
 					System.out.println(email);
 					InternetAddress to = new InternetAddress(email);
 					msg.setRecipient(Message.RecipientType.TO, to);
@@ -100,7 +119,17 @@ public class SendPasswordMailServlet extends HttpServlet {
 				
 				rd.forward(request, response);
 				
-				
+		} else {
+			String view = "/WEB-INF/views/common/msg.jsp";
+			String msg = "유효한 이메일이 없습니다.";
+			String loc = request.getContextPath();
+			
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			
+			RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
+			reqDispatcher.forward(request, response);
+		}
 				
 	}
 
