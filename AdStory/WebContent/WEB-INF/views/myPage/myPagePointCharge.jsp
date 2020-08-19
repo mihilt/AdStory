@@ -7,12 +7,9 @@
 var IMP = window.IMP;
 IMP.init('imp63123307');
 
-
 function pointChargeValidate(){
     const $pointAmount = $("[name=pointAmount]");
-    alert($pointAmount.val());
-    if((/[^0-9]/g.test($pointAmount.val()) == true) | ($pointAmount.val()=="")){
-        
+    if((/[^0-9]/g.test($pointAmount.val()) == true) | ($pointAmount.val()=="")){  
         alert("적립할 포인트를 정확하게 입력하세요.");
         return false;
     }
@@ -27,7 +24,6 @@ function pointChargeValidate(){
         buyer_tel : '<%=memberLoggedIn.getPhoneNum() %>',
         buyer_addr : '<%=memberLoggedIn.getAddress() %>',
         buyer_postcode : '123-456',
-        //m_redirect_url : 'http://www.naver.com'
     }, function(rsp) {
         if ( rsp.success ) {
             jQuery.ajax({
@@ -36,7 +32,6 @@ function pointChargeValidate(){
                 dataType: 'json',
                 data: {
                     imp_uid : rsp.imp_uid
-
                 }
             }).done(function(data) {
 
@@ -54,11 +49,9 @@ function pointChargeValidate(){
             });  
             
             $("[id=frm]").submit();
-            
         } else {
             msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
-   
             location.href="<%=request.getContextPath()%>/myPage/point/charge?memberId=<%=memberLoggedIn.getMemberId() %>";
             alert(msg);
         }

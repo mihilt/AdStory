@@ -4,7 +4,9 @@ import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
@@ -72,6 +74,16 @@ public class PointLogService {
 		close(conn);
 		return list;
 	}
+
+	public Map<String, Integer> selectSales() {
+		Connection conn = getConnection();
+		Map<String, Integer> sales = new HashMap<>();
+		sales = pointLogDAO.selectSales(conn);
+		
+		close(conn);
+		return sales;
+	}
+
 
 
 

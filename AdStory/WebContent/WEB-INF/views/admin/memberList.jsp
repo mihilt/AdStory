@@ -68,7 +68,7 @@
           <tr class="bg-gray-100 text-sm">
      <% } %>
 	          <td class="border px-2 py-2"><%=m.getKey() %></td>
-	          <td class="border px-2 py-2"><%=m.getMemberId() %></td>
+	          <td class="border px-2 py-2 text-blue-500 hover:underline"><a href="<%=request.getContextPath()%>/myPage/view?memberId=<%=m.getMemberId()%>"><%=m.getMemberId() %></a></td>
 	          <td class="border px-2 py-2"><%=m.getName() %></td>
 	          
 <%
