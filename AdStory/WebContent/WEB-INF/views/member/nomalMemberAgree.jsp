@@ -54,11 +54,13 @@
 			});
 		});
 	});
+	
+
 </script>
 </head>
 <body>
 
-<form action="" id="joinForm">
+<form action="<%= request.getContextPath() %>/member/nomalEnroll" id="joinForm" name="agreeFrm">
 			
 			<br>
 			<br>
@@ -123,8 +125,8 @@ AD Story 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감
                 </li>
             </ul>
             <ul class="footBtwrap clearfix">
-                <li><button class="fpmgBt1">비동의</button></li>
-                <li><button class="fpmgBt2" onclick="location.href = '<%= request.getContextPath() %>/member/nomalEnroll';">동의</button></li>
+                <li><button class="fpmgBt1" onclick="location.href='<%= request.getContextPath() %>';">비동의</button></li>
+                <li><input class="fpmgBt2" type="submit" value="동의" id="agree"/></li>
             </ul>
         </form>
 
