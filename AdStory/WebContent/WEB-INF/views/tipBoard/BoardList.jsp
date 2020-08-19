@@ -62,6 +62,17 @@
 	            <%=request.getAttribute("pageBar")%>
 	        </div>
 	    </div>
+	    <div class="py-10 m-auto" style='max-width:557px;'>
+		    <button
+		          class="float-left bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded"
+		          onclick="location.href='<%=request.getContextPath()%>/board/insert';">
+		                   인기글</button>
+	        <button
+	              class="float-right bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-700 hover:border-transparent rounded"
+	              onclick="location.href='<%=request.getContextPath()%>/tipBoard/insert';">
+	                          글쓰기
+	        </button>
+        </div>
     </div>
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

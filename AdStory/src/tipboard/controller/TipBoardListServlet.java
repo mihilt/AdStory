@@ -19,13 +19,13 @@ import tipboard.model.vo.TipBoard;
  * Servlet implementation class TipBoardServlet
  */
 @WebServlet("/tipBoard/list")
-public class TipBoardServlet extends HttpServlet {
+public class TipBoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TipBoardServlet() {
+    public TipBoardListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
