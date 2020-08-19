@@ -218,6 +218,23 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
+	public Member selectEmail(String email) {
+		
+		System.out.println("memberId@service = " + email);
+		//1. DB Connection객체 생성
+		Connection conn = getConnection();
+		System.out.println("conn = " + conn);
+		//2. DAO 처리 요청
+		Member member = memberDAO.selectEmail(conn, email);
+		
+		System.out.println("member@service = " + member);
+		//3. DML요청인 경우, Transaction 처리
+		//4. Connection 반납(close)
+		close(conn);
+		
+		return member; 
+	}
 	
 	
 	

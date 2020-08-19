@@ -43,7 +43,7 @@
 	                    </button>
 	                 
 	                  </div>
-	                  <p class="text-center text-md font-light">아이디가 없으신가요? <a href="<%= request.getContextPath() %>/member/SelectRole" class="font-light text-md text-blue-600">회원가입</a></p>
+	                  <p class="text-center text-md font-light">아이디가 없으신가요? <a href="<%= request.getContextPath() %>/member/SelectRole" class="font-light text-md text-indigo-600">회원가입</a></p>
 	                </form>
 	            </div>
 	        </div>

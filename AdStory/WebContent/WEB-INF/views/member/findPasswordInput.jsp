@@ -42,7 +42,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>이메일</th>
+				<th>이메일바꾸는거 테스트</th>
 				<td>
 					<input type="email" id="receiver_" name="receiver" placeholder="abc@xyz.com">
 					<input type="button" id="submit" value="인증번호 발송" onclick = "checkEmail();"/>
@@ -54,7 +54,7 @@
 			</tr>
 		</table>
 		<input type="submit" value="확인" />
-		<button class="return" onclick="location.href='<%= request.getContextPath() %>';">비동의</button>
+		<button class="return" onclick="location.href='<%= request.getContextPath() %>';">취소</button>
 	</form>
 	</section>
 
