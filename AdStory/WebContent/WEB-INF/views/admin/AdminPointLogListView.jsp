@@ -80,8 +80,8 @@
         
           <td class="border px-4 py-2"><%=l.getLogDateTime() %></td>
           
-          <td class="border px-4 py-2"><%=l.getRefMemberId() %></td>
-          
+          <td class="border px-2 py-2 text-blue-500 hover:underline"><a href="<%=request.getContextPath()%>/myPage/view?memberId=<%=l.getRefMemberId()%>"><%=l.getRefMemberId() %></a></td>
+
           <td class="border px-4 py-2"><%= realStatus %></td>
           
           
