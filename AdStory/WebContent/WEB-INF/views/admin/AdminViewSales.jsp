@@ -9,16 +9,16 @@ sales = (Map<String, Integer>)request.getAttribute("sales");
 %>
 
 <div class="m-12">
-    <p class = "text-3xl border-b-2">관리자 - 수익조회</p>
+    <p class = "text-3xl border-b-2">관리자 - 수익 조회</p>
     
     <p class = "my-5">
         <a class = "text-blue-600 hover:underline" href="<%= request.getContextPath() %>/admin/main">
                     메인
         </a> 
-        > 수익조회
+        > 수익 조회
     </p>
     
-    <p class = "text-sm text-red-700">* <b>실시간 수익</b>은 아직 출금되지 않은 포인트를 매출에 집계한 값입니다.</p>
+    <p class = "text-sm text-red-700">* <b>실시간 수익</b>은 아직 출금되지 않은 포인트를 수익에 집계한 값입니다.</p>
     <p class = "text-sm text-red-700 mb-10">* <b>확정 수익</b>은 모든 회원들이 남김없이 포인트를 출금한다고 가정했을 경우 생기는 수수료 수익만 산출한 값입니다.</p>
     
     <div class = "w-9/12 m-auto">
