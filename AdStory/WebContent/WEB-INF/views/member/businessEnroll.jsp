@@ -11,6 +11,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.5.1.js"></script>
 
 
+
 </head>
 <body>
 
@@ -211,7 +212,6 @@ $("#memberId_").change(function(){
 	
 });
 
-
 $("[name=bussinessEnrollFrm]").submit(function(){
 	var $memberId = $("#memberId_");
 	
@@ -231,12 +231,7 @@ $("[name=bussinessEnrollFrm]").submit(function(){
 	}
 	
 	//3.중복검사 여부
-	var $idValid = $("#idValid");
-	if($idValid.val() == 0){ 
-		alert("아이디 중복 검사 해주세요.");
-		console.log($idValid.val()); 
-		return false;
-	}
+	
 	
 	//4.사업자번호 검사여부
 	var $BuisinessNumValid = $("#BuisinessNumValid");
@@ -245,9 +240,16 @@ $("[name=bussinessEnrollFrm]").submit(function(){
 		return false;
 	}
 	
+	var $idValid = $("#idValid");
+	if($idValid.val() == 0){ 
+		alert("아이디 중복 검사 해주세요.");
+		console.log($idValid.val()); 
+		return false;
+	}
 	
 	return true;
 });
+
 
 
 </script>

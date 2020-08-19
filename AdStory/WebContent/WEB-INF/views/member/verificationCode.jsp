@@ -36,7 +36,7 @@
 		
 		var $frm = $(opener.document.nomalEnrollFrm);
 		$frm.find("#receiver_").val("<%= email %>");
-		$frm.find("#emailValid").val(1); //이게 왜 안되는거지??...맞는데..??? 왜 못찾는거지시발
+		$frm.find("#emailValid").val(1); //이게 왜 안되는거지??...맞는데..??? 왜 못찾는거지
 		
 		
 		self.close();

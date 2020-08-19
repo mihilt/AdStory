@@ -22,6 +22,7 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
 .footBtwrap{margin-top: 15px;}
 .footBtwrap>li{float: left;width: 50%;height: 60px;}
 .footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;}
+#agree{display: block; width: 100%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;}
 .fpmgBt1{background-color: #fff;color:#888}
 .fpmgBt2{background-color: lightsalmon;color: #fff}
 
