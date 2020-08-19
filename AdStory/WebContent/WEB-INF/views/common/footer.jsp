@@ -35,15 +35,15 @@
 	                  </div>
 	                
 	                  <div class="flex items-center justify-between mb-5">
-	                     <a class="inline-block align-baseline font-light text-sm text-indigo-600 hover:text-indigo-500" href="#">
+	                     <a class="inline-block align-baseline font-light text-sm text-blue-600 hover:text-blue-500" href="#">
 	                            비밀번호 찾기
 	                    </a>
-	                    <button class="bg-indigo-600 hover:bg-blue-700 text-white font-light py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="submit">
+	                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-light py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="submit">
 	                            로그인
 	                    </button>
 	                 
 	                  </div>
-	                  <p class="text-center text-md font-light">아이디가 없으신가요? <a href="<%= request.getContextPath() %>/member/SelectRole" class="font-light text-md text-indigo-600">회원가입</a></p>
+	                  <p class="text-center text-md font-light">아이디가 없으신가요? <a href="<%= request.getContextPath() %>/member/SelectRole" class="font-light text-md text-blue-600">회원가입</a></p>
 	                </form>
 	            </div>
 	        </div>
