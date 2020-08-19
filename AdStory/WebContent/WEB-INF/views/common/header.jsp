@@ -162,6 +162,9 @@
                         onclick="location.href='<%= request.getContextPath() %>/board/list';">광고 게시판</li>
                     
                     <li class="sidenav__list-item">문의게시판</li>
+
+                    <li class="sidenav__list-item"
+                        onclick="location.href='<%= request.getContextPath() %>/tipBoard/list';">팁 게시판</li>
                     
                     
                 </ul>
