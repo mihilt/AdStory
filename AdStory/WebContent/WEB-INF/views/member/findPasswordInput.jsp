@@ -24,9 +24,9 @@
 </form>
 
 	<section id="find_container">
-	<h2>회원정보입력</h2>
+	<h2>비밀번호찾기</h2>
 	<form name="findFrm" 
-	  	  action="<%= request.getContextPath() %>/member/memberfind" 
+	  	  action="<%= request.getContextPath() %>/member/findPassword" 
 	  	  method="post">
 		<table>
 			<tr>
@@ -54,7 +54,7 @@
 			</tr>
 		</table>
 		<input type="submit" value="확인" />
-		<button class="return" onclick="location.href='<%= request.getContextPath() %>';">비동의</button>
+		<button class="return" onclick="location.href='<%= request.getContextPath() %>';">취소</button>
 	</form>
 	</section>
 
@@ -79,6 +79,18 @@ function checkEmail() {
 	$frm.find("[name=code_check]").val($code_check.val());
 	$frm.submit();
 }
+
+//4.이메일인증여부
+
+$("[name=findFrm]").submit(function(){
+	
+	var $emailValid = $("#emailValid");
+	if($emailValid.val() == 0){
+		alert("이메일 인증을 진행해주세요.");
+		return false;
+	}
+});
+
 
 </script>
 

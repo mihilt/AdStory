@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String email = (String)request.getAttribute("email"); %>
+<% String email = (String)request.getAttribute("email"); 
+   boolean isUsable = (boolean)request.getAttribute("isUsable"); %>
+<%! public int getRandom(){
+	int random = 0;
+	random = (int)Math.floor((Math.random()*(99999-10000+1)))+10000;
+	return random;
+}%>
 
 <!DOCTYPE html>
 <html>
@@ -43,9 +49,10 @@ function makeNull() {
 
 function closePopup(){
 	
+	var $receiver = $("#receiverR");
 	var $frm = $(opener.document.findFrm);
-	$frm.find("#receiver_").val("<%= email %>");
-	$frm.find("#emailValid").val(1); //이게 왜 안되는거지??...맞는데..??? 왜 못찾는거지
+	$frm.find("#receiver_").val(<%=email%>);
+	$frm.find("#emailValid").val(1);
 	
 	
 	self.close();
@@ -55,7 +62,7 @@ function closePopup(){
 
 </head>
 <body>
-
+	<% 	if(isUsable != true){ %>
 	<form id="form2">
 		<table>
 			<tr>
@@ -68,6 +75,23 @@ function closePopup(){
 		</table>
 		<input id="hi" type="button" value='확인' onclick="closePopup();"/>
 	</form>
+	<%  } else { %>
+	
+	<p>유효하지 않은 이메일입니다.<br/> 다시 입력해주세요.</p>
+	
+	<form name = "findFrm1"
+		  method = "POST"
+		  action="<%= request.getContextPath() %>/member/sendPasswordMail">
+		  
+		<input type="email" id="receiverR" name="receiver" placeholder="abc@xyz.com">
+		<input type="hidden" readonly="readonly" name="code_check" id="code_check_" 
+							value="<%=getRandom()%>"/>
+		<input type="submit" value="인증하기" />
+	</form>
+	
+	<%  } %>
+	
+	
 	
 
 </body>
