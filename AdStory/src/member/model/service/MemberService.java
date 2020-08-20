@@ -219,14 +219,14 @@ public class MemberService {
 		return result;
 	}
 
-	public Member selectEmail(String email) {
-		
-		System.out.println("memberId@service = " + email);
+
+	public Member selectMail(String email) {
+		System.out.println("email@service = " + email);
 		//1. DB Connection객체 생성
 		Connection conn = getConnection();
 		System.out.println("conn = " + conn);
 		//2. DAO 처리 요청
-		Member member = memberDAO.selectEmail(conn, email);
+		Member member = memberDAO.selectMail(conn, email);
 		
 		System.out.println("member@service = " + member);
 		//3. DML요청인 경우, Transaction 처리
@@ -234,6 +234,28 @@ public class MemberService {
 		close(conn);
 		
 		return member; 
+	}
+
+	public Member selectPW(String memberId, String name, String email) {
+		System.out.println("memberId@service="+memberId);
+		System.out.println("name@service="+name);
+		System.out.println("email@service = " + email);
+
+		//1. DB Connection객체 생성
+		Connection conn = getConnection();
+		System.out.println("conn = " + conn);
+		//2. DAO 처리 요청
+
+		Member member = memberDAO.selectPW(conn, memberId,name,email);
+
+		
+		System.out.println("member@service = " + member);
+		//3. DML요청인 경우, Transaction 처리
+		//4. Connection 반납(close)
+		close(conn);
+
+		return member;
+
 	}
 	
 	

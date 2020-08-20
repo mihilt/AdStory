@@ -44,11 +44,8 @@ public class SendPasswordMailServlet extends HttpServlet {
 		
 		
 		String email = request.getParameter("receiver");
-		System.out.println("email@servlet = " + email);
-		
-		Member member = new MemberService().selectEmail(email);
-		
-		System.out.println(member);
+
+		Member member = new MemberService().selectMail(email);
 		
 		boolean isUsable = member == null ? true : false;
 		System.out.println("isUsable@servlet = " + isUsable);
@@ -56,80 +53,67 @@ public class SendPasswordMailServlet extends HttpServlet {
 		
 		
 		
+			
+		Properties props = System.getProperties();
+		props.put("mail.smtp.user", "jmleeh819@gmail.com");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "465");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.socketFactory.fallback", "false");
 		
-		if(isUsable != false ) {
-		//키벨류형식으로 메일보내는 상태를 저장해서 꺼내쓴다?? 이정도 인것같음 뭔가 보내야해서 입력할때 이 값을 꺼내쓸듯.
-				Properties props = System.getProperties();
-				props.put("mail.smtp.user", "jmleeh819@gmail.com");
-				props.put("mail.smtp.host", "smtp.gmail.com");
-				props.put("mail.smtp.port", "465");
-				props.put("mail.smtp.starttls.enable", "true");
-				props.put("mail.smtp.auth", "true");
-				props.put("mail.smtp.socketFactory.port", "465");
-				props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-				props.put("mail.smtp.socketFactory.fallback", "false");
-				
-				//보안성 알고리즘인듯
-				Authenticator auth = new MyAuthentication();
-				
-				//getDefaultInstance() 메소드를 호출하면 공유 세션 인스턴스가 반환된다. 즉, 메소드를 호출할 때마다 동일한 세션이 반환된다.
-				Session session = Session.getDefaultInstance(props, auth);
-				MimeMessage msg = new MimeMessage(session);
-				
-				
-				try {
-					//편지보낸 시간
-					msg.setSentDate(new Date());
-					InternetAddress from = new InternetAddress("jmleeh819@gmail.com");
-					
-					//이메일 발신자
-					msg.setFrom(from);
-					
-					//이메일 수신자
-					                     //사용자가 입력한 이메일 받아오기
-					System.out.println(email);
-					InternetAddress to = new InternetAddress(email);
-					msg.setRecipient(Message.RecipientType.TO, to);
-					request.setAttribute("email", email);
-					
-					//이메일 제목
-					msg.setSubject("비밀번호 인증번호", "UTF-8");
-					
-					//이메일 내용
-					String code = request.getParameter("code_check"); //인증번호값 받기
-					request.setAttribute("code", code);
-					System.out.println(code);
-					msg.setText(code, "UTF-8");
-					
-					//이메일 헤더
-					msg.setHeader("content-Type", "text/html");
-					
-					//이메일 보내기
-					System.out.println(msg);
-					javax.mail.Transport.send(msg);
-					System.out.println("보냄");
-					
-				} catch(AddressException e) {
-					e.printStackTrace();
-				} catch(MessagingException e) {
-					e.printStackTrace();
-				}
-				
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/sendPasswordMail.jsp");
-				
-				rd.forward(request, response);
-				
-		} else {
-			String view = "/WEB-INF/views/common/msg.jsp";
-			String msg = "유효한 이메일이 없습니다.";
-			String loc = request.getContextPath();
+		Authenticator auth = new MyAuthentication();
+		
+		Session session = Session.getDefaultInstance(props, auth);
+		MimeMessage msg = new MimeMessage(session);
+		
+		
+		try {
+			//편지보낸 시간
+			msg.setSentDate(new Date());
+			InternetAddress from = new InternetAddress("jmleeh819@gmail.com");
 			
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
+			//이메일 발신자
+			msg.setFrom(from);
 			
-			RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
-			reqDispatcher.forward(request, response);
+			//이메일 수신자
+			                //사용자가 입력한 이메일 받아오기
+			System.out.println(email);
+			InternetAddress to = new InternetAddress(email);
+			msg.setRecipient(Message.RecipientType.TO, to);
+			request.setAttribute("email", email);
+			
+			//이메일 제목
+			msg.setSubject("비밀번호 인증번호", "UTF-8");
+			
+			//이메일 내용
+			String code = request.getParameter("code_check"); //인증번호값 받기
+			request.setAttribute("code", code);
+			System.out.println(code);
+			msg.setText(code, "UTF-8");
+			
+			//이메일 헤더
+			msg.setHeader("content-Type", "text/html");
+			
+			//이메일 보내기
+			System.out.println(msg);
+			javax.mail.Transport.send(msg);
+			System.out.println("보냄");
+			
+		} catch(AddressException e) {
+			e.printStackTrace();
+		} catch(MessagingException e) {
+			e.printStackTrace();
 		}
+		
+		
+		request.setAttribute("isUsable", isUsable);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/sendPasswordMail.jsp");
+		
+		rd.forward(request, response);
+
 				
 	}
 

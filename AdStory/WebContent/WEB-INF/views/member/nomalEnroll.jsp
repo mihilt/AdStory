@@ -201,13 +201,19 @@ $("[name=nomalEnrollFrm]").submit(function(){
 		return false;
 	}
 	
-	//3.중복검사 여부
+	//3.아이디 중복검사 여부
 	var $idValid = $("#idValid");
 	if($idValid.val() == 0){
 		alert("아이디 중복 검사 해주세요.");
 		return false;
 	}
 	
+	//4.이메일인증여부
+	var $emailValid = $("#emailValid");
+	if($emailValid.val() == 0){
+		alert("이메일 인증을 진행해주세요.");
+		return false;
+	}
 	
 	return true;
 } 
