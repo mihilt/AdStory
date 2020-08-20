@@ -32,7 +32,7 @@ public class TipBoardDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		System.out.println(boardNo);
+		
 		
 		TipBoard tipBoard = new TipBoardService().selectOne(boardNo);
 		int result = new TipBoardService().deleteTipBoard(boardNo);

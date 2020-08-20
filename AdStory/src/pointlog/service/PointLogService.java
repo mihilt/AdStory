@@ -49,8 +49,7 @@ public class PointLogService {
 		Connection conn = getConnection();
 		List<PointLogRanking> list= pointLogDAO.PointLogRankingTodayList(conn);
 		
-		System.out.println("list@service = " + list);
-		
+	
 		close(conn);
 		return list;
 	}
@@ -59,7 +58,7 @@ public class PointLogService {
 		Connection conn = getConnection();
 		List<PointLogRanking> list= pointLogDAO.PointLogRankingWeekList(conn);
 		
-		System.out.println("list@service = " + list);
+	
 		
 		close(conn);
 		return list;
@@ -69,7 +68,7 @@ public class PointLogService {
 		Connection conn = getConnection();
 		List<PointLogRanking> list= pointLogDAO.PointLogRankingYearList(conn);
 		
-		System.out.println("list@service = " + list);
+
 		
 		close(conn);
 		return list;

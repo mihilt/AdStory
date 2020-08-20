@@ -35,8 +35,7 @@ public class TipBoardUpdateServlet extends HttpServlet {
 		
 
 		TipBoard board = new TipBoardService().selectOne(boardNo);
-		System.out.println("board@servlet = " + board);
-		
+
 
 		request.setAttribute("board", board);
 		request.getRequestDispatcher("/WEB-INF/views/tipBoard/boardUpdate.jsp")

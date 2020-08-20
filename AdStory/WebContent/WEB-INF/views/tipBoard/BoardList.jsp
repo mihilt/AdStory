@@ -21,12 +21,12 @@
     <div class = "text-center ">
 	    <table class = "m-auto">
 	        <tr>
-	            <th class = "mobile-hide-table px-2 pb-2">번호</th>
+	            <th style='min-width : 48px' class = "mobile-hide-table px-2 pb-2">번호</th>
 	            <th class = "px-4 pb-2">제목</th>
-	            <th class = "px-4 pb-2">작성자</th>
-	            <th class = "mobile-hide-table px-4 pb-2">작성일</th>
-	            <th class = "px-1 pb-2">조회수</th>
-	            <th class = "px-1 pb-2">추천수</th>
+	            <th style='min-width : 80px'class = "px-4 pb-2">작성자</th>
+	            <th style='min-width : 116px' class = "mobile-hide-table px-4 pb-2">작성일</th>
+	            <th style='min-width : 56px' class = "px-1 pb-2">조회수</th>
+	            <th style='min-width : 56px' class = "px-1 pb-2">추천수</th>
 	        </tr>
 	
 	<%		
@@ -40,7 +40,7 @@
 		    <tr class="border hover:bg-blue-200 ">
 		  <% } %>
 	            <td class = "mobile-hide-table px-2 py-2"><%= b.getKey() %></td>
-	            <td class = " text-left px-4 w-1/3 hover:text-blue-700 hover:underline hover:font-bold cursor-pointer"
+	            <td class = " text-left px-4 w-2/3 hover:text-blue-700 hover:underline hover:font-bold cursor-pointer"
 	            onclick="location.href='<%= request.getContextPath() %>/tipBoard/view?boardNo=<%= b.getKey() %>'">
 	                <%= b.getTitle() %>
 	                <span class="text-blue-700 font-extrabold">
@@ -72,7 +72,7 @@
 	    </div>
 
    <%    }     %>   
-	    <div class="py-10 m-auto" style='max-width:557px;'>
+	    <div class="py-10 m-auto" style='max-width:1024px;'>
 		    <button
 		          class="float-left bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
 		          onclick="location.href='<%=request.getContextPath()%>/tipBoard/list/recommended';">
