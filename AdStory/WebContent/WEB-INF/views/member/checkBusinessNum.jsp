@@ -3,6 +3,7 @@
     
 <%
 	String result = (String)request.getAttribute("result");
+	String businessNum = (String)request.getAttribute("BusinessNum");
 	System.out.println(result);
 %>
 <!DOCTYPE html>
@@ -42,7 +43,7 @@
 		console.log("numtest");
 	
 		var $frm = $(opener.document.bussinessEnrollFrm);
-		/* $frm.find("#BusinessNum_").val($businessNum.val()); */
+		$frm.find("#BusinessNum_").val("<%=businessNum%>");
 		$frm.find("#BuisinessNumValid").val(1);
 		
 		console.log($businessNum.val());

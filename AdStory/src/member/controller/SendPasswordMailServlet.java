@@ -110,6 +110,7 @@ public class SendPasswordMailServlet extends HttpServlet {
 		
 		
 		request.setAttribute("isUsable", isUsable);
+		request.setAttribute("email", email);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/sendPasswordMail.jsp");
 		
 		rd.forward(request, response);

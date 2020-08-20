@@ -49,12 +49,13 @@ function makeNull() {
 
 function closePopup(){
 	
-	var $receiver = $("#receiverR");
+	
 	var $frm = $(opener.document.findFrm);
-	$frm.find("#receiver_").val(<%=email%>);
+	$frm.find("#receiver_").val("<%= email%>");
 	$frm.find("#emailValid").val(1);
 	
-	
+	console.log($frm.find("#receiver_").val("<%= email%>"));
+	/* console.log($receiver.val()); */
 	self.close();
 }
 	
@@ -83,7 +84,7 @@ function closePopup(){
 		  method = "POST"
 		  action="<%= request.getContextPath() %>/member/sendPasswordMail">
 		  
-		<input type="email" id="receiverR" name="receiver" placeholder="abc@xyz.com">
+		<input type="email" id="receiver" name="receiver" placeholder="abc@xyz.com">
 		<input type="hidden" readonly="readonly" name="code_check" id="code_check_" 
 							value="<%=getRandom()%>"/>
 		<input type="submit" value="인증하기" />

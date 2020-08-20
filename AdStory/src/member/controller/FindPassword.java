@@ -41,8 +41,9 @@ public class FindPassword extends HttpServlet {
 		boolean isUsable = member == null ? true : false;
 		System.out.println("isUsable@servlet = " + isUsable);
 		
-		if (isUsable != false) {
+		if (isUsable != true) {
 			
+			request.setAttribute("memberId",memberId);
 			request.getRequestDispatcher("/WEB-INF/views/member/changePassword.jsp").forward(request, response);
 			
 		} else {
