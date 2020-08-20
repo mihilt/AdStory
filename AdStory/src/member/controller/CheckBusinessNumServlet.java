@@ -58,6 +58,7 @@ public class CheckBusinessNumServlet extends HttpServlet {
 		
 			request.setAttribute("result", result);
 		}
+		request.setAttribute("BusinessNum", BusinessNum);
 		request.getRequestDispatcher("/WEB-INF/views/member/checkBusinessNum.jsp")
 		.forward(request, response); 
 
