@@ -42,7 +42,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>이메일</th>
+				<th>이메일바꾸는거 테스트</th>
 				<td>
 					<input type="email" id="receiver_" name="receiver" placeholder="abc@xyz.com">
 					<input type="button" id="submit" value="인증번호 발송" onclick = "checkEmail();"/>

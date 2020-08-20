@@ -44,6 +44,7 @@ public class SendPasswordMailServlet extends HttpServlet {
 		
 		
 		String email = request.getParameter("receiver");
+
 		Member member = new MemberService().selectMail(email);
 		
 		boolean isUsable = member == null ? true : false;
@@ -112,10 +113,7 @@ public class SendPasswordMailServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/member/sendPasswordMail.jsp");
 		
 		rd.forward(request, response);
-				
-		
-		
-				
+
 				
 	}
 

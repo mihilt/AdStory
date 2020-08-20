@@ -12,6 +12,19 @@
 
 
 
+<link rel="icon"
+    href="<%=request.getContextPath() %>/images/favicon.ico"
+    type="image/x-icon">
+<link rel="shortcut icon"
+    href="<%=request.getContextPath() %>/images/favicon.ico"
+    type="image/x-icon">
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+    rel="stylesheet">
+
+
+
+<link rel="stylesheet"
+    href="<%=request.getContextPath() %>/css/main_style.css" />
 </head>
 <body>
 
@@ -25,9 +38,10 @@
 </form>
 
 
+<div class="m-10">
 
 	<section id=enroll-container>
-	<h2>회원 가입 정보 입력</h2>
+	<p class = "mb-5 text-xl font-bold">회원 가입 정보 입력</p>
 	<form name="bussinessEnrollFrm" 
 		  action="<%= request.getContextPath() %>/member/businessEnroll" 
 		  method="post">
@@ -35,9 +49,9 @@
 			<tr>
 				<th>아이디</th>
 				<td>
-					<input type="text" placeholder="4글자이상" name="memberId" id="memberId_" required>
+					<input class = "border-2 m-2 p-1 px-2" type="text" placeholder="4글자이상" name="memberId" id="memberId_" required>
 					&nbsp;
-					<input type="button" value="아이디 중복 검사" 
+					<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="button" value="아이디 중복 검사" 
 						   onclick="checkIdDuplicate();"/>
 					<!-- 아이디 중복검사 여부 : 0=미확인, 1=확인 -->
 					<input type="hidden" id="idValid" value="0"/>
@@ -46,68 +60,73 @@
 			<tr>
 				<th>패스워드</th>
 				<td>
-					<input type="password" name="password" id="password_" required><br>
+					<input class = "border-2 m-2 p-1 px-2" type="password" name="password" id="password_" required><br>
 				</td>
 			</tr>
 			<tr>
 				<th>패스워드확인</th>
 				<td>	
-					<input type="password" id="password2" required><br>
+					<input class = "border-2 m-2 p-1 px-2" type="password" id="password2" required><br>
 				</td>
 			</tr>  
 			<tr>
 				<th>대표전화</th>
 				<td>	
-					<input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required><br>
+					<input class = "border-2 m-2 p-1 px-2" type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required><br>
 				</td>
 			</tr>
 			<tr>
+			    <th>은행선택</th>
+				<td>
+					 <select class = "border-2 m-2 p-1 px-2" name="bank">
+		                 <option value="기업은행">기업은행</option>
+		                 <option value="국민은행">국민은행</option>
+		                 <option value="신한은행">신한은행</option>
+		                 <option value="하나은행">하나은행</option>
+		                 <option value="우리은행">우리은행</option>
+		                 <option value="새마을금고">새마을금고</option>
+		            </select>
+				</td>
+            </tr>
+			<tr>
 				<th>계좌번호</th>
-				<select name="bank">
-				    <option value="기업은행">기업은행</option>
-				    <option value="국민은행">국민은행</option>
-				    <option value="신한은행">신한은행</option>
-				    <option value="하나은행">하나은행</option>
-				    <option value="우리은행">우리은행</option>
-				    <option value="새마을금고">새마을금고</option>
-				</select>
 				<td>	
-					<input type="text" placeholder="계좌번호를 입력하세요" name="acountNum" id="acountNum" maxlength="11" required><br>
+					<input class = "border-2 m-2 p-1 px-2" type="text" placeholder="계좌번호를 입력하세요" name="acountNum" id="acountNum" maxlength="11" required><br>
 				</td>
 			</tr>
 			<tr>
 				<th>사업자번호</th>
 				<td>	
-				<input type="text"  name="BusinessNum" id="BusinessNum_" required>&nbsp; 
-				<input type="button" value="사업자번호 인증" onclick="checkBusinessNum();" /> 
+				<input class = "border-2 m-2 p-1 px-2" type="text"  name="BusinessNum" id="BusinessNum_" required>&nbsp; 
+				<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="button" value="사업자번호 인증" onclick="checkBusinessNum();" /> 
 				<input type="hidden" id="BuisinessNumValid" value="0"/>
 				</td>
 			</tr>
 			<tr>
 				<th>사업자명</th>
 				<td>	
-				<input type="text" name="name" id="name" ><br/>
+				<input class = "border-2 m-2 p-1 px-2" type="text" name="name" id="name" ><br/>
 				</td>
 			</tr> 
 			<tr>
 				<th>이메일</th>
 				<td>	
-					<input type="email" placeholder="abc@xyz.com" name="email" id="email">
+					<input class = "border-2 m-2 p-1 px-2" type="email" placeholder="abc@xyz.com" name="email" id="email">
 				</td>
 			</tr>
 			
 			<tr>
 				<th>주소</th>
 				<td>	
-					<input type="text" placeholder="" name="address" id="address"><br>
+					<input class = "border-2 m-2 p-1 px-2" type="text" placeholder="" name="address" id="address"><br>
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value="가입" >
-		<input type="reset" value="취소">
+		<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="submit" value="가입" >
+		<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="reset" value="취소">
 	</form>
 </section>
-
+</div>
 <script>
 /**
  * 아이디 중복검사 함수
@@ -164,12 +183,7 @@ $("[name=bussinessEnrollFrm]").submit(function(){
 		return false;
 	}
 
-	//3.중복검사 여부
-	var $BuisinessNumValid = $("#BuisinessNumValid");
-	if($BuisinessNumValid.val() == 0){
-		alert("아이디 중복 검사 해주세요.");
-		return false;
-	}
+
 	
 	
 	return true;

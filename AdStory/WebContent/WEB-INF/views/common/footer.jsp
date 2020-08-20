@@ -35,10 +35,12 @@
 	                  </div>
 	                
 	                  <div class="flex items-center justify-between mb-5">
+
 	                     <a class="inline-block align-baseline font-light text-sm text-indigo-600 hover:text-indigo-500" href="<%= request.getContextPath() %>/member/findPasswordInput">
+
 	                            비밀번호 찾기
 	                    </a>
-	                    <button class="bg-indigo-600 hover:bg-blue-700 text-white font-light py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="submit">
+	                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-light py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="submit">
 	                            로그인
 	                    </button>
 	                 

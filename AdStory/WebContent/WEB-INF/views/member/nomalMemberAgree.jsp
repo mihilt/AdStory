@@ -5,6 +5,13 @@
 <head>
 <meta charset="UTF-8">
 
+<link rel="icon"
+    href="<%=request.getContextPath() %>/images/favicon.ico"
+    type="image/x-icon">
+<link rel="shortcut icon"
+    href="<%=request.getContextPath() %>/images/favicon.ico"
+    type="image/x-icon">
+
 <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/css/enrollStyle.css" />
 

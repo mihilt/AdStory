@@ -693,9 +693,11 @@ public class MemberDAO {
 		try {
 			//1. PreparedStatement객체생성, 미완성쿼리 전달
 			pstmt = conn.prepareStatement(sql);
+
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, name);
 			pstmt.setString(3, email);
+
 			
 			//2. 실행 
 			rset = pstmt.executeQuery();
