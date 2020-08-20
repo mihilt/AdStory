@@ -4,7 +4,6 @@
 <%
 	String result = (String)request.getAttribute("result");
 	String businessNum = (String)request.getAttribute("BusinessNum");
-	System.out.println(result);
 %>
 <!DOCTYPE html>
 <html>

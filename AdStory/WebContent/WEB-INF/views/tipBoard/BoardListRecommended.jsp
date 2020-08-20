@@ -45,7 +45,7 @@
             <tr class="border hover:bg-blue-200 ">
           <% } %>
                 <td class = "mobile-hide-table px-2 py-2"><%= b.getKey() %></td>
-                <td class = " text-left px-4 w-1/3 hover:text-blue-700 hover:underline hover:font-bold cursor-pointer"
+                <td class = " text-left px-4 w-2/3 hover:text-blue-700 hover:underline hover:font-bold cursor-pointer"
                 onclick="location.href='<%= request.getContextPath() %>/tipBoard/view?boardNo=<%= b.getKey() %>'">
                     <%= b.getTitle() %>
                     <span class="text-blue-700 font-extrabold">
@@ -63,7 +63,7 @@
                 <td class = "px-1"><%= b.getRecommend() %></td>
             </tr>   
    
-           <%       } %>
+           <% } %>
         </table>
     
         <div class="align-middle flex justify-center">
@@ -77,11 +77,11 @@
             <button
                   class="float-left bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                   onclick="location.href='<%=request.getContextPath()%>/tipBoard/list';">
-                 전체목록</button>
+                         전체목록</button>
             <button
                   class="float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                   onclick="location.href='<%=request.getContextPath()%>/tipBoard/insert';">
-                              글쓰기
+                          글쓰기
             </button>
         </div>
     </div>

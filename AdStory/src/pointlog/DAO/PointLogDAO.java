@@ -71,7 +71,7 @@ public class PointLogDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
+
 		return list;
 	}
 	
@@ -114,7 +114,7 @@ public class PointLogDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
+
 		return list;
 	}
 	
@@ -259,7 +259,7 @@ public class PointLogDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
+
 		return list;
 	}
 
@@ -285,7 +285,7 @@ public class PointLogDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
+
 		return list;
 	}
 
@@ -315,7 +315,7 @@ public class PointLogDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("sales@boardDAO = " + sales);
+
 		return sales;
 	}
 

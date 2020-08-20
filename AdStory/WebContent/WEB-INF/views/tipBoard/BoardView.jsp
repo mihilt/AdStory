@@ -34,7 +34,7 @@ function deleteBoard(){
         </a> 
         > <%=b.getKey() %>번 게시글
     </p>
-    <div class="">
+    <div class="max-w-screen-lg m-auto">
 	    <div>
 	       <div class="bg-gray-200 text-xl border-t-2 border-b p-1 px-3">
               <%=b.getTitle() %>
@@ -42,7 +42,7 @@ function deleteBoard(){
 
 	    </div>
 
-	    <div class="p-1 px-3 py-2">
+	    <div class=" p-1 px-3 py-2">
 	       <div>
               <span class="text-sm"><%=b.getMemberId() %> </span> | <span class="text-sm"> <%=b.getPostDate() %></span>
               <span class="text-sm float-right">조회수 : <%=b.getReadCount() %></span>
@@ -102,11 +102,11 @@ function deleteBoard(){
 				    <span class="text-xs"> <%=bc.getPostDate()%></span> 
 				    
 				    <span class="float-right">
-				         <button class="btn-reply text-xs" value="<%=bc.getKey()%>">답글</button>
+				         <button class="btn-reply text-xs font-bold text-blue-700 hover:underline" value="<%=bc.getKey()%>">답글</button>
 			         <%if(memberLoggedIn!=null 
 	                          && (MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole()) 
 	                                  || bc.getMemberId().equals(memberLoggedIn.getMemberId()) )){%>        
-                         <button class="btn-delete text-xs" value="<%=bc.getKey()%>">삭제</button>
+                         <button class="btn-delete text-xs font-bold text-blue-700 hover:underline" value="<%=bc.getKey()%>">삭제</button>
                      <% } %>            
 				    </span>
 				<% } %>    
@@ -116,7 +116,7 @@ function deleteBoard(){
 				%>
                 <div class = "pl-20 border-t">
                 <% if("T".equals(bc.getStatus())){ %>
-                    <div class = "text-sm py-4 text-center text-red-500">삭제된 답글입니다.</div>
+                    <div class = "text-sm py-4 text-center text-red-500 text-blue-700 hover:underline">삭제된 답글입니다.</div>
                 <% } else { %>
                     <span class="text-xs text-blue-700 font-bold"> <%=bc.getMemberId()%></span> 
                     <br /> 
@@ -128,7 +128,7 @@ function deleteBoard(){
                      <%if(memberLoggedIn!=null 
                        && (MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole()) 
                                || bc.getMemberId().equals(memberLoggedIn.getMemberId()) )){%>  
-                         <button class="btn-delete text-xs" value="<%=bc.getKey()%>">삭제</button>
+                         <button class="btn-delete text-xs font-bold text-blue-700 hover:underline" value="<%=bc.getKey()%>">삭제</button>
                      <% } %>  
                     </span>
                 <% } %>
@@ -166,7 +166,7 @@ function deleteBoard(){
                
 	           <textarea id="boardCommentContent" class="p-2 h-32 border w-full" name="content" placeholder="덧글을 작성해주세요."></textarea>
 	           <button
-	               class="float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+	               class="mb-32 float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
 	               type="submit">
 	                              덧글 등록
                </button>

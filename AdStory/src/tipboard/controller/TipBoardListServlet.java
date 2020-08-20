@@ -45,11 +45,9 @@ public class TipBoardListServlet extends HttpServlet {
 
 		List<TipBoard> list = new TipBoardService().selectTipBoardList(cPage, numPerPage);
 		
-		System.out.println("list="+list);
 		
 		int totalContents = new TipBoardService().selectTipBoardCount();
-		System.out.println("totalContents = " + totalContents);
-		
+
 		String url = request.getRequestURI();
 		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);
 	
