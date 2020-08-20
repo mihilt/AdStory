@@ -66,7 +66,7 @@
 	    <form method="post" onsubmit="return check();"> 
 	        <input name="boardTitle" class="border my-2 p-1 w-full" type="text" placeholder="제목을 입력해주세요."/>
 	        <textarea name="boardContent" id="sample"></textarea>
-	        <input class = "mt-10 float-right bg-transparent hover:bg-blue-500 text-gray-700 font-semibold hover:text-white py-4 px-8 border border-gray-700 hover:border-transparent rounded" type="submit" value="작성">
+	        <input class = "mt-10 float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-3 px-6 border border-blue-500 hover:border-transparent rounded" type="submit" value="작성">
 	        <input class="hidden" type="text" name="boardWriter" value="<%= memberLoggedIn.getMemberId() %>" readonly/>
 	    </form>
     </div>

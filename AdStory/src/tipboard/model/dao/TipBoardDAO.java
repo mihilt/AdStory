@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import board.model.dao.BoardDAO;
+import board.model.vo.Board;
 import tipboard.model.vo.TipBoard;
 
 public class TipBoardDAO {
@@ -53,7 +54,7 @@ public class TipBoardDAO {
 				b.setReadCount(rset.getInt("read_count"));
 				b.setRecommend(rset.getInt("recommend"));
 				
-				b.setMemberId(rset.getString("name"));
+				b.setMemberId(rset.getString("member_id"));
 				b.setMemberRole(rset.getString("member_role"));
 
 				list.add(b);
@@ -134,6 +135,60 @@ public class TipBoardDAO {
 		}
 
 		return boardNo;
+	}
+
+	public int increaseReadCount(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseReadCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate(); 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public TipBoard selectOne(Connection conn, int boardNo) {
+		TipBoard b = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectOne");
+		try{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				b = new TipBoard();
+				
+				b.setKey(rset.getInt("key"));
+				b.setUserKey(rset.getInt("user_key"));
+				b.setTitle(rset.getString("title"));
+				b.setContent(rset.getString("content"));
+				b.setPostDate(rset.getString("post_date"));
+				b.setReadCount(rset.getInt("read_count"));
+				b.setRecommend(rset.getInt("recommend"));
+				
+				b.setMemberId(rset.getString("member_id"));
+				b.setMemberRole(rset.getString("member_role"));
+
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return b;
 	}
 
 }

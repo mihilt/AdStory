@@ -8,6 +8,8 @@ import static common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import board.model.vo.Board;
+import common.Utils;
 import tipboard.model.dao.TipBoardDAO;
 import tipboard.model.vo.TipBoard;
 
@@ -47,6 +49,22 @@ public class TipBoardService {
 		close(conn);
 		
 		return result;
+	}
+
+
+	public TipBoard selectOne(int boardNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		result = tipBoardDAO.increaseReadCount(conn, boardNo);		
+		
+		TipBoard tipBoard = tipBoardDAO.selectOne(conn, boardNo);
+
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return tipBoard;
 	}
 
 }
