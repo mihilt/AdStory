@@ -1,7 +1,6 @@
 package tipboard.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,22 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-import common.Utils;
 import tipboard.model.service.TipBoardService;
-import tipboard.model.vo.TipBoard;
 
 /**
- * Servlet implementation class TipBoardServlet
+ * Servlet implementation class TipBoardCommentDeleteServlet
  */
-@WebServlet("/tipBoard/list")
-public class TipBoardServlet extends HttpServlet {
+@WebServlet("/tipBoard/comment/delete")
+public class TipBoardCommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TipBoardServlet() {
+    public TipBoardCommentDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,28 +30,25 @@ public class TipBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int numPerPage = 10;
-		int cPage = 1;
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		int boardCommentNo = Integer.parseInt(request.getParameter("boardCommentNo"));
 		
-		try{
-			cPage = Integer.parseInt(request.getParameter("cPage"));
-		} catch(NumberFormatException e){
+		int result = new TipBoardService().deleteTipBoardComment(boardCommentNo);
 		
-		}
+		String view = "/WEB-INF/views/common/msg.jsp";
+		String msg = "";
+		String loc = request.getContextPath() + "/tipBoard/view?boardNo="+boardNo;
 
-		List<TipBoard> list = new TipBoardService().selectTipBoardList(cPage, numPerPage);
+		if(result>0)
+			view = "/tipBoard/view?boardNo="+boardNo;
+			
+		else 
+			msg = "댓글 삭제 실패!";	
 		
-		System.out.println("list="+list);
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
-		int totalContents = new TipBoardService().selectTipBoardCount();
-		System.out.println("totalContents = " + totalContents);
-		
-		String url = request.getRequestURI();
-		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);
-	
-		request.setAttribute("list",list);
-		request.setAttribute("pageBar",pageBar);	
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/tipBoard/BoardList.jsp");
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
 	}
 
