@@ -140,6 +140,22 @@ public class TipBoardService {
 	}
 
 
+	public List<TipBoard> selectTipBoardListRecommended(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<TipBoard> list= tipBoardDAO.selectTipBoardListRecommended(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
+
+	public int selectTipBoardListRecommendedCount() {
+		Connection conn = getConnection();
+		int totalBoardCount = tipBoardDAO.selectTipBoardListRecommendedCount(conn);
+		close(conn);
+		return totalBoardCount;
+	}
+
+
 
 
 }

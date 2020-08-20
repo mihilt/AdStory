@@ -14,10 +14,9 @@ import java.util.List;
 import java.util.Properties;
 
 import board.model.dao.BoardDAO;
-import board.model.vo.Board;
-
 import tipboard.model.vo.TipBoard;
 import tipboard.model.vo.TipBoardComment;
+import tipboard.model.vo.TipBoardWithCommentCnt;
 
 public class TipBoardDAO {
 	private Properties prop = new Properties();
@@ -47,7 +46,8 @@ public class TipBoardDAO {
 			pstmt.setInt(2, cPage*numPerPage);
 			rset = pstmt.executeQuery();
 			while(rset.next()){
-				TipBoard b = new TipBoard();
+				TipBoardWithCommentCnt b = new TipBoardWithCommentCnt();
+				
 				b.setKey(rset.getInt("key"));
 				b.setUserKey(rset.getInt("user_key"));
 				b.setTitle(rset.getString("title"));
@@ -59,6 +59,7 @@ public class TipBoardDAO {
 				b.setMemberId(rset.getString("member_id"));
 				b.setMemberRole(rset.getString("member_role"));
 
+				b.setBoardCommentCnt(rset.getInt("comm_cnt"));
 				list.add(b);
 			}
 		}catch(Exception e){
@@ -343,6 +344,68 @@ public class TipBoardDAO {
 		}
 		
 		return result;
+	}
+
+	public List<TipBoard> selectTipBoardListRecommended(Connection conn, int cPage, int numPerPage) {
+		List<TipBoard> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectTipBoardListRecommended");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			rset = pstmt.executeQuery();
+			while(rset.next()){
+				TipBoardWithCommentCnt b = new TipBoardWithCommentCnt();
+				b.setKey(rset.getInt("key"));
+				b.setUserKey(rset.getInt("user_key"));
+				b.setTitle(rset.getString("title"));
+				b.setContent(rset.getString("content"));
+				b.setPostDate(rset.getString("post_date"));
+				b.setReadCount(rset.getInt("read_count"));
+				b.setRecommend(rset.getInt("recommend"));
+				
+				b.setMemberId(rset.getString("member_id"));
+				b.setMemberRole(rset.getString("member_role"));
+				
+				b.setBoardCommentCnt(rset.getInt("comm_cnt"));
+				list.add(b);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+	public int selectTipBoardListRecommendedCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		int totalMember = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectTipBoardListRecommendedCount");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				totalMember = rset.getInt("cnt");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalMember;
 	}
 
 }
