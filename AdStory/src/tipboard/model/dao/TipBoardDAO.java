@@ -15,7 +15,9 @@ import java.util.Properties;
 
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
+
 import tipboard.model.vo.TipBoard;
+import tipboard.model.vo.TipBoardComment;
 
 public class TipBoardDAO {
 	private Properties prop = new Properties();
@@ -189,6 +191,95 @@ public class TipBoardDAO {
 			close(pstmt);
 		}
 		return b;
+	}
+
+	public int recommend(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("recommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate(); 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertTipBoardComment(Connection conn, TipBoardComment tipBoardComment) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertTipBoardComment"); 
+		try {
+			
+			String boardCommentRef = 
+					tipBoardComment.getCommRef() == 0 ? null : String.valueOf(tipBoardComment.getCommRef());
+	
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setInt(1, tipBoardComment.getUserKey()); 
+			pstmt.setInt(2, tipBoardComment.getPostKey()); 
+			pstmt.setString(3, tipBoardComment.getContent()); 
+			pstmt.setInt(4, tipBoardComment.getCommLevel());
+			pstmt.setString(5, boardCommentRef);
+			pstmt.setString(6, tipBoardComment.getStatus());
+	
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+	
+			
+		} finally  {
+			close(pstmt);
+		} 
+		
+		return result;
+	}
+
+	public List<TipBoardComment> selectCommentList(Connection conn, int boardNo) {
+		List<TipBoardComment> commentList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCommentList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			commentList = new ArrayList<>();
+			while(rset.next()) {
+				TipBoardComment bc = new TipBoardComment();
+				bc.setKey(rset.getInt("key"));
+				bc.setUserKey(rset.getInt("user_key"));
+				bc.setPostKey(rset.getInt("post_key"));
+				bc.setContent(rset.getString("content"));
+				bc.setPostDate(rset.getString("post_date"));
+				bc.setCommLevel(rset.getInt("comm_level"));
+				bc.setCommRef(rset.getInt("comm_ref"));
+				bc.setStatus(rset.getString("status"));
+				bc.setMemberId(rset.getString("member_id"));
+				bc.setMemberRole(rset.getString("member_role"));
+				
+				commentList.add(bc);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return commentList;
 	}
 
 }

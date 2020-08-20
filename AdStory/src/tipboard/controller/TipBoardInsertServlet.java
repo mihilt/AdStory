@@ -42,18 +42,18 @@ public class TipBoardInsertServlet extends HttpServlet {
 		String boardTitle = request.getParameter("boardTitle");
 		String boardWriter = request.getParameter("boardWriter");
 		String boardContent = request.getParameter("boardContent");
-		
+	
 		TipBoard tipBoard = new TipBoard(0, 0, boardTitle, boardContent, null, 0, 0, boardWriter, null);
 		
 		int result = new TipBoardService().insertTipBoard(tipBoard);
 		int boardNo = tipBoard.getKey();
 
+		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
-		String loc = "";
+		String loc = request.getContextPath() + "/tipBoard/view?boardNo=" + boardNo;
 		
 		if(result > 0) {
-			msg = "게시글 등록 성공!";
-			loc = request.getContextPath() + "/tipBoard/view?boardNo=" + boardNo;
+			view = "/tipBoard/view?boardNo=" + boardNo;
 		}
 		else {
 			msg = "게시글 등록 실패!";
@@ -61,7 +61,7 @@ public class TipBoardInsertServlet extends HttpServlet {
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
+		request.getRequestDispatcher(view)
 			   .forward(request, response);
 		
 		

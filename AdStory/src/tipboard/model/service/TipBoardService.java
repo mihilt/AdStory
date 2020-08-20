@@ -12,6 +12,7 @@ import board.model.vo.Board;
 import common.Utils;
 import tipboard.model.dao.TipBoardDAO;
 import tipboard.model.vo.TipBoard;
+import tipboard.model.vo.TipBoardComment;
 
 public class TipBoardService {
 
@@ -65,6 +66,41 @@ public class TipBoardService {
 		
 		close(conn);
 		return tipBoard;
+	}
+
+
+	public int recommend(int boardNo) {
+		Connection conn = getConnection();
+		int result = 0;
+		
+		result =  tipBoardDAO.recommend(conn,boardNo);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+
+	public int insertTipBoardComment(TipBoardComment tipBoardComment) {
+		Connection conn = getConnection();
+		int result = tipBoardDAO.insertTipBoardComment(conn, tipBoardComment);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public List<TipBoardComment> selectCommentList(int boardNo) {
+		Connection conn = getConnection();
+		List<TipBoardComment> commentList
+			= tipBoardDAO.selectCommentList(conn, boardNo);
+		close(conn);
+		return commentList;
 	}
 
 }

@@ -1,6 +1,7 @@
 package tipboard.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import common.Utils;
 import tipboard.model.service.TipBoardService;
 import tipboard.model.vo.TipBoard;
+import tipboard.model.vo.TipBoardComment;
 
 /**
  * Servlet implementation class TipBoardViewServlet
@@ -37,9 +39,7 @@ public class TipBoardViewServlet extends HttpServlet {
 		TipBoardService tipBoardService = new TipBoardService();
 		TipBoard tipBoard = tipBoardService.selectOne(boardNo);
 		
-		/*
-		 * 덧글리스트 가져오기
-		 */
+		List<TipBoardComment> commentList = tipBoardService.selectCommentList(boardNo);
 		
 		String view = "/WEB-INF/views/tipBoard/BoardView.jsp";
 		
@@ -63,9 +63,8 @@ public class TipBoardViewServlet extends HttpServlet {
 			
 			tipBoard.setContent(boardContent);		
 		}
-		
 		request.setAttribute("tipBoard", tipBoard);
-
+		request.setAttribute("commentList", commentList);
 		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
