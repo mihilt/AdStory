@@ -282,4 +282,67 @@ public class TipBoardDAO {
 		return commentList;
 	}
 
+	public int deleteTipBoardComment(Connection conn, int boardCommentNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteTipBoardComment"); 
+		
+		try {
+
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setInt(1, boardCommentNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteTipBoard(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteTipBoard"); 
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateTipBoard(Connection conn, TipBoard b) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateTipBoard"); 
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, b.getTitle());
+			pstmt.setString(2, b.getContent());;
+			pstmt.setInt(3, b.getKey());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

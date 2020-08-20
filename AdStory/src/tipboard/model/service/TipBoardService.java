@@ -103,4 +103,43 @@ public class TipBoardService {
 		return commentList;
 	}
 
+
+	public int deleteTipBoardComment(int boardCommentNo) {
+		Connection conn = getConnection();
+		int result = tipBoardDAO.deleteTipBoardComment(conn, boardCommentNo);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int deleteTipBoard(int boardNo) {
+		Connection conn = getConnection();
+		int result = tipBoardDAO.deleteTipBoard(conn, boardNo);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int updateTipBoard(TipBoard tipBoard) {
+		Connection conn = getConnection();
+		int result = tipBoardDAO.updateTipBoard(conn, tipBoard);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+
+
+
 }

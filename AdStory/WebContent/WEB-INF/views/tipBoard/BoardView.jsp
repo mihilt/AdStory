@@ -1,3 +1,4 @@
+<%@page import="member.model.service.MemberService"%>
 <%@page import="tipboard.model.vo.TipBoardComment"%>
 <%@page import="java.util.List"%>
 <%@page import="tipboard.model.vo.TipBoard"%>
@@ -9,6 +10,21 @@
 	List<TipBoardComment> commentList 
 	= (List<TipBoardComment>)request.getAttribute("commentList"); 
 %>
+<form name="boardDelFrm" 
+      action="<%=request.getContextPath()%>/tipBoard/delete" 
+      method="post">
+    <input type="hidden" name="boardNo" value="<%=b.getKey() %>" />
+</form>
+<script>
+function updateBoard(){
+    location.href="<%=request.getContextPath()%>/tipBoard/update?boardNo=<%=b.getKey() %>";
+}
+function deleteBoard(){
+    if(!confirm('이 게시글을 정말 삭제하시겠습니까?')) return;
+    $("[name=boardDelFrm]").submit();
+}
+</script>
+
 <div class = "m-12">  
 
     <p class = "text-3xl border-b-2 mb-10">팁 게시판</p>
@@ -44,8 +60,25 @@
            <button
                class="my-5 bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                onclick="location.href='<%=request.getContextPath()%>/tipBoard/list';">
-                              뒤로
+               뒤로
            </button>
+           
+           <% if(memberLoggedIn!=null && 
+              (b.getMemberId().equals(memberLoggedIn.getMemberId())
+                || MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())) ){ %>
+           <button
+               class="float-right my-5 bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+               onclick="deleteBoard()">
+                              삭제
+           </button>
+           <div class="float-right">　</div>
+           <button
+               class="float-right my-5 bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+               onclick="updateBoard()">
+                              수정
+           </button>
+            <% } %>
+
 	    </div>
 	    
 	    
@@ -59,30 +92,46 @@
 							if (bc.getCommLevel() == 1) {
 				%>
 				<div class = "border-t">
+				<% if("T".equals(bc.getStatus())){ %>
+				    <div class = "py-4 text-center font-bold text-red-500">삭제된 덧글입니다.</div>
+				<% } else { %>
 				    <span class="text-xs text-blue-700 font-bold"> <%=bc.getMemberId()%></span> 
 				    <br /> 
 				    <%=bc.getContent()%>
 				    <br /> 
 				    <span class="text-xs"> <%=bc.getPostDate()%></span> 
+				    
 				    <span class="float-right">
 				         <button class="btn-reply text-xs" value="<%=bc.getKey()%>">답글</button>
-                       <%-- 삭제버튼 추가 : 관리자 또는 작성자 본인 --%>
-                         <button class="btn-delete text-xs">삭제</button>
+			         <%if(memberLoggedIn!=null 
+	                          && (MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole()) 
+	                                  || bc.getMemberId().equals(memberLoggedIn.getMemberId()) )){%>        
+                         <button class="btn-delete text-xs" value="<%=bc.getKey()%>">삭제</button>
+                     <% } %>            
 				    </span>
+				<% } %>    
 			    </div>
 				<%
 					} else {
 				%>
-                <div class = "pl-10 border-t">
+                <div class = "pl-20 border-t">
+                <% if("T".equals(bc.getStatus())){ %>
+                    <div class = "text-sm py-4 text-center text-red-500">삭제된 답글입니다.</div>
+                <% } else { %>
                     <span class="text-xs text-blue-700 font-bold"> <%=bc.getMemberId()%></span> 
                     <br /> 
                     <%=bc.getContent()%>
                     <br /> 
-                    <span class="text-xs"> <%=bc.getPostDate()%></span> 
+                    <span class="text-xs"> <%=bc.getPostDate()%></span>
+                     
                     <span class="float-right">
-                       <%-- 삭제버튼 추가 : 관리자 또는 작성자 본인 --%>
-                         <button class="btn-delete text-xs">삭제</button>
+                     <%if(memberLoggedIn!=null 
+                       && (MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole()) 
+                               || bc.getMemberId().equals(memberLoggedIn.getMemberId()) )){%>  
+                         <button class="btn-delete text-xs" value="<%=bc.getKey()%>">삭제</button>
+                     <% } %>  
                     </span>
+                <% } %>
                 </div>
 
 				<%
@@ -119,7 +168,7 @@
 	           <button
 	               class="float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
 	               type="submit">
-	                              등록
+	                              덧글 등록
                </button>
 	       </form>
 	    </div>
@@ -129,22 +178,26 @@
 </div>
 
 <script>
+$(".btn-delete").click(function(){
+    if(!confirm("정말 삭제하시겠습니까?")) return;
+    
+    location.href = "<%= request.getContextPath() %>/tipBoard/comment/delete?boardNo=<%=b.getKey() %>&boardCommentNo="+$(this).val();
+    
+});
 
 $(".btn-reply").click(function(){
     <%  if(memberLoggedIn == null){ %>
-    <%-- 로그인 하지 않은 경우 --%>
         loginAlert();
         
     <%  } else { %>
-    <%-- 로그인 한 경우 --%>
-        //동적으로 답글(대댓글) 폼을 바로 아래 tr태그에 제공
+
         var html = "<form class='pb-16' action='<%= request.getContextPath() %>/tipBoard/comment/insert' method='POST'>"
                  + '<input type="hidden" name="boardNo" value="<%= b.getKey() %>" />'
                  + '<input type="hidden" name="userKey" value="<%= memberLoggedIn.getKey() %>" />'
                  + '<input type="hidden" name="commLevel" value="2" />'
                  + '<input type="hidden" name="commRef" value="' + $(this).val() + '" />' 
                  + '<textarea id="boardCommentContent" class="p-2 h-32 border w-full" name="content" placeholder="덧글을 작성해주세요."></textarea>'
-                 + '<button class="float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type="submit">등록</button>'
+                 + '<button class="float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type="submit">답글 등록</button>'
                  + "</form>"
 
           var $ht = $(html);
@@ -161,26 +214,11 @@ $(".btn-reply").click(function(){
              })
              .children("textarea")
              .focus();
-             
-              
-          //.btn-reply에 click 이벤트핸들러가 딱 한번만 작동하도록 함.
+ 
           $(this).off('click');
     
     <%  } %>
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function loginAlert(){
     alert("로그인 후 이용할 수 있습니다.");
