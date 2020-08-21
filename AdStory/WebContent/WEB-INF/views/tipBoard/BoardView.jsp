@@ -81,11 +81,7 @@ function deleteBoard(){
 
 	    </div>
 	    
-	    
-	    
-	    
 	    <div>
-		
 				<%
 					if (commentList != null && !commentList.isEmpty()) {
 						for (TipBoardComment bc : commentList) {
@@ -141,19 +137,7 @@ function deleteBoard(){
 				%>
 
 		</div>
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
+		
 	    <div class=" pt-4">
 	       <form action="<%=request.getContextPath()%>/tipBoard/comment/insert"
                  method="POST"

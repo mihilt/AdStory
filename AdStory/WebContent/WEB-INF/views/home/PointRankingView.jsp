@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="pointlog.vo.PointLogRanking"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -7,6 +8,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <% 
 String type = (String)request.getAttribute("servletType");
+ArrayList memberIdRank = new ArrayList<>();
+ArrayList rankPointAmount = new ArrayList<>();
 %>
 <div class = "m-12">  
     
@@ -68,10 +71,17 @@ String type = (String)request.getAttribute("servletType");
 		    <tbody>
 		    
 		    <%
+
+		        
+		    
 		    	int num = 0;
 		        for(PointLogRanking l : list){ %>
-		        
-                    <% num++; %>
+		            
+                    <% 
+                    num++;
+                    memberIdRank.add("\"" + num + "등 : " + l.getMemberId() + "\"");
+                    rankPointAmount.add(l.getSumPoint());
+                    %>
 
                     <% if(num%2==0){ %>
 				        <tr>
@@ -102,5 +112,40 @@ String type = (String)request.getAttribute("servletType");
     </div>
     
     <p class = "text-center my-10 text-red-600 text-sm">*일반회원이 게시글 홍보를 통해 얻은 포인트만 집계 처리한 순위입니다.</p>
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<div>
+	<div class = "w-1/2 m-auto">
+	    <div class="p-5">
+	        <canvas id="chartjs-1" class="chartjs" width="undefined" height="undefined"></canvas>
+	        <script>
+	        new Chart(document.getElementById("chartjs-1"), {
+	            "type": "bar",
+	            "data": {
+	                "labels": <%=memberIdRank.toString()%>,
+	                "datasets": [{
+	                    "label": "광고수익",
+	                    "data": <%=rankPointAmount.toString() %>,
+	                    "fill": false,
+	                    "backgroundColor": ["rgba(54, 162, 235, 0.2)"],
+	                    "borderColor": ["rgb(54, 162, 235)"],
+	                    "borderWidth": 1
+	                }]
+	            },
+	            "options": {
+	                "scales": {
+	                    "yAxes": [{
+	                        "ticks": {
+	                            "beginAtZero": true
+	                        }
+	                    }]
+	                }
+	            }
+	        });
+	        </script>
+	    </div>
+    </div>
+
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
