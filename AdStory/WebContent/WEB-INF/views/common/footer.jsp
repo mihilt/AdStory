@@ -36,15 +36,17 @@
 	                
 	                  <div class="flex items-center justify-between mb-5">
 	                  <span class="inline-block align-baseline font-light text-sm text-blue-800">
-						<a class="hover:text-blue-500" href="<%= request.getContextPath() %>/member/findIdInput">
+                      
+						<a class="mx-1 hover:text-blue-500" href="<%= request.getContextPath() %>/member/findIdInput">
 	                       아이디 찾기
 	                    </a>
-	                    <a class="hover:text-blue-500" href="<%= request.getContextPath() %>/member/findPasswordInput">
-	                                              비밀번호 찾기
+	                    <a class="mx-1 hover:text-blue-500" href="<%= request.getContextPath() %>/member/findPasswordInput">
+                        
+	                       비밀번호 찾기
 	                    </a>
 	                  </span> 
 	                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-light py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="submit">
-	                            로그인
+	                       로그인
 	                    </button>
 	                 
 	                  </div>

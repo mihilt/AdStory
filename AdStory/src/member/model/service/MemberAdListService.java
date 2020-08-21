@@ -34,4 +34,11 @@ public class MemberAdListService {
 		return num;
 	}
 
+	public int selectNumInquiry() {
+		Connection conn = getConnection();
+		int num = memberAdListDAO.selectNumInquiry(conn);
+		close(conn);
+		return num;
+	}
+
 }
