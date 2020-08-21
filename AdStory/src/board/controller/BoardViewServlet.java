@@ -48,8 +48,8 @@ public class BoardViewServlet extends HttpServlet {
 		Board board = boardService.selectOne(boardNo);
 		List<BoardComment> commentList = 
 				boardService.selectCommentList(boardNo);
-//		List<BoardCategory> categoryList = boardService.selectCategoryList(); 
-		System.out.println("commentList@servlet = " + commentList);
+		List<BoardCategory> categoryList = boardService.selectCategoryList(); 
+		System.out.println("categoryList@servlet = " + categoryList);
 
 		String view = "/WEB-INF/views/board/boardView.jsp";
 		// 게시글 가져오기에 실패한경우
@@ -75,7 +75,7 @@ public class BoardViewServlet extends HttpServlet {
 
 		request.setAttribute("board", board);
 		request.setAttribute("commentList",commentList);
-//		request.setAttribute("categoryList", categoryList);
+		request.setAttribute("categoryList", categoryList);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
 	}

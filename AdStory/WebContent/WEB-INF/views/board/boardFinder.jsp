@@ -1,35 +1,144 @@
+<%@page import="board.model.vo.BoardCategory"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="board.model.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%
+	List<Board> list = (List<Board>) request.getAttribute("list");
+List<BoardCategory> categoryList = (List<BoardCategory>) request.getAttribute("categoryList");
+%>
+<script>
+$(function(){
+	
+	console.log("start");
 
+
+		<%if (memberLoggedIn != null) {%>
+		$(".unlike").click(function(){
+			
+			$userKeyVal = $(this).prev().text();
+			
+			//$likeClass = $("#like").children("i").attr("class");
+			console.log($userKeyVal);
+		var param = {
+				userKey : '<%=memberLoggedIn.getKey()%>',
+				cUserKey : $userKeyVal
+			}
+
+
+			$.ajax({
+				url : "<%=request.getContextPath()%>/text/like.do",
+						//data : "name=honggd&age=30",
+						data : param,
+						method : "GET",
+						beforeSend : function() {
+							//요청전 처리함수
+							console.log("beforeSend!");
+						},
+						success : function(data) {
+							console.log(data);
+							//처리 성공시 호출 함수
+							if (data == "1") {
+								//찜완료 전체 기업 빨간색으로
+								//$(".key"+$userKeyVal).css("color", "red");
+								//console.log($(this).attr("class"));
+								//$(".key"+$userKeyVal).parent().attr("class","like");
+								
+								alert("내가 찜한 기업에 추가되었습니다.");
+								location.reload();
+							}
+
+						},
+						error : function(xhr, textStatus, err) {
+							//처리시 에러가 발생하면 호출되는 함수
+							console.log(xhr, textStatus, err);
+						},
+						complete : function() {
+							//처리성공/실패와 상관없이 무조건 호출되는 함수
+							console.log("complete!");
+						}
+
+					});
+
+			});
+	$(".like").click(function(){
+			
+		$userKeyVal = $(this).prev().text();
+		console.log("취소하자!");
+			/* $likeClass = $("#like").children("i").attr("class");
+			console.log($("#like").children("i").attr("class")); */
+		var param = {
+				userKey : '<%=memberLoggedIn.getKey()%>',
+				cUserKey : $userKeyVal
+			}
+
+
+					$.ajax({
+						url : "<%=request.getContextPath()%>/text/unLike.do",
+							//data : "name=honggd&age=30",
+							data : param,
+							method : "GET",
+							beforeSend : function() {
+								//요청전 처리함수
+								console.log("beforeSend!");
+							},
+							success : function(data) {
+								console.log(data);
+								//처리 성공시 호출 함수
+								if ( data >0) {
+									//console.log($(this).attr("class"));
+									//찜취소 검은색으로
+									//$(".key" + $userKeyVal).css("color", "");
+									//$(".key" + $userKeyVal).parent().attr("class","unlike");
+
+									alert("내가 찜한 기업에서 삭제되었습니다.");
+									location.reload();
+								}
+
+							},
+							error : function(xhr, textStatus, err) {
+								//처리시 에러가 발생하면 호출되는 함수
+								console.log(xhr, textStatus, err);
+							},
+							complete : function() {
+								//처리성공/실패와 상관없이 무조건 호출되는 함수
+								console.log("complete!");
+							}
+
+						});
+
+					});
+	<%}else{%>
+	$(".unlike").click(function(){
+		alert("로그인 후 이용 가능합니다.");
+		
+		
+	});
+	<%}%>
+		});
+</script>
 <!-- 상단 nav -->
 <nav
 	class="text-center font-bold sm:flex sm:justify-center sm:items-center mt-4">
 	<div class="flex flex-col sm:flex-row">
+	<a
+			class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0"
+			href="<%=request.getContextPath()%>/board/list">전체</a>
+	<%if(categoryList != null){
+		for(BoardCategory c : categoryList){
+		%>
+
 		<a
-			class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0"
-			href="#">전체</a> <a
-			class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0"
-			href="#">건강식품</a> <a
-			class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0"
-			href="#">화장품&미용</a> <a
-			class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0"
-			href="#">가전제품</a> <a
-			class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0"
-			href="#">생활용품</a> <a
-			class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0"
-			href="#">교육</a> <a
-			class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0"
-			href="#">요식업</a>
+			class="<%=c.getKey()==list.get(0).getCategoryKey()?"text-blue-400 ":"text-gray-700 hover:text-blue-700 " %> mt-3 hover:underline sm:mx-3 sm:mt-0"
+			href="<%=request.getContextPath()%>/board/finder?searchType=category&searchKeyword=<%=c.getKey()%>"><%= c.getCategoryName()%></a>
+		<%} }%>
+		
 	</div>
 </nav>
 
-<%
-	List<Board> list = (List<Board>) request.getAttribute("list");
-%>
+
 
 <div class="container my-12 mx-auto px-4 md:px-12">
 	<%
@@ -65,7 +174,7 @@
 
 			<!-- Article -->
 			<article class="overflow-hidden rounded-lg shadow-lg">
-
+<div style="min-height:40vh; max-height:40vh">
 				<a
 					href="<%=request.getContextPath()%>/board/view?boardNo=<%=b.getKey()%>">
 					<img alt="Placeholder" class="block h-auto w-full"
@@ -73,13 +182,13 @@
 					src="<%=request.getContextPath()%>/images/defaultImg.png"
 					alt="홍보 사진" /> <%
  	} else {
- %> src="<%=request.getContextPath()%>/upload/board-images/<%=b.getMainImageOrigin()%>"/>
+ %> src="<%=request.getContextPath()%>/upload/board-images/<%=b.getMainImageRename()%>"/>
 					<%
  	}
  %>
 
 				</a>
-
+</div>
 				<header
 					class="flex items-center justify-between leading-tight p-2 md:p-4">
 					<h1 class="text-lg">
@@ -121,10 +230,16 @@
 						<p class="text-sm">
 							<%=b.getRefMemberName()%>
 						</p>
-					</a> <a id="like"
-						class="no-underline text-grey-darker hover:text-red-dark" href="#">
-						<span class="hidden">Like</span> <i class="fa fa-heart"></i>
-					</a>
+					</a> 
+					<%if(memberLoggedIn != null && memberLoggedIn.getMemberRole().equals("U")){ %>
+						<div class="hidden" class="likeKey"><%=b.getUserKey()%></div>
+						<button class='<%=b.getIsLike() == 1 ? "like" : "unlike"%>'
+							class="no-underline text-grey-darker hover:text-red-dark">
+							<span class="hidden">Like</span> <i id="likeIcon"
+								class="fa fa-heart key<%=b.getUserKey()%>"
+								style='color:<%=b.getIsLike() == 1 ? "red" : ""%>;'></i>
+						</button>
+						<%} %>
 				</footer>
 			</article>
 			<!-- END Article -->

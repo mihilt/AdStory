@@ -11,9 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import board.model.dao.BoardDAO;
+import member.model.vo.Member;
 import tipboard.model.vo.TipBoard;
 import tipboard.model.vo.TipBoardComment;
 import tipboard.model.vo.TipBoardWithCommentCnt;
@@ -406,6 +408,92 @@ public class TipBoardDAO {
 		}
 		
 		return totalMember;
+	}
+
+	public List<TipBoard> searchPost(Connection conn, Map<String, Object> param) {
+		List<TipBoard> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("searchPost");
+		String col = "";
+		
+		switch(String.valueOf(param.get("searchType"))) {
+		case "memberId" : col = "member_id"; break;
+		case "title" : col = "title"; break;
+		}
+		sql = sql.replace("●", col);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + param.get("searchKeyword") + "%");
+			
+			int cPage = (int)param.get("cPage");
+			int numPerPage = (int)param.get("numPerPage");			
+			pstmt.setInt(2, (cPage-1) * numPerPage + 1);
+			pstmt.setInt(3, cPage * numPerPage);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while(rset.next()) {
+				TipBoardWithCommentCnt b = new TipBoardWithCommentCnt();
+				
+				b.setKey(rset.getInt("key"));
+				b.setUserKey(rset.getInt("user_key"));
+				b.setTitle(rset.getString("title"));
+				b.setContent(rset.getString("content"));
+				b.setPostDate(rset.getString("post_date"));
+				b.setReadCount(rset.getInt("read_count"));
+				b.setRecommend(rset.getInt("recommend"));
+				
+				b.setMemberId(rset.getString("member_id"));
+				b.setMemberRole(rset.getString("member_role"));
+				
+				b.setBoardCommentCnt(rset.getInt("comm_cnt"));
+				
+				list.add(b);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int searchPostCount(Connection conn, Map<String, Object> param) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchPostCount");
+		System.out.println(sql);
+		String col = "";
+		switch(String.valueOf(param.get("searchType"))) {
+		case "memberId" : col = "member_id"; break;
+		case "title" : col = "title"; break;
+		}
+		sql = sql.replace("●", col);
+		System.out.println(sql);
+		System.out.println(param.get("searchKeyword"));
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + param.get("searchKeyword") + "%");
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalContents = rset.getInt("total_contents");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return totalContents;
 	}
 
 }

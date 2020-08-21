@@ -79,6 +79,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		int categoryKey = Integer.parseInt(multipartRequest.getParameter("categoryKey"));
 		String title = multipartRequest.getParameter("title");
 		String content = multipartRequest.getParameter("content");
+		String url = multipartRequest.getParameter("url");
 		//사용자가 업로드한 파일명
 		String originalFileName 
 			= multipartRequest.getOriginalFileName("upFile");
@@ -90,7 +91,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		
 		//수정하지 않는 항목 제외(userKey,clickPrice,point,url)
 		Board board = new Board(boardNo, categoryKey, 0, title, content, null,null,
-				0, 0, null, originalFileName, renamedFileName, 0,null,null);
+				0, 0, url, originalFileName, renamedFileName, 0,null,null);
 		
 		Board oldBoard = new BoardService().selectOne(boardNo);
 		System.out.println("boardNo@servlet="+boardNo);
