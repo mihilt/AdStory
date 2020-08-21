@@ -54,7 +54,7 @@ ArrayList rankPointAmount = new ArrayList<>();
             %> 
               
 <%  if(list == null || list.isEmpty()){  %>     
-            <div class = "m-auto text-xl text-red-700">오늘 날짜 기준 조회된 랭킹목록이 없습니다.</div>
+            <div class = "m-auto text-xl text-red-700">조회된 랭킹목록이 없습니다.</div>
             
             
 <%  } else { %>

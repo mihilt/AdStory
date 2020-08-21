@@ -51,7 +51,7 @@
 					<tr>
 						<th>아이디</th>
 						<td><input class = "border-2 m-2 p-1 px-2" type="text" placeholder="4글자이상" name="memberId"
-							id="memberId_" required> &nbsp; <input type="button" class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2"
+							id="memberId_" required> &nbsp; <input type="button" class="text-xs bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2"
 							value="아이디 중복 검사" onclick="checkIdDuplicate();" /> <!-- 아이디 중복검사 여부 : 0=미확인, 1=확인 -->
 							<input type="hidden" id="idValid" value="0" /></td>
 					</tr>
@@ -98,7 +98,7 @@
 					<tr>
 						<th>이메일</th>
 						<td><input class = "border-2 m-2 p-1 px-2" type="email" id="receiver_" name="receiver"
-							placeholder="abc@xyz.com"> <input type="button" class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2"
+							placeholder="abc@xyz.com"> <input type="button" class="text-xs bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2"
 							id="submit" value="인증번호 발송" onclick="checkEmail();" /> <input
 							type="hidden" readonly="readonly" name="code_check"
 							id="code_check_" value="<%=getRandom()%>" /> <input type="hidden"
@@ -110,8 +110,10 @@
 							id="address"><br></td>
 					</tr>
 				</table>
-				<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="submit" value="가입"> 
-				<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="reset"	value="취소">
+				<div class = "mt-5">
+					<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="submit" value="가입"> 
+					<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="reset"	value="취소">
+			    </div>
 			</form>
 		</section>
 	</div>
