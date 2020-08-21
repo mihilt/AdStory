@@ -737,6 +737,62 @@ public class MemberDAO {
 		return member;
 	}
 
+
+	public Member selectId(Connection conn, String name, String email) {
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectId");
+		System.out.println("sql@memberDAO = " + sql);
+		System.out.println("email@memberDAO = " + email);
+		
+		try {
+			//1. PreparedStatement객체생성, 미완성쿼리 전달
+			pstmt = conn.prepareStatement(sql);
+
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+
+			
+			//2. 실행 
+			rset = pstmt.executeQuery();
+			System.out.println("rset@memberDAO = " + rset);
+			
+			//3.ResultSet -> Member
+			if(rset.next()) {
+				System.out.println("sefsef" + rset.getDate("enroll_date"));
+				
+				member = new Member();
+				
+				member.setKey(rset.getInt("key"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("password"));
+				member.setMemberRole(rset.getString("member_role"));
+				member.setPoint(rset.getInt("point"));
+				member.setPhoneNum(rset.getString("phone_num"));
+				member.setAccountName(rset.getString("account_name"));
+				member.setAccountNum(rset.getString("account_num"));
+				member.setBussinessNum(rset.getString("business_num"));
+				member.setName(rset.getString("name"));
+				member.setEmail(rset.getString("email"));
+				member.setAddress(rset.getString("address"));
+				member.setEnrollDate(rset.getDate("enroll_date"));
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("member@dao = " + member);
+		
+		return member;
+	}
+
 	
 
 }

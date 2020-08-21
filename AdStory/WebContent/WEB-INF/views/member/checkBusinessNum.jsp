@@ -16,13 +16,12 @@
 <script>
 	$(function(){
 		
-		$("[name=checkIdDuplicateFrm]").submit(function(){
+		$("[name=checkBusinessNumFrm]").submit(function(){
 			//아이디 중복검사
-			var $memberId = $("#memberId");
+			var $BusinessNum = $("#BusinessNum_");
 			
-			if(/^\w{4,}$/.test($memberId.val()) == false){
-				alert("유효한 사업자번호를 입력해주세요.");
-				$memberId.select();
+			if(/^[\w]{4,}$/.test($BusinessNum.val()) == false){
+				alert("유효한 사업자번호를 입력하세요.");
 				return false;
 			}
 			
