@@ -136,10 +136,16 @@ function checkBusinessNum(){
 	console.log("test");
 	var $BusinessNum = $("#BusinessNum_");
 	
+	if(/^[\w]{4,}$/.test($BusinessNum.val()) == false){
+		alert("유효한 사업자번호를 입력하세요.");
+		return false;
+	}
+	
+	
 	
 	var url = "";//checkIdDuplicateFrm의 action값이 사용되므로, 비워둠.
 	var title = "checkBusinessNumPopup";
-	var spec = "left=500px, top=300px, width=300px, height=200px";
+	var spec = "left=500px, top=300px, width=500px, height=400px";
 	open(url, title, spec);
 	//2.폼관련
 	var $frm = $("[name=checkBusinessNumFrm]");
@@ -166,7 +172,7 @@ $("#BusinessNum_").change(function(){
 
 
 $("[name=bussinessEnrollFrm]").submit(function(){
-	var $BusinessNum = $("BusinessNum_");
+	var $BusinessNum = $("#BusinessNum_");
 	
 	//1.memberId
 	if(/^[\w]{4,}$/.test($BusinessNum.val()) == false){
@@ -202,7 +208,7 @@ function checkIdDuplicate(){
 	//1.팝업관련
 	var url = "";//checkIdDuplicateFrm의 action값이 사용되므로, 비워둠.
 	var title = "checkIdDuplicatePopup";
-	var spec = "left=500px, top=300px, width=300px, height=200px";
+	var spec = "left=500px, top=300px, width=500px, height=300px";
 	open(url, title, spec);
 	
 	//2.폼관련

@@ -258,6 +258,27 @@ public class MemberService {
 		return member;
 
 	}
+
+
+	public Member selectId(String name, String email) {
+		System.out.println("name@service="+name);
+		System.out.println("email@service = " + email);
+
+		//1. DB Connection객체 생성
+		Connection conn = getConnection();
+		System.out.println("conn = " + conn);
+		//2. DAO 처리 요청
+
+		Member member = memberDAO.selectId(conn,name,email);
+
+		
+		System.out.println("member@service = " + member);
+		//3. DML요청인 경우, Transaction 처리
+		//4. Connection 반납(close)
+		close(conn);
+
+		return member;
+
 	public List<MemberWishList> selectWishList(int cPage, int numPerPage, int userKey) {
 		Connection conn = getConnection();
 		List<MemberWishList> list = memberDAO.selectWishList(conn,cPage,numPerPage,userKey);
@@ -296,6 +317,7 @@ public class MemberService {
 		int totalWishListCount = memberDAO.selectWishListCount(conn, userKey);
 		close(conn);
 		return totalWishListCount;
+
 	}
 	
 	
