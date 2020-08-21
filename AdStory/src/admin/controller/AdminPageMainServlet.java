@@ -32,8 +32,10 @@ public class AdminPageMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int numPointWithdrawLogT = new MemberAdListService().selectWithdrawNum();
+		int numInquiry = new MemberAdListService().selectNumInquiry();
 		
 		request.setAttribute("withdrawNum", new Integer(numPointWithdrawLogT));
+		request.setAttribute("numInquiry", new Integer(numInquiry));
 		
 		String view = "/WEB-INF/views/admin/AdminPageView.jsp";
 		
