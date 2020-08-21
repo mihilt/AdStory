@@ -51,7 +51,7 @@
 				<td>
 					<input class = "border-2 m-2 p-1 px-2" type="text" placeholder="4글자이상" name="memberId" id="memberId_" required>
 					&nbsp;
-					<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="button" value="아이디 중복 검사" 
+					<input class="text-xs bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="button" value="아이디 중복 검사" 
 						   onclick="checkIdDuplicate();"/>
 					<!-- 아이디 중복검사 여부 : 0=미확인, 1=확인 -->
 					<input type="hidden" id="idValid" value="0"/>
@@ -98,7 +98,7 @@
 				<th>사업자번호</th>
 				<td>	
 				<input class = "border-2 m-2 p-1 px-2" type="text"  name="BusinessNum" id="BusinessNum_" required>&nbsp; 
-				<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="button" value="사업자번호 인증" onclick="checkBusinessNum();" /> 
+				<input class="text-xs bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="button" value="사업자번호 인증" onclick="checkBusinessNum();" /> 
 				<input type="hidden" id="BuisinessNumValid" value="0"/>
 				</td>
 			</tr>
@@ -122,8 +122,10 @@
 				</td>
 			</tr>
 		</table>
-		<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="submit" value="가입" >
-		<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="reset" value="취소">
+		<div class = "mt-5">
+			<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="submit" value="가입" >
+			<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="reset" value="취소">
+        </div>
 	</form>
 </section>
 </div>

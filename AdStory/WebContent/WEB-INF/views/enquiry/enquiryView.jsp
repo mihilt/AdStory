@@ -5,21 +5,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<!-- 상단 nav -->
-<!-- 상단 nav -->
-    <nav class="mb-10 text-center font-bold sm:flex sm:justify-center sm:items-center mt-4">
-        <div class="flex flex-col sm:flex-row">
-            <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>">회사소개</a>
-            <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>/home/notice">공지사항</a>
-            <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>/home/pointRanking/today">포인트 랭킹</a>
-            <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>/home/manual">초보자 메뉴얼</a>
-            <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>/home/FAQ">자주 묻는 질문(FAQ)</a>
-        </div>
-    </nav>
 <%
 	Enquiry eq = (Enquiry)request.getAttribute("enquiry");
-
 %>
+<div class = "max-w-screen-lg m-auto my-10">
 <img id="enquiryImg" src="<%=request.getContextPath() %>/images/enquiry.jpg" alt="공지사항" />
 <style>
 #enquiryImg{
@@ -73,7 +62,7 @@ table#tbl-board-view tr:nth-child(even) {background-color: #f2f2f2;}
 		   <br /><br />
 	<table id="tbl-board-view">
 		<tr>
-			<th>글번호</th>
+			<th class = "text-center w-1/5">글번호</th>
 			<td><%=eq.getKey() %></td>
 		</tr>
 		<tr>
@@ -92,7 +81,13 @@ table#tbl-board-view tr:nth-child(even) {background-color: #f2f2f2;}
 				
 		<tr>
 			<th>답변내용</th>
-			<td style="height: 200px;"><%=eq.getAnswer()%></td>
+			<td style="height: 200px;">
+			<%if(null == eq.getAnswer()){ %>
+			<p class = "text-red-700">아직 관리자가 답글을 달지 않았습니다.</p>
+			<% } else { %>
+			<%=eq.getAnswer()%>
+			<% } %>
+			</td>
 		</tr>
 					
 	</table>
@@ -179,5 +174,5 @@ $("[name=enquiryAnswer]").submit(function(){
 <br />
 <br />
 <br />
-
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

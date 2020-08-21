@@ -278,6 +278,7 @@ public class MemberService {
 		close(conn);
 
 		return member;
+	}
 
 	public List<MemberWishList> selectWishList(int cPage, int numPerPage, int userKey) {
 		Connection conn = getConnection();
