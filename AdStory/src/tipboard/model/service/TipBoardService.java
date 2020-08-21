@@ -7,9 +7,11 @@ import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import board.model.vo.Board;
 import common.Utils;
+import member.model.vo.Member;
 import tipboard.model.dao.TipBoardDAO;
 import tipboard.model.vo.TipBoard;
 import tipboard.model.vo.TipBoardComment;
@@ -153,6 +155,22 @@ public class TipBoardService {
 		int totalBoardCount = tipBoardDAO.selectTipBoardListRecommendedCount(conn);
 		close(conn);
 		return totalBoardCount;
+	}
+
+
+	public List<TipBoard> searchPost(Map<String, Object> param) {
+		Connection conn = getConnection();
+		List<TipBoard> list = tipBoardDAO.searchPost(conn, param); 
+		close(conn);
+		return list;
+	}
+
+
+	public int searchPostCount(Map<String, Object> param) {
+		Connection conn = getConnection();
+		int totalContents = tipBoardDAO.searchPostCount(conn, param);
+		close(conn);
+		return totalContents;
 	}
 
 
