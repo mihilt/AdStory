@@ -6,6 +6,7 @@ import java.util.Map;
 
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
+import member.model.vo.MemberWishList;
 import member.model.vo.MemberWithdraw;
 import pointlog.DAO.PointLogDAO;
 import pointlog.vo.PointLog;
@@ -256,6 +257,45 @@ public class MemberService {
 
 		return member;
 
+	}
+	public List<MemberWishList> selectWishList(int cPage, int numPerPage, int userKey) {
+		Connection conn = getConnection();
+		List<MemberWishList> list = memberDAO.selectWishList(conn,cPage,numPerPage,userKey);
+		close(conn);
+		return list;
+	}
+
+	public int insertWishList(int userKey, int cUserKey) {
+		Connection conn = getConnection();
+		int result = memberDAO.insertWishList(conn,userKey,cUserKey);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+
+		close(conn);
+
+		return result;
+	}
+
+	public int deleteWishList(int userKey, int cUserKey) {
+		Connection conn = getConnection();
+		int result = memberDAO.deleteWishList(conn,userKey,cUserKey);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+
+		close(conn);
+
+		return result;
+	}
+
+	public int selectWishListCount(int userKey) {
+		Connection conn = getConnection();
+		int totalWishListCount = memberDAO.selectWishListCount(conn, userKey);
+		close(conn);
+		return totalWishListCount;
 	}
 	
 	

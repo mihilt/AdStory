@@ -33,10 +33,11 @@ public class BoardCommentDeleteServlet extends HttpServlet {
 		//1. 파라미터값 가져오기
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		int boardCommentNo = Integer.parseInt(request.getParameter("boardCommentNo"));
+		String role = request.getParameter("role");
 //		System.out.println("boardNo="+boardNo+", boardCommentNo="+boardCommentNo);
 
 		//2. 비지니스로직 호출
-		int result = new BoardService().deleteBoardComment(boardCommentNo);
+		int result = new BoardService().deleteBoardComment(boardCommentNo,role);
 		
 		//3. 받은 결과에 따라 view단 처리위임.
 		String view = "/WEB-INF/views/common/msg.jsp";

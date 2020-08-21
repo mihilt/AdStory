@@ -10,10 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import board.model.service.BoardService;
 import board.model.vo.Board;
+import board.model.vo.BoardCategory;
 import common.Utils;
+import member.model.vo.Member;
 
 /**
  * Servlet implementation class BoardFinderServlet
@@ -36,7 +39,14 @@ public class BoardFinderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchType = request.getParameter("searchType");
 		String searchKeyword = request.getParameter("searchKeyword");
-		
+		int userKey=0;
+		HttpServletRequest httpReq = (HttpServletRequest)request;
+		HttpSession session = httpReq.getSession();
+		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+		if(memberLoggedIn != null) {
+			
+			userKey = memberLoggedIn.getKey();
+		}
 		int cPage = 1;
 		int numPerPage = 20;
 		try {
@@ -53,10 +63,13 @@ public class BoardFinderServlet extends HttpServlet {
 		param.put("searchKeyword", searchKeyword);
 		param.put("cPage", cPage);
 		param.put("numPerPage", numPerPage);
+		param.put("userKey",userKey);
 		System.out.println("param = " + param);
 		
-		List<Board> list = new BoardService().searchBoard(param);
-		System.out.println("list@servlet = " + list);
+		BoardService boardService = new BoardService();
+		List<Board> list = boardService.searchBoard(param);
+		List<BoardCategory> categoryList = boardService.selectCategoryList();
+//		System.out.println("list@servlet = " + list);
 		
 		int totalContents = new BoardService().getTotalContents(param);
 		System.out.println("totalContents@servlet = " + totalContents);
@@ -71,6 +84,7 @@ public class BoardFinderServlet extends HttpServlet {
 		//3. view handling
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("categoryList", categoryList);
 		request.getRequestDispatcher("/WEB-INF/views/board/boardFinder.jsp")
 			   .forward(request, response);		
 	}

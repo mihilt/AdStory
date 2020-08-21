@@ -9,10 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import board.model.service.BoardService;
 import board.model.vo.Board;
+import board.model.vo.BoardCategory;
 import common.Utils;
+import member.model.service.MemberService;
+import member.model.vo.Member;
+import member.model.vo.MemberWishList;
 
 /**
  * Servlet implementation class BoardListServlet
@@ -39,15 +44,32 @@ public class BoardListServlet extends HttpServlet {
 		//1. 파라미터값 변수에 담기
 		int numPerPage = 12;//한페이지당 수
 		int cPage = 1;//요청페이지
-		try{
-			cPage = Integer.parseInt(request.getParameter("cPage"));
-		} catch(NumberFormatException e){
-		
+		int userKey=0;
+		HttpServletRequest httpReq = (HttpServletRequest)request;
+		HttpSession session = httpReq.getSession();
+		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+		if(memberLoggedIn != null) {
+			
+			userKey = memberLoggedIn.getKey();
 		}
-
-		List<Board> list = new BoardService().selectBoardList(cPage, numPerPage);
+		try{
+			
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch(NumberFormatException e){}
+//		}try {
+//			
+//			userKey = Integer.parseInt(request.getParameter("userKey"));
+//		}catch(NumberFormatException e) {
+//			
+//		}
+//		System.out.println("-----userKey@servlet="+userKey);
+		BoardService boardService = new BoardService();
+		List<Board> list = boardService.selectBoardList(cPage, numPerPage,userKey);
+		List<BoardCategory> categoryList = boardService.selectCategoryList();
+//		List<MemberWishList> wishList = new MemberService().selectWishList(userKey);
 		
-		System.out.println("list="+list);
+		
+//		System.out.println("***********boardlist@servlet="+list);
 		
 		//2.2 전체게시글수, 전체페이지수 구하기
 		int totalContents = new BoardService().selectBoardCount();
@@ -58,7 +80,8 @@ public class BoardListServlet extends HttpServlet {
 	
 		//4.뷰단 포워딩		
 		request.setAttribute("list",list);
-		request.setAttribute("pageBar",pageBar);	
+		request.setAttribute("pageBar",pageBar);
+		request.setAttribute("categoryList", categoryList);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/board/BoardList.jsp");
 		reqDispatcher.forward(request, response);
 		
