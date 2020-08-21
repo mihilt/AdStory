@@ -1,9 +1,8 @@
-package home.controller;
+package notice.controller;
 
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,16 +14,16 @@ import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeServlet
+ * Servlet implementation class NoticeListServlet
  */
-@WebServlet("/home/notice")
-public class NoticeServlet extends HttpServlet {
+@WebServlet("/notice/list")
+public class NoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeServlet() {
+    public NoticeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,7 +43,7 @@ public class NoticeServlet extends HttpServlet {
 		List<Notice> list = new NoticeService().selectNoticeList(cPage,numPerPage);
 		int totalContents = new NoticeService().selectNoticeCount();
 	
-		String url = request.getRequestURI();
+		String url = request.getRequestURI();// /mvc/board/list
 		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);
 		
 		request.setAttribute("list", list);

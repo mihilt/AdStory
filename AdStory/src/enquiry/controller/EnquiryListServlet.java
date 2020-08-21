@@ -1,9 +1,8 @@
-package home.controller;
+package enquiry.controller;
 
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.Utils;
-import notice.model.service.NoticeService;
-import notice.model.vo.Notice;
+import enquiry.model.service.EnquiryService;
+import enquiry.model.vo.Enquiry;
+
 
 /**
- * Servlet implementation class NoticeServlet
+ * Servlet implementation class EnquiryListServlet
  */
-@WebServlet("/home/notice")
-public class NoticeServlet extends HttpServlet {
+@WebServlet("/enquiry/elist")
+public class EnquiryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeServlet() {
+    public EnquiryListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,15 +41,15 @@ public class NoticeServlet extends HttpServlet {
 			
 		}
 		
-		List<Notice> list = new NoticeService().selectNoticeList(cPage,numPerPage);
-		int totalContents = new NoticeService().selectNoticeCount();
+		List<Enquiry> list = new EnquiryService().selectEnquiryList(cPage,numPerPage);
+		int totalContents = new EnquiryService().selectEnquiryCount();
 	
 		String url = request.getRequestURI();
 		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp")
+		request.getRequestDispatcher("/WEB-INF/views/enquiry/enquiryList.jsp")
 			   .forward(request, response);
 	}
 
