@@ -36,22 +36,27 @@
  
      <div class = "mx-10">
         <div class="flex mb-4">
-		  <div class=" text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/3 h-12 m-2">
+		  <div class=" text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded <%="U".equals(memberLoggedIn.getMemberRole())?"w-1/4" :"w-1/3"%> h-12 m-2">
 		      <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/view?memberId=<%= memberLoggedIn.getMemberId()%>'">
 		                  내정보 보기
 		      </button>
 		  </div>
 		  
-		  <div class=" text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/3 h-12 m-2">
+		  <div class=" text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded <%="U".equals(memberLoggedIn.getMemberRole())?"w-1/4" :"w-1/3"%> h-12 m-2">
 		      <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/point?memberId=<%= memberLoggedIn.getMemberId()%>'">
 		                  포인트 관리
 		      </button>
 		  </div>
 		  
         <% if("U".equals(memberLoggedIn.getMemberRole())){%>
-		  <div class=" text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/3 h-12 m-2">
+		  <div class=" text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/4 h-12 m-2">
 			  <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/adList?memberId=<%= memberLoggedIn.getMemberId()%>'">
 			     광고신청 현황
+			  </button>
+		  </div>
+		  <div class=" text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded w-1/4 h-12 m-2">
+			  <button class="w-full h-full" onclick="location.href='<%= request.getContextPath() %>/myPage/wishList?userKey=<%= memberLoggedIn.getKey()%>'">
+			        내 위시 리스트
 			  </button>
 		  </div>
 		<% } else if(!"U".equals(memberLoggedIn.getMemberRole())) { %>

@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import member.model.vo.Member;
+import member.model.vo.MemberWishList;
 import member.model.vo.MemberWithdraw;
 import pointlog.vo.PointLog;
 
@@ -736,6 +737,126 @@ public class MemberDAO {
 		
 		return member;
 	}
+	public List<MemberWishList> selectWishList(Connection conn, int cPage , int numPerPage,int userKey) {
+		List<MemberWishList> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectWishList");
+		String col = "";
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userKey);
+
+			int startRnum = (cPage-1) * numPerPage + 1;
+			int endRnum = cPage * numPerPage;
+			pstmt.setInt(2, startRnum);
+			pstmt.setInt(3, endRnum);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while(rset.next()) {
+				MemberWishList wishList = new MemberWishList();
+				wishList.setKey(rset.getInt("key"));
+				wishList.setUserKey(rset.getInt("user_key"));
+				wishList.setCUserKey(rset.getInt("c_user_key"));
+				wishList.setRefCUserName(rset.getString("name"));
+				wishList.setRefPhoneNum(rset.getString("phone_num"));
+				wishList.setRefEmail(rset.getString("email"));
+				wishList.setRefAddress(rset.getString("address"));
+				list.add(wishList);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println("wishlist@dao = " + list);
+		return list;
+	}
+
+
+	public int insertWishList(Connection conn, int userKey, int cUserKey) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertWishList");
+		// insert into pnt_log values (seq_pnt_log.nextval,?,?,sysdate,?,?,(select point
+		// from member where key=?)-?)
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userKey);
+			pstmt.setInt(2, cUserKey);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		System.out.println("result@dao = " + result);
+
+		return result;
+	}
+
+
+	public int deleteWishList(Connection conn, int userKey, int cUserKey) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteWishList");
+		// insert into pnt_log values (seq_pnt_log.nextval,?,?,sysdate,?,?,(select point
+		// from member where key=?)-?)
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userKey);
+			pstmt.setInt(2, cUserKey);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		System.out.println("result@dao = " + result);
+
+		return result;
+	}
+
+
+	public int selectWishListCount(Connection conn, int userKey) {
+		PreparedStatement pstmt = null;
+		int totalWishListCount = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectWishListCount");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userKey);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				totalWishListCount = rset.getInt("cnt");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalWishListCount;
+	}
+	
 
 	
 
