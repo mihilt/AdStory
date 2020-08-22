@@ -14,36 +14,18 @@
 <style>
 #drop {
 	border: 10px dashed #ccc;
-	/* width: 300px; */
-	height: 400px;
+	min-height: 400px;
 }
 
-#thumbnails {
-	width: 100%;
-	height: 100%;
-}
 
 .drag-over {
 	background-color: grey;
 }
 
-.thumb {
-	width: 200px;
-	padding: 5px;
-	float: left;
-}
-
-.thumb {
-overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 300px;
-            height: 300px;
-}
 
 .thumb>.close {
 	position: absolute;
+	float:right;
 	background-color: red;
 	cursor: pointer;
 }
@@ -68,7 +50,7 @@ overflow: hidden;
 
 
 
-
+<div class="max-w-screen-lg m-auto">
 		<div class="inline-block relative w-64">
 
 			<label
@@ -84,13 +66,6 @@ overflow: hidden;
 					}
 				%>
 			</select>
-			<!-- <div
-				class="pointer-events-none absolute inset-y-1 right-0 flex items-center px-2 text-gray-700">
-				<svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 20 20">
-					<path
-						d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-			</div> -->
 		</div>
 		<div class="flex-mx-3 mb-6">
 			<label
@@ -108,10 +83,17 @@ overflow: hidden;
 				type="text" name="" value="<%=memberLoggedIn.getName()%>" readonly>
 
 		</div>
-		<div id="drop" class="flex-mx-3 mb-6">
+		<div id="drop" class="my-10 w-1/2">
 			
-				메인이미지 drag & drop
-				<div id="thumbnails"></div>
+				
+				<div  id="thumbnails" 
+				style=" width:-webkit-fill-available;">
+				    <div class = "m-32 text-center">
+	                    <p>메인이미지를</p>
+	                    <p>Drag and Drop</p>
+	                    <p>해주세요</p>
+                    </div>
+                </div>
 			
 		</div>
 		<div class="flex-mx-3 mb-6">
@@ -128,28 +110,23 @@ overflow: hidden;
 		<div class="w-full md:w-1/2 px-3">
 			<label
 				class="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2"
-				for="title"> 가격 </label> <input
-				class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-				type="text" name="point" required placeholder="가격을 입력해주세요">
-
+				for="title"> 사용 포인트 </label> 
+				<input	class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+				type="text" 
+				name="point" 
+				required 
+				placeholder="사용 포인트를 입력해주세요">
 		</div>
 		<div class="inline-block relativew-full md:w-1/2 px-3">
 			<label
 				class="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2"
-				for="clickPrice"> 단가 </label> <select
-				class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 py-3 px-4 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-				name="clickPrice" id="">
-				<option value="10">10원</option><i class="fas fa-angle-down"></i>
-				<option value="20">20원</option>
-				<option value="30">30원</option>
-			</select>
-			<!-- <div
-				class="pointer-events-none absolute inset-y-1 right-0 flex items-center px-2 text-gray-700">
-				<svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 20 20">
-					<path
-						d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-			</div> -->
+				for="clickPrice"> 클릭단가 </label>
+				<input  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                type="text" 
+                name="clickPrice" 
+                required 
+                placeholder="클릭단가를 입력해주세요"> 
+
 		</div>
 		</div>
 		
@@ -174,6 +151,7 @@ overflow: hidden;
 </div>
 
 	</form>
+</div>
 </div>
 </div>
 <script>
@@ -209,13 +187,10 @@ overflow: hidden;
 		reader.onload = (function(f) {
 			return function(e) {
 				var div = '<div class="thumb"> \
-<div class="close" data-idx="' + 0 + '">X</div> \
-<img src="'
-						+ e.target.result
-						+ '" title="'
-						+ escape(f.name)
-						+ '"/> \
-</div>';
+					<div class="close" data-idx="' + 0 + '">X</div> \
+					<img src="'+ e.target.result+ '" title="'+ escape(f.name)+ '"/> \
+					</div>';
+					
 				$("#thumbnails").html(div);
 			};
 		})(file);
@@ -232,11 +207,53 @@ overflow: hidden;
 		//공백만 작성한 경우도 폼이 제출되어서는 안됨.
 		var $boardTitle = $("[name=title]");
 		var $boardContent = $("[name=content]");
-		//formData = $('#boardInsertFrm');
-		//console.log($('#boardInsertFrm').serialize());
+		
+	    const $point = $("[name=point]");
+	    const $clickPrice = $("[name=clickPrice]");
 
-		//formData = formElement.getFormData();
 		console.log($('#boardInsertFrm').serializeArray());
+		
+        if (/^.+$/.test($point.val()) == false) {
+            alert("사용 포인트를 입력하세요.");
+            return false;
+        }
+      
+        if (/^(.|\n)+$/.test($clickPrice.val()) == false) {
+            alert("클릭단가를 입력하세요.");
+            return false;
+        }
+		
+	    if($point.val() < 10000){
+	        alert("10,000p 이상부터 게시글 등록이 가능합니다.")
+	        return false;
+	    }
+	    
+	    if($point.val() % 1000 != 0){
+	        alert("1,000p 단위로 게시글 등록을 해야합니다.")
+	        return false;
+	    }
+	    
+	    if($clickPrice.val() % 100 != 0 || $clickPrice.val() == 0){
+	        alert("100p 단위로 클릭단가를 설정 해야합니다.")
+	        return false;
+	    }
+
+       if($point.val() % $clickPrice.val() != 0){
+            alert("사용 포인트를 클릭단가로 나누었을 때 나머지가 생기면 안됩니다.")
+            return false;
+        }
+	    
+	    if($clickPrice.val() > $point.val()){
+	    	alert("사용 포인트보다 클릭 단가가 더 높습니다.")
+	    	return false;
+	    }
+
+	    
+	    if($point.val() > <%=memberLoggedIn.getPoint() %>){
+	        alert("보유하신 포인트보다 많은 포인트를 사용하실 수 없습니다.")
+	        return false;
+	    }
+	    
 
 		if (/^.+$/.test($boardTitle.val()) == false) {
 			alert("제목을 입력하세요.");

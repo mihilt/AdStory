@@ -26,28 +26,6 @@ function pointChargeValidate(){
         buyer_postcode : '123-456',
     }, function(rsp) {
         if ( rsp.success ) {
-            jQuery.ajax({
-                url: "/payments/complete",
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    imp_uid : rsp.imp_uid
-                }
-            }).done(function(data) {
-
-                if ( everythings_fine ) {
-                    msg = '결제가 완료되었습니다.';
-                    msg += '\n고유ID : ' + rsp.imp_uid;
-                    msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                    msg += '\결제 금액 : ' + rsp.paid_amount;
-                    msg += '카드 승인번호 : ' + rsp.apply_num;
-                    
-                    alert(msg);
-                } else {
-
-                }
-            });  
-            
             $("[id=frm]").submit();
         } else {
             msg = '결제에 실패하였습니다.';
@@ -80,15 +58,16 @@ function pointChargeValidate(){
     
     
     <div class="leading-loose">
-	  <div id="frm" class="max-w-xl m-4 p-10 bg-white rounded shadow-xl m-auto" action="<%= request.getContextPath() %>/myPage/point/charge/action?memberId=<%= memberLoggedIn.getMemberId() %>" method="POST">
+	  <form id="frm" class="max-w-xl m-4 p-10 bg-white rounded shadow-xl m-auto" action="<%= request.getContextPath() %>/myPage/point/charge/action?memberId=<%= memberLoggedIn.getMemberId() %>" method="POST">
 	    <div class="">
 	      <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" name="pointAmount" type="text" required="" placeholder="충전 포인트를 입력해주세요.">
+	      <input class="hidden" type="text" name="enter" />
 	    </div>
 	    <div class="mt-4 grid">
 	      <button class="px-4 py-1 text-blue-500 font-light tracking-wider hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded" type="button"
 	      onclick="pointChargeValidate();">충전하기</button>
 	    </div>
-	  </div>
+	  </form>
 	</div>
 
 
