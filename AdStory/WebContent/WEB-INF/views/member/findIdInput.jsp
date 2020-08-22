@@ -28,6 +28,7 @@
     
 </head>
 
+
 <body>
     <div class= "m-12">
 
@@ -36,9 +37,10 @@
 			<input type="hidden" readonly="readonly" name="code_check" id="code_check_" 
 									value="<%=getRandom()%>"/>
 		</form>
-		
+			
 			<section id="find_container">
 			<h2 class="text-center font-bold text-2xl my-4">아이디 찾기</h2>
+			<h4 class="text-center text-1xl my-4">본인확인 이메일주소와 입력한 이메일주소가 같아야, 이메일인증이 가능합니다.</h4>
 			<form name="findFrm" 
 			  	  action="<%= request.getContextPath() %>/member/findId" 
 			  	  method="post">
