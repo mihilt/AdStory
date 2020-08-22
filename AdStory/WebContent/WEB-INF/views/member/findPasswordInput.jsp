@@ -24,7 +24,7 @@
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
     rel="stylesheet">
 <link rel="stylesheet"
-    href="<%=request.getContextPath() %>/css/main_style.css" />
+    href="<%=request.getContextPath() %>/css/main_style.css"/>
     
 </head>
 
@@ -46,19 +46,22 @@
 				<tr>
 					<th class = "text-right">아이디</th>
 					<td>
-						<input class = "border-2 m-2 p-1 px-2" type="text" placeholder="4글자이상" name="memberId" id="memberId_" required>
+						<input class = "border-2 m-2 p-1 px-2" type="text" placeholder="4글자이상" name="memberId" id="memberId_"
+						value="<%= request.getAttribute("memberId") != null ? request.getAttribute("memberId") : ""%>" required>
 					</td>
 				</tr>
 				<tr>
 					<th class = "text-right">이름</th>
 					<td>
-						<input class = "border-2 m-2 p-1 px-2" type="text" name="name" id="name" required><br/>
+						<input class = "border-2 m-2 p-1 px-2" type="text" name="name" id="name" 
+						value="<%= request.getAttribute("name") != null ? request.getAttribute("name") : ""%>" required><br/>
 					</td>
 				</tr>
 				<tr>
 					<th class = "text-right">이메일</th>
 					<td>
-						<input class = "border-2 m-2 p-1 px-2" type="email" id="receiver_" name="receiver" placeholder="abc@xyz.com">
+						<input class = "border-2 m-2 p-1 px-2" type="email" id="receiver_" name="receiver" placeholder="abc@xyz.com" 
+						value="<%= request.getAttribute("email") != null ? request.getAttribute("email") : ""%>">
 						<input class="text-xs bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="button" id="submit" value="인증번호 발송" onclick = "checkEmail();"/>
 						<div id="checkCode"></div>
 						<input type="hidden" readonly="readonly" name="code_check" id="code_check_" 

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <% String memberId = (String)request.getAttribute("memberId"); %>	
+<% String name = (String)request.getAttribute("name"); %>	
+<% String email = (String)request.getAttribute("email"); %>	
 	
 <!doctype html>
 <html lang="en">
@@ -24,6 +26,7 @@
 	</style>
 	
 	
+	
 </head>
 <body>
 	<div id="checkid-container">
@@ -33,7 +36,10 @@
 			<p>
 				회원님의 아이디는 [ <span><%= memberId %></span> ] 입니다.
 			</p>
-			<button type="button" >닫기</button>
+			<input type="hidden" name="name" value="<%=(String)request.getAttribute("name") %>" />
+			<input type="hidden" name="email" value="<%=(String)request.getAttribute("email") %>" />
+			<input type="hidden" name="memberId" value="<%=(String)request.getAttribute("memberId") %>"/>
+			<button type="button" onclick = "location.href='<%=request.getContextPath()%>'">돌아가기</button>
 			<input type="submit" value="비밀번호 찾기" />
 		</form>
 	

@@ -42,7 +42,8 @@ public class FindId extends HttpServlet {
 		System.out.println("isUsable@servlet = " + isUsable);
 		
 		if (isUsable != true) {
-			
+			request.setAttribute("name", name);
+			request.setAttribute("email", email);
 			request.setAttribute("memberId",member.getMemberId());
 			request.getRequestDispatcher("/WEB-INF/views/member/idView.jsp").forward(request, response);
 			
