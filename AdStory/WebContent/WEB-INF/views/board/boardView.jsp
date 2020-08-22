@@ -58,6 +58,9 @@ $(function(){
 					$("#applyBtn").text("신청완료");
 					//클릭안되게
 					$("#applyBtn").attr("onclick","complete();");
+					
+					$("#applyBtn").hide();
+					$("#applyText").show();
 				}
 
 			},
@@ -75,70 +78,84 @@ $(function(){
 	});
 </script>
 
-<nav
-	class="category-menu sm:flex sm:justify-center sm:items-center mt-4">
-	<div class="flex flex-col sm:flex-row">
-		<a
-			class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0"
-			href="<%=request.getContextPath()%>/board/list">전체</a>
-		<%if(categoryList != null){
-		for(BoardCategory c : categoryList){
-		%>
-		<a
-			class="<%=c.getKey()==b.getCategoryKey()?"text-blue-400 ":"text-gray-700 hover:text-blue-700 " %> mt-3 hover:underline sm:mx-3 sm:mt-0"
-			href="<%=request.getContextPath()%>/board/finder?searchType=category&searchKeyword=<%=c.getKey()%>"><%= c.getCategoryName()%></a>
-		<%} }%>
-	</div>
-</nav>
+
+
 <div class="m-12">
-
-	<p class="text-3xl border-b-2 mb-10"><%=b.getTitle()%></p>
-	<p class=" font-bold text-base mb-10">
-		기업명
-		<%=b.getRefMemberName()%>
-		<i class="fas fa-grip-lines-vertical"></i>
-		<%=b.getEnrollDate()%>
-		<%--관리자인경우에만 게시글 수정삭제버튼 보일수 있게 함 --%>
-		<% if(memberLoggedIn!=null && 
-				MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())){ %>
-		<i class="fas fa-grip-lines-vertical"></i> <input type="button"
-			value="수정" onclick="updateBoard()"> <i
-			class="fas fa-grip-lines-vertical"></i> <input type="button"
-			value="마감" onclick="deleteBoard()">
-
-
-		<%} %>
-		
-	<%
-		if (memberLoggedIn != null && memberLoggedIn.getMemberRole().equals("U")) {
-	%>
-	<button id="applyBtn"
-		class="float-right bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-400 rounded shadow"
-		onclick="location.href='<%=request.getContextPath()%>/board/apply?userKey=<%=memberLoggedIn.getKey()%>&postKey=<%=b.getKey()%>';">신청하기</button>
-
-	<%
-		}
-	%>
-	</p>
-	<div class="px-20">
-		<div class="text-center bg-gray-200">
-			<%=b.getContent() %>
-			<div class="bottom-of-main"></div>
+	   <div class=" max-w-screen-lg m-auto">
+		<div class=" font-bold  mb-10">
+				<%--관리자인경우에만 게시글 수정삭제버튼 보일수 있게 함 --%>
+				<% if(memberLoggedIn!=null && 
+						MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())){ %>
+				<div class = "border-t border-b py-10">
+					    <div class="text-center text-xl text-red-700">
+                                                     관리자 권한
+                        </div>	
+					<div class="m-auto text-center flex w-1/2">
+					
+					    <div class="px-10 m-auto my-5 cursor-pointer bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+						 onclick="updateBoard()">
+						   수정
+						</div>
+						 
+						<div class="px-10 m-auto my-5 cursor-pointer bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+						onclick="deleteBoard()">
+						  마감
+						</div>
+					</div> 
+				</div>
+				<%} %>
+				
+			<%
+				if (memberLoggedIn != null && memberLoggedIn.getMemberRole().equals("U")) {
+			%>
+			<div class="border-t border-b text-center my-5">
+				<button id="applyBtn"
+					class="w-1/2 m-auto my-5 cursor-pointer bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+					onclick="location.href='<%=request.getContextPath()%>/board/apply?userKey=<%=memberLoggedIn.getKey()%>&postKey=<%=b.getKey()%>';">신청하기</button>
+					<div class = "text-center my-5 hidden" id = "applyText">
+					    <div class = "text-xl text-red-700">
+					        신청이 완료된 게시글 입니다.
+					    </div>
+					    <div class = "w-1/2 m-auto my-5 cursor-pointer bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"  
+					    onclick="location.href='<%=request.getContextPath()%>/myPage/adList?memberId=<%=memberLoggedIn.getMemberId()%>'">
+					                광고신청 현황으로 가기
+					    </div>
+					</div>
+			</div>	
+			<%
+				}
+			%>
 		</div>
-
-		<h3>첨부파일</h3>
+		<p class="text-3xl ml-2"><%=b.getRefBoardCategoryName() %> > <%=b.getTitle()%></p>
+		<div class = "border-t mb-10">
+			<div class = "font-bold text-sm p-5">
+				<p>기업명 : <%=b.getRefMemberName()%> | 날짜 : <%=b.getEnrollDate()%></p>
+			</div>
+			<div>
+			  <img src="<%=request.getContextPath()%>/upload/board-images/<%=b.getMainImageRename()%>" alt="" />
+			</div>
+			<div class="my-3 p-5">
+				<%=b.getContent() %>
+				<div class="bottom-of-main"></div>
+			</div>
+        </div>
+        <div class = "m-4 text-center text-xl text-blue-700">
+           <p>잔여 포인트: <%= (String)Commas.format(b.getPoint()) %>P | 단가: <%= (String)Commas.format(b.getClickPrice()) %>P</p>    
+        </div>
 		<%
 		if (b.getOriginalFileName() != null) {
-	%>
-		<a
-			href="javascript:fileDownload('<%=b.getOriginalFileName()%>','<%=b.getRenamedFileName()%>');">
-			<img alt="첨부파일" src="<%=request.getContextPath()%>/images/file.png"
-			width=16px> <%=b.getOriginalFileName()%>
-		</a>
+	    %>
+	    <div class = "border-t py-4">
+			<a
+				href="javascript:fileDownload('<%=b.getOriginalFileName()%>','<%=b.getRenamedFileName()%>');">
+				<img alt="첨부파일" src="<%=request.getContextPath()%>/images/file.png"
+				width=16px> <%=b.getOriginalFileName()%>
+			</a>
+		</div>
 		<%
 		}
-	%>
-		<hr style="margin-top: 30px;" />
+	   %>
+		<hr/>
 
 
 		<form action="<%= request.getContextPath() %>/board/comment/insert"
@@ -222,11 +239,10 @@ $(function(){
 
 	</div>
 </div>
+
+
+
 <section id="board-container">
-
-
-
-
 	<% if(memberLoggedIn!=null && 
 			MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole()) ){ %>
 	<form name="boardDelFrm"
