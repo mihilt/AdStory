@@ -151,7 +151,31 @@ $(function(){
          if (list == null || list.isEmpty()) {
       %>
 
-      <div class="m-auto text-xl">조회된 게시물이 없습니다.</div>
+      <div class="m-auto text-xl w-full text-center">
+                  조회된 게시물이 없습니다.
+                  
+       <%
+          if (memberLoggedIn != null && !memberLoggedIn.getMemberRole().equals("U")) {
+       %>
+       <div class="my-10">
+             <button
+                class="float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                onclick="location.href='<%=request.getContextPath()%>/board/insert';">
+                            글쓰기
+             </button>
+       </div>
+       <%
+          }
+       %>
+      </div>
+
+
+
+
+	   
+
+
+
 
       <%
          } else {
@@ -278,15 +302,15 @@ onclick="location.href='<%=request.getContextPath()%>/board/view?boardNo=<%=b.ge
          type="submit">검색</button>
    </form>
 </div>
-    <%}%>
-
-
 <!-- pageBar -->
 <div class="align-middle flex justify-center">
    <div class="flex rounded-md mt-8">
       <%=request.getAttribute("pageBar")%>
    </div>
 </div>
+    <%}%>
+
+
 <!-- 밑에 여백 -->
 <div class="bottom-of-main"></div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

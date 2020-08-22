@@ -234,9 +234,13 @@ $(function(){
 		%>
 		</div>
 
-
+        <%if(memberLoggedIn.getName().equals(b.getRefMemberName())){ %>
+			<button class="px-10 m-auto my-5 cursor-pointer bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+			 onclick=location.href="<%=request.getContextPath()%>/board/update?boardNo=<%=b.getKey()%>";>
+			   수정
+			</button>
+		<% } %>
 		
-
 	</div>
 </div>
 
@@ -253,7 +257,6 @@ $(function(){
 	<script>
 function updateBoard(){
 	location.href="<%=request.getContextPath()%>/board/update?boardNo=<%=b.getKey()%>";
-	
 }
 function deleteBoard(){
 	if(!confirm('이 게시글을 정말 마감하시겠습니까?')) return;

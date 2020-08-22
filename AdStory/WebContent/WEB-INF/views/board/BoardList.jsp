@@ -283,9 +283,6 @@ onclick="location.href='<%=request.getContextPath()%>/board/view?boardNo=<%=b.ge
          type="submit">검색</button>
    </form>
 </div>
-    <%}%>
-
-
 <!-- pageBar -->
 <div class="align-middle flex justify-center">
    <div class="flex rounded-md mt-8">
@@ -294,4 +291,7 @@ onclick="location.href='<%=request.getContextPath()%>/board/view?boardNo=<%=b.ge
 </div>
 <!-- 밑에 여백 -->
 <div class="bottom-of-main"></div>
+    <%}%>
+
+
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
