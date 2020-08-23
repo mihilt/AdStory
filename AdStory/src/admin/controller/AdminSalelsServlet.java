@@ -33,7 +33,6 @@ public class AdminSalelsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, Integer> sales = new HashMap<>();
 		sales  = new PointLogService().selectSales();
-		System.out.println("sales@Servlet = " + sales);
 		
 		request.setAttribute("sales", sales);
 		request.getRequestDispatcher("/WEB-INF/views/admin/AdminViewSales.jsp")

@@ -72,7 +72,6 @@ public class EnquiryDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@dao = " + list);
 		
 		return list;
 	}
@@ -162,7 +161,6 @@ public class EnquiryDAO {
 		}finally{
 			close(rset);
 			close(pstmt);
-			System.out.println("enquiry@dao = " + enquiry);
 		}
 		
 		return enquiry;

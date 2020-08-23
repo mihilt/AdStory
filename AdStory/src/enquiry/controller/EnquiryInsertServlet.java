@@ -48,7 +48,6 @@ public class EnquiryInsertServlet extends HttpServlet {
 		Enquiry enquiry = new Enquiry(0, enquiryUser, enquiryTitle, enquiryContent, null,null);
 		
 		int result = new EnquiryService().insertEnquiry(enquiry);
-		System.out.println(enquiry);
 		
 		String msg = "";
 		String loc = request.getContextPath() + "/enquiry/elist";

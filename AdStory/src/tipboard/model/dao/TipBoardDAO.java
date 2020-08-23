@@ -469,15 +469,12 @@ public class TipBoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("searchPostCount");
-		System.out.println(sql);
 		String col = "";
 		switch(String.valueOf(param.get("searchType"))) {
 		case "memberId" : col = "member_id"; break;
 		case "title" : col = "title"; break;
 		}
 		sql = sql.replace("●", col);
-		System.out.println(sql);
-		System.out.println(param.get("searchKeyword"));
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

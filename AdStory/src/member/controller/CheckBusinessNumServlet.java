@@ -38,9 +38,7 @@ public class CheckBusinessNumServlet extends HttpServlet {
 		
 		
 		
-		System.out.println("test");
 		String BusinessNum = request.getParameter("BusinessNum");
-		System.out.println(BusinessNum);
 		
 		//2. 업무로직
 		
@@ -55,7 +53,6 @@ public class CheckBusinessNumServlet extends HttpServlet {
 		for (String businessRegNo : listBusinessRegNo) {
 			String result = listResult.stream() .filter(map -> map.containsKey(businessRegNo)) .map(map -> map.get(businessRegNo)) 
 					.collect(Collectors.joining()); 
-			System.out.println(businessRegNo + " = " + result);
 			
 			
 		

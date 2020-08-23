@@ -32,8 +32,6 @@ public class UnLikeServlet extends HttpServlet {
 		//1.사용자입력값처리
 		int userKey = Integer.parseInt(request.getParameter("userKey"));
 		int cUserKey = Integer.parseInt(request.getParameter("cUserKey"));
-		System.out.println("userKey = " + userKey);
-		System.out.println("cUserKey = " + cUserKey);
 		
 		//2.업무로직
 		int result = new MemberService().deleteWishList(userKey,cUserKey);

@@ -41,7 +41,6 @@ public class BoardCommentInsertServlet extends HttpServlet {
 			int commentRef = Integer.parseInt(request.getParameter("commentRef"));
 			
 			BoardComment boardComment = new BoardComment(0, postKey, userKey, content, null, commentLevel,commentRef,null);
-			System.out.println("boardComment@servlet"+boardComment);
 			
 			//2.비지니스로직 
 			int result = new BoardService().insertBoardComment(boardComment);

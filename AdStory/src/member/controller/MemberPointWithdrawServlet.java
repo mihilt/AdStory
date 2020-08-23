@@ -47,10 +47,8 @@ public class MemberPointWithdrawServlet extends HttpServlet {
 		}
 		
 		List<MemberWithdraw> list = new MemberService().showMemberWithdraw(cPage, numPerPage,memberId);
-		System.out.println("list@Servlet = "+list);
 		
 		int totalWithdrawCount = new MemberService().showMemberWithdrawCount(memberId);
-		System.out.println("totalWithdrawCount@Servlet =" + totalWithdrawCount);
 		
 		
 		String url = request.getRequestURI()+"?memberId="+memberId;

@@ -31,7 +31,6 @@ public class MemberDAO {
 		String fileName = "/sql/member/member-query.properties";
 		fileName =  MemberDAO.class.getResource(fileName)
 								   .getPath();
-		System.out.println("fileName@dao = " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (IOException e) {
@@ -46,8 +45,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectOne");
-		System.out.println("sql@memberDAO = " + sql);
-		System.out.println("memberId@memberDAO = " + memberId);
 		
 		try {
 			//1. PreparedStatement객체생성, 미완성쿼리 전달
@@ -56,11 +53,9 @@ public class MemberDAO {
 			
 			//2. 실행 
 			rset = pstmt.executeQuery();
-			System.out.println("rset@memberDAO = " + rset);
 			
 			//3.ResultSet -> Member
 			if(rset.next()) {
-				System.out.println("sefsef" + rset.getDate("enroll_date"));
 				
 				member = new Member();
 				
@@ -87,7 +82,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("member@dao = " + member);
 		
 		return member;
 	}
@@ -98,14 +92,12 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("updateMemberPoint"); 
 		
-		System.out.println(query);
 		try {
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setInt(1, pointAmount);
 			pstmt.setString(2, userId);
 
-			System.out.println(pstmt);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -113,7 +105,6 @@ public class MemberDAO {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("result@DAO = " + result);
 		return result;
 	}
 
@@ -131,7 +122,6 @@ public class MemberDAO {
 			pstmt.setInt(2, pointAmount);
 			pstmt.setString(3, requirements);
 
-			System.out.println(pstmt);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -178,10 +168,6 @@ public class MemberDAO {
 		String query = prop.getProperty("selectMemberWithdrawList");
 		
 		
-		System.out.println("아뭐냐구");
-		System.out.println(memberId);
-		System.out.println((cPage-1)*numPerPage+1);
-		System.out.println(cPage*numPerPage);
 		
 		try{
 			pstmt = conn.prepareStatement(query);
@@ -204,7 +190,6 @@ public class MemberDAO {
 				w.setRequirements(rset.getString("requirements"));
 				w.setStatus(rset.getString("status"));
 				
-				System.out.println("w는"+w);
 				list.add(w);
 			}
 		}catch(Exception e){
@@ -213,7 +198,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
 		return list;
 	}
 
@@ -281,7 +265,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
 		return list;
 	}
 
@@ -415,7 +398,6 @@ public class MemberDAO {
 		case "memberName" : col = "name"; break;
 		}
 		sql = sql.replace("●", col);
-		System.out.println("sql@dao = " + sql);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -455,7 +437,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@dao = " + list);
 		return list;
 	}
 
@@ -465,7 +446,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("getSearchTotalContents");
-		System.out.println(sql);
 		String col = "";
 		switch(String.valueOf(param.get("searchType"))) {
 		case "memberId" : col = "member_id"; break;
@@ -495,7 +475,6 @@ public class MemberDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertMember"); 
-		System.out.println(member);
 		try {
 			
 			pstmt = conn.prepareStatement(query);
@@ -526,7 +505,6 @@ public class MemberDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertNomalMember"); 
-		System.out.println(member);
 		try {
 			
 			pstmt = conn.prepareStatement(query);
@@ -636,8 +614,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectMail");
-		System.out.println("sql@memberDAO = " + sql);
-		System.out.println("email@memberDAO = " + email);
 		
 		try {
 			//1. PreparedStatement객체생성, 미완성쿼리 전달
@@ -646,11 +622,9 @@ public class MemberDAO {
 			
 			//2. 실행 
 			rset = pstmt.executeQuery();
-			System.out.println("rset@memberDAO = " + rset);
 			
 			//3.ResultSet -> Member
 			if(rset.next()) {
-				System.out.println("sefsef" + rset.getDate("enroll_date"));
 				
 				member = new Member();
 				
@@ -677,7 +651,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("member@dao = " + member);
 		
 		return member;
 	}
@@ -688,8 +661,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectPW");
-		System.out.println("sql@memberDAO = " + sql);
-		System.out.println("email@memberDAO = " + email);
 		
 		try {
 			//1. PreparedStatement객체생성, 미완성쿼리 전달
@@ -702,11 +673,9 @@ public class MemberDAO {
 			
 			//2. 실행 
 			rset = pstmt.executeQuery();
-			System.out.println("rset@memberDAO = " + rset);
 			
 			//3.ResultSet -> Member
 			if(rset.next()) {
-				System.out.println("sefsef" + rset.getDate("enroll_date"));
 				
 				member = new Member();
 				
@@ -733,7 +702,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("member@dao = " + member);
 		
 		return member;
 	}
@@ -777,7 +745,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("wishlist@dao = " + list);
 		return list;
 	}
 
@@ -801,7 +768,6 @@ public class MemberDAO {
 			close(pstmt);
 		}
 
-		System.out.println("result@dao = " + result);
 
 		return result;
 	}
@@ -826,7 +792,6 @@ public class MemberDAO {
 			close(pstmt);
 		}
 
-		System.out.println("result@dao = " + result);
 
 		return result;
 	}
@@ -864,8 +829,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectId");
-		System.out.println("sql@memberDAO = " + sql);
-		System.out.println("email@memberDAO = " + email);
 		
 		try {
 			//1. PreparedStatement객체생성, 미완성쿼리 전달
@@ -878,11 +841,9 @@ public class MemberDAO {
 			
 			//2. 실행 
 			rset = pstmt.executeQuery();
-			System.out.println("rset@memberDAO = " + rset);
 			
 			//3.ResultSet -> Member
 			if(rset.next()) {
-				System.out.println("sefsef" + rset.getDate("enroll_date"));
 				
 				member = new Member();
 				
@@ -909,7 +870,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("member@dao = " + member);
 		
 		return member;
 	}

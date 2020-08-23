@@ -31,13 +31,11 @@ public class checkBuisinessIdDuplicateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.사용자입력값 처리
 				String memberId = request.getParameter("memberId");
-				System.out.println("memberId@servlet = " + memberId);
 				
 				//2. 업무로직
 				Member member = new MemberService().selectOne(memberId);
 				
 				boolean isUsable = member == null ? true : false;
-				System.out.println("isUsable@servlet = " + isUsable);
 
 				//3. view단 처리
 				request.setAttribute("isUsable", isUsable);

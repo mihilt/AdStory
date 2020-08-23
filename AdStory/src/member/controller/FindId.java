@@ -39,7 +39,6 @@ public class FindId extends HttpServlet {
 		Member member = new MemberService().selectId(name,email);
 		
 		boolean isUsable = member == null ? true : false;
-		System.out.println("isUsable@servlet = " + isUsable);
 		
 		if (isUsable != true) {
 			request.setAttribute("name", name);

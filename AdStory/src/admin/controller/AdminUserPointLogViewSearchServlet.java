@@ -46,11 +46,7 @@ public class AdminUserPointLogViewSearchServlet extends HttpServlet {
 		}
 		
 		List<PointLog> list = new PointLogService().selectMemberPointLogList(cPage, numPerPage, memberId);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		System.out.println(list);
 		int totalContents = new PointLogService().selectMemberPointLogCount(memberId);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		System.out.println(totalContents);
 		
 		String url = request.getRequestURI();
 		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);

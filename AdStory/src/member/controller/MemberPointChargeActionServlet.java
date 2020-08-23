@@ -36,8 +36,6 @@ public class MemberPointChargeActionServlet extends HttpServlet {
 		
 		int result = new MemberService().memberChargePoint(memberId, pointAmount);
 		
-		System.out.println(memberId);
-		System.out.println(pointAmount);
 
 		
 		String view = "/WEB-INF/views/common/msg.jsp";

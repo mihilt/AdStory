@@ -67,7 +67,6 @@ public class MemberAdListDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
 		return list;
 	}
 

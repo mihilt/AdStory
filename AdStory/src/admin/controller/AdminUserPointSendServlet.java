@@ -38,17 +38,12 @@ public class AdminUserPointSendServlet extends HttpServlet {
 		String radio = request.getParameter("radio");
 
 		
-		System.out.println("userId = " + userId);
-		System.out.println("pointAmount = " + pointAmount);
-		System.out.println("radio = " + radio);
 		
 		if("decrease".equals(radio)) {
 			pointAmount = -pointAmount; 
 		}
-		System.out.println("라디오 변환 후 pointAmount = " + pointAmount);
 		
 		int result = new MemberService().updateMemberPoint(userId, pointAmount); 
-		System.out.println("result@servlet = " +result);
 		
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";

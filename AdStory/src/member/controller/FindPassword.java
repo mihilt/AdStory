@@ -39,7 +39,6 @@ public class FindPassword extends HttpServlet {
 		Member member = new MemberService().selectPW(memberId,name,email);
 		
 		boolean isUsable = member == null ? true : false;
-		System.out.println("isUsable@servlet = " + isUsable);
 		
 		if (isUsable != true) {
 			

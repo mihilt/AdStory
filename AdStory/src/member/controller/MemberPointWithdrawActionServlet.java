@@ -40,12 +40,8 @@ public class MemberPointWithdrawActionServlet extends HttpServlet {
 			requirements = " ";
 		} 
 		
-		System.out.println(memberId);
-		System.out.println(pointAmount);
-		System.out.println(requirements);
 		
 		int result = new MemberService().applyWithdraw(memberId, pointAmount, requirements);
-		System.out.println("result@Servlet = "+result);
 		
 		
 		

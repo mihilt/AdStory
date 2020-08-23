@@ -49,7 +49,6 @@ public class BoardViewServlet extends HttpServlet {
 		List<BoardComment> commentList = 
 				boardService.selectCommentList(boardNo);
 		List<BoardCategory> categoryList = boardService.selectCategoryList(); 
-		System.out.println("categoryList@servlet = " + categoryList);
 
 		String view = "/WEB-INF/views/board/boardView.jsp";
 		// 게시글 가져오기에 실패한경우

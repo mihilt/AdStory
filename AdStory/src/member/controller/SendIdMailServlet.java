@@ -47,7 +47,6 @@ public class SendIdMailServlet extends HttpServlet {
 		Member member = new MemberService().selectMail(email);
 		
 		boolean isUsable = member == null ? true : false;
-		System.out.println("isUsable@servlet = " + isUsable);
 		
 		
 		
@@ -79,7 +78,6 @@ public class SendIdMailServlet extends HttpServlet {
 			
 			//이메일 수신자
 			                //사용자가 입력한 이메일 받아오기
-			System.out.println(email);
 			InternetAddress to = new InternetAddress(email);
 			msg.setRecipient(Message.RecipientType.TO, to);
 			request.setAttribute("email", email);
@@ -90,16 +88,13 @@ public class SendIdMailServlet extends HttpServlet {
 			//이메일 내용
 			String code = request.getParameter("code_check"); //인증번호값 받기
 			request.setAttribute("code", code);
-			System.out.println(code);
 			msg.setText(code, "UTF-8");
 			
 			//이메일 헤더
 			msg.setHeader("content-Type", "text/html");
 			
 			//이메일 보내기
-			System.out.println(msg);
 			javax.mail.Transport.send(msg);
-			System.out.println("보냄");
 			
 		} catch(AddressException e) {
 			e.printStackTrace();

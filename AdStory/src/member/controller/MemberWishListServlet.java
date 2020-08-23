@@ -48,7 +48,6 @@ public class MemberWishListServlet extends HttpServlet {
 		
 		//2.2 전체게시글수, 전체페이지수 구하기
 		int totalContents = new MemberService().selectWishListCount(userKey);
-		System.out.println("totalContents = " + totalContents);
 		
 		String url = request.getRequestURI()+"?userKey="+userKey;
 		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);

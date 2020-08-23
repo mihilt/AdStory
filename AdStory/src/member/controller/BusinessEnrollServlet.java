@@ -62,7 +62,6 @@ public class BusinessEnrollServlet extends HttpServlet {
 						0,phoneNum,bank, accountNum, businessNum, name, email, address,  null);
 	
 		int result = new MemberService().insertMember(member);
-		System.out.println(result);
 		
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";

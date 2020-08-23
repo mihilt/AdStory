@@ -41,7 +41,6 @@ public class BoardInsertServlet extends HttpServlet {
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       List<BoardCategory> categoryList = new BoardService().selectCategoryList();
-      System.out.println("categoryList = "+categoryList);
       request.setAttribute("categoryList", categoryList);
       request.getRequestDispatcher("/WEB-INF/views/board/boardInsert.jsp")
             .forward(request, response);
@@ -91,8 +90,6 @@ public class BoardInsertServlet extends HttpServlet {
          = multipartRequest.getOriginalFileName("upMainImage");
       String mainImageRename
       = multipartRequest.getFilesystemName("upMainImage");
-      System.out.println("***메인이미지"+mainImageOrigin);
-      System.out.println("***메인이미지"+mainImageRename);
       //사용자가 업로드한 파일명
       String originalFileName 
          = multipartRequest.getOriginalFileName("upFile");

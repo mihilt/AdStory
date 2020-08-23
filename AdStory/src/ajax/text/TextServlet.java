@@ -32,8 +32,6 @@ public class TextServlet extends HttpServlet {
 		//1.사용자입력값처리
 		int userKey = Integer.parseInt(request.getParameter("userKey"));
 		int postKey = Integer.parseInt(request.getParameter("postKey"));
-		System.out.println("userKey = " + userKey);
-		System.out.println("postKey = " + postKey);
 		
 		//2.업무로직
 		int result = new BoardService().selectAdList(userKey,postKey);

@@ -40,14 +40,12 @@ public class Utils {
 		//3. 암호화 처리
 		md.update(bytes);
 		byte[] encryptedBytes = md.digest();
-		System.out.println(new String(encryptedBytes));
 		
 		//4. 인코딩처리 Base64 
 		// 영대소문자 52, 숫자 10, +, /
 		// = 패딩문자(채우기텍스트)
 		Encoder encoder = Base64.getEncoder();
 		encryptedPassword = encoder.encodeToString(encryptedBytes);
-		System.out.println(encryptedPassword);
 		
 		return encryptedPassword;
 	}

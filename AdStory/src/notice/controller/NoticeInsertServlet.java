@@ -46,11 +46,9 @@ public class NoticeInsertServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		int categoryKey = Integer.parseInt(request.getParameter("categoryKey"));
-		System.out.println("category@servlet="+categoryKey);
 		Notice notice = new Notice(0, categoryKey, title, content, null);
 		
 		int result = new NoticeService().insertNotice(notice);
-		System.out.println("result@servlet = " + notice);
 		
 		String msg = "";
 		String loc = request.getContextPath() + "/notice/list";

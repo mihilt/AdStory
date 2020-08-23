@@ -54,7 +54,6 @@ public class BoardDAO {
 				// 컬럼명은 대소문자 구분이 없다.
 				b.setKey(rset.getInt("key"));
 				b.setCategoryKey(rset.getInt("category_key"));
-//			System.out.println("rset"+rset.getInt("category_key"));
 				b.setUserKey(rset.getInt("user_key"));
 				b.setTitle(rset.getString("title"));
 				b.setContent(rset.getString("content"));
@@ -79,7 +78,6 @@ public class BoardDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("selectOne@dao = " + b);
 		return b;
 	}
 
@@ -124,7 +122,6 @@ public class BoardDAO {
 				b.setRefBoardCategoryName(rset.getString("category_name"));
 				b.setIsLike(rset.getInt("is_like"));
 
-//				System.out.println("&&&&&&&&&b = "+b);
 
 				list.add(b);
 			}
@@ -134,7 +131,6 @@ public class BoardDAO {
 			close(rset);
 			close(pstmt);
 		}
-//		System.out.println("list@boardDAO = " + list);
 		return list;
 	}
 
@@ -198,7 +194,6 @@ public class BoardDAO {
 			close(pstmt);
 		}
 
-		System.out.println("****resultBoard@dao = " + board);
 
 		return result;
 	}
@@ -223,7 +218,6 @@ public class BoardDAO {
 				b.setKey(rset.getInt("key"));
 				b.setCategoryName(rset.getString("category_name"));
 
-//				System.out.println("b = "+b);
 
 				categoryList.add(b);
 			}
@@ -233,7 +227,6 @@ public class BoardDAO {
 			close(rset);
 			close(pstmt);
 		}
-//		System.out.println("categorylist@boardDAO = " + categoryList);
 		return categoryList;
 	}
 
@@ -260,7 +253,6 @@ public class BoardDAO {
 			close(pstmt);
 		}
 
-		System.out.println("result@dao = " + result);
 
 		return result;
 	}
@@ -284,7 +276,6 @@ public class BoardDAO {
 			close(rset);
 			close(pstmt);
 		}
-//		System.out.println("boardNo@dao = " + boardNo);
 
 		return boardNo;
 	}
@@ -306,7 +297,6 @@ public class BoardDAO {
 			close(pstmt);
 		}
 
-		System.out.println("urlresult@dao = " + result);
 
 		return result;
 	}
@@ -334,7 +324,6 @@ public class BoardDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("selectAdList@dao = " + result);
 		return result;
 	}
 
@@ -542,11 +531,8 @@ public class BoardDAO {
 			keyword = param.get("searchKeyword")+"";
 			break;
 		}
-//		System.out.println("col@DAO="+col);
 		sql = sql.replace("●", col);
-//		System.out.println("sql@dao = " + sql);
 
-//		System.out.println("param.get(\"searchKeyword\")="+param.get("searchKeyword"));
 		try {
 			pstmt = conn.prepareStatement(sql);
 
@@ -593,7 +579,6 @@ public class BoardDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@dao = " + list);
 		return list;
 	}
 
@@ -602,7 +587,6 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("getSearchTotalContents");
-//		System.out.println(sql);
 		String col = "";
 		String keyword = "";
 		switch (String.valueOf(param.get("searchType"))) {
@@ -621,7 +605,6 @@ public class BoardDAO {
 
 		}
 		sql = sql.replace("●", col);
-//		System.out.println("param.get(\"searchKeyword\")="+param.get("searchKeyword"));
 
 		try {
 			pstmt = conn.prepareStatement(sql);

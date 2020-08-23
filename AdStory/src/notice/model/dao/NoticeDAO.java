@@ -117,7 +117,6 @@ public class NoticeDAO {
 		}finally {
 			close(pstmt);
 		}
-		System.out.println("result@dao = " + result);
 		return result;
 	}
 
@@ -148,7 +147,6 @@ public class NoticeDAO {
 		}finally{
 			close(rset);
 			close(pstmt);
-			System.out.println("notice@DAO=" + notice);
 		}
 		return notice;
 	}

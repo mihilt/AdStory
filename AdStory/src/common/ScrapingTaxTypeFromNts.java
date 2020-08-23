@@ -63,19 +63,15 @@ public class ScrapingTaxTypeFromNts {
 			try { 
 				Response res = Jsoup.connect(url) .headers(headers) 
 						.requestBody(body) .timeout(3000) .method(Method.POST) .execute(); 
-				System.out.println(res.body());
 				
 			org.dom4j.Document document = DocumentHelper.parseText(res.body()); 
 			//System.out.println( document.valueOf("//map/trtCntn"));
 			String trtCntn = document.valueOf("//map/trtCntn") + ""; 
 				//if (logger.isDebugEnabled()) { 
-					System.out.println("trtCntn[" + trtCntn + "]"); 
 					//} 
 				map.put(businessRegNo, trtCntn); 
 			} catch (IOException e) { 
-				System.out.println("Jsoup 오류 : "+ e); 
 			} catch (DocumentException e) { 
-				System.out.println("Document parse 오류 : " + e);
 				} 
 			return map;
 			} 

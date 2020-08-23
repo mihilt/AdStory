@@ -43,7 +43,6 @@ public class BoardUpdateServlet extends HttpServlet {
 		//2.업무로직
 		BoardService boardService = new BoardService();
 		Board board =boardService.selectOne(boardNo);
-		System.out.println("board@servlet = " + board);
 		List<BoardCategory> categoryList = boardService.selectCategoryList();
 		
 		//3.jsp view단 처리
@@ -94,8 +93,6 @@ public class BoardUpdateServlet extends HttpServlet {
 				0, 0, url, originalFileName, renamedFileName, 0,null,null);
 		
 		Board oldBoard = new BoardService().selectOne(boardNo);
-		System.out.println("boardNo@servlet="+boardNo);
-		System.out.println("oldBoard@servlet="+oldBoard);
 		String oldRenamedFileName = oldBoard.getRenamedFileName();
 		String oldOriginalFileName = oldBoard.getOriginalFileName();
 		
@@ -108,13 +105,11 @@ public class BoardUpdateServlet extends HttpServlet {
 			// 이전 첨부파일 삭제 | db에는 새파일데이터로 수정
 			if(originalFileName != null) {
 				boolean result = oldFile.delete();
-				System.out.println(oldFile + (result?"삭제성공!":"삭제실패"));
 			}
 			//2.첨부파일만 삭제한 경우
 			// 이전 첨부파일 삭제 |db에는 null로 수정
 			else if(delFile != null) {
 				boolean result = oldFile.delete();
-				System.out.println(oldFile + (result?"삭제성공!":"삭제실패"));
 			}
 			//3.기존 첨부파일 유지하는 경우
 			// db의 정보도 그대로 유지
@@ -127,7 +122,6 @@ public class BoardUpdateServlet extends HttpServlet {
 		
 		//2.업무로직
 		int result = new BoardService().updateBoard(board);
-		System.out.println("result@servlet = " + result);
 		
 		//3.view단처리
 		String msg = "";

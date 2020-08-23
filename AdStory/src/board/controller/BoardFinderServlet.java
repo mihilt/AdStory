@@ -55,8 +55,6 @@ public class BoardFinderServlet extends HttpServlet {
          
       }
       
-      System.out.println(searchType);
-      System.out.println(searchKeyword);
       
       Map<String, Object> param = new HashMap<>();
       param.put("searchType", searchType);
@@ -64,7 +62,6 @@ public class BoardFinderServlet extends HttpServlet {
       param.put("cPage", cPage);
       param.put("numPerPage", numPerPage);
       param.put("userKey",userKey);
-      System.out.println("param = " + param);
       
       BoardService boardService = new BoardService();
       List<Board> list = boardService.searchBoard(param);
@@ -72,7 +69,6 @@ public class BoardFinderServlet extends HttpServlet {
 //      System.out.println("list@servlet = " + list);
       
       int totalContents = new BoardService().getTotalContents(param);
-      System.out.println("totalContents@servlet = " + totalContents);
       
       //페이지바 문자열을 리턴할 static메소드 호출
       String url = request.getRequestURI() 
