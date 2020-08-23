@@ -44,7 +44,14 @@ function deleteBoard(){
 
 	    <div class=" p-1 px-3 py-2">
 	       <div>
-              <span class="text-sm"><%=b.getMemberId() %> </span> | <span class="text-sm"> <%=b.getPostDate() %></span>
+              <span class="text-sm">
+                <td class = "px-4">
+                   <a class = "text-blue-700 font-bold" 
+                   href="<%=request.getContextPath()%>/tipBoard/search?searchType=memberId&searchKeyword=<%= b.getMemberId() %>">
+                       <%= b.getMemberId() %>
+                   </a>
+                </td>
+              </span> | <span class="text-sm"> <%=b.getPostDate() %></span>
               <span class="text-sm float-right">조회수 : <%=b.getReadCount() %></span>
            </div>
 	       <div class= "py-5 ">

@@ -49,7 +49,12 @@
 	                    <% } %>
                     </span>
 	            </td>
-	            <td class = "px-4"><%= b.getMemberId() %></td>
+                <td class = "px-4">
+                   <a class = "text-blue-700 font-bold" 
+                   href="<%=request.getContextPath()%>/tipBoard/search?searchType=memberId&searchKeyword=<%= b.getMemberId() %>">
+                       <%= b.getMemberId() %>
+                   </a>
+                </td>
 				<%
 				   String date[] = b.getPostDate().split(" ");
 				%>
