@@ -112,7 +112,7 @@
 				</table>
 				<div class = "mt-5">
 					<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="submit" value="가입"> 
-					<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="reset"	value="취소">
+					<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="reset"	value="취소" onclick="location.href='<%=request.getContextPath()%>';">
 			    </div>
 			</form>
 		</section>
