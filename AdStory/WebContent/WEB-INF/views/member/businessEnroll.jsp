@@ -124,7 +124,7 @@
 		</table>
 		<div class = "mt-5">
 			<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="submit" value="가입" >
-			<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="reset" value="취소">
+			<input class="bg-white cursor-pointer hover:bg-blue-500 hover:text-white border border-solid border-blue-500 font-bold rounded text-blue-500 mx-2 p-2" type="reset" value="취소" onclick="location.href='<%=request.getContextPath()%>';">
         </div>
 	</form>
 </section>
@@ -147,7 +147,7 @@ function checkBusinessNum(){
 	
 	var url = "";//checkIdDuplicateFrm의 action값이 사용되므로, 비워둠.
 	var title = "checkBusinessNumPopup";
-	var spec = "left=500px, top=300px, width=500px, height=400px";
+	var spec = "left=500px, top=300px, width=300px, height=200px";
 	open(url, title, spec);
 	//2.폼관련
 	var $frm = $("[name=checkBusinessNumFrm]");
