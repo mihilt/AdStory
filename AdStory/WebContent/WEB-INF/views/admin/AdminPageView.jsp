@@ -42,9 +42,8 @@ int Inquiry=numInquiry.intValue();
             <% } %>
             </div>
             
-            <%if(Inquiry > 0) {%>
             <div class="w-full md:w-1/2 p-3">
-            
+            <%if(Inquiry > 0) {%>
                 <div class="bg-red-100 border-b-4 border-red-500 rounded-lg shadow-lg p-5">
                     <div class="flex flex-row items-center">
                         <div class="flex-1 text-center">
@@ -53,9 +52,9 @@ int Inquiry=numInquiry.intValue();
                         </div>
                     </div>
                 </div>
-            </div>
+            
             <% } else { %>
-            <div class="bg-blue-100 border-b-4 border-blue-500 rounded-lg shadow-lg p-5">
+                <div class="bg-blue-100 border-b-4 border-blue-500 rounded-lg shadow-lg p-5">
                     <div class="flex flex-row items-center">
                         <div class="flex-1 text-center">
                             <h5 class="font-bold uppercase text-gray-600">미완료 문의 갯수</h5>
@@ -63,8 +62,8 @@ int Inquiry=numInquiry.intValue();
                         </div>
                     </div>
                 </div>
-            </div>
             <% } %>
+            </div>
         </div>
 	
 	    <div class="flex my-4 mb-16">		  

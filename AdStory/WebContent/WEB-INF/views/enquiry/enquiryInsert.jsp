@@ -114,11 +114,11 @@
 		
 	</table>
 	<br /><br />
-	</form>
 	<input type="submit" value="등록하기" id= "menuBtn"
 					   onclick="return enquiryValidate();">
 	<input type="button" value="취소" id="backBtn" 
 			   onclick="location.href='<%= request.getContextPath() %>/enquiry/elist';" />
+	</form>
 	<br />
 	<br />
 	<br />
