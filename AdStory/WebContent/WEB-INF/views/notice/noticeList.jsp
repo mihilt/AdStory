@@ -19,42 +19,51 @@
 	List<Notice> list = (List<Notice>)request.getAttribute("list");
 %>
 <div class = "max-w-screen-lg m-auto my-10">
+
 <img id="noticeImg" src="<%=request.getContextPath() %>/images/notice.jpg" alt="공지사항" />
+
 <style>
+
 #noticeImg{
 	width: 100%;
 	height:400px;
-	padding-left: 50px;
-	padding-right: 50px;
+	opacity: 0.9;
+
+/* 	box-shadow: 0 10px 14px 0 rgba(0, 195, 255, 0.15), 0 14px 28px 0 rgba(0, 0, 0, 0.2); */
 }
 
-section#board-container{width:90%; margin:0 auto; text-align:center;}
-section#board-container h2{margin:10px 0; font-size: 30px;}
+section#board-container{width:100%; margin:0 auto; text-align:center;}
 table#tbl-board{width:100%; margin:0 auto; border-collapse:collapse; clear:both; }
 table#tbl-board th, table#tbl-board td { text-align: center;  padding: 8px;} 
-table#tbl-board th  { background-color: rgba(152, 209, 236, 0.849); color: rgba(64, 68, 70, 0.932);}
-table#tbl-board tr:nth-child(even) {background-color: #f5f0f0c0;}
+table#tbl-board th {
+ 	background-color: white; 
+	border-top: 3px solid rgba(152, 209, 236, 0.7); 
+	border-bottom: 3px solid rgba(152, 209, 236, 0.7); 
+ 	color: rgba(152, 209, 236, 0.849);}
+table#tbl-board tr:nth-child(even) {background-color: rgba(152, 209, 236, 0.2); }
 
 #btn-add{
- background-color: rgba(233, 190, 0, 0.87);
-  color: white;
+ background-color: white;
+  color: rgba(152, 209, 236, 0.849);
   padding: 10px 10px;
   border-radius: 12px;
-  border: none;
+  border: 3px solid rgba(152, 209, 236, 0.849);
   cursor: pointer;
   width: 80px;
   opacity: 0.9;
   float: right;
 
 }
+#btn-add:hover{
+	background-color: rgba(152, 209, 236, 0.849);
+	color: white;
+}
+
 
 </style>
 <section id="board-container">
-	<h2>공지사항 </h2>
-	<% 	if(memberLoggedIn != null && MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())){ %>
-	<input type="button" value="글쓰기" id="btn-add" 
-		   onclick="location.href='<%= request.getContextPath() %>/notice/insert';" />
-	<% 	} %>
+	
+	
 	<br />	
 	<br />	
 	<table id="tbl-board">
@@ -87,7 +96,12 @@ table#tbl-board tr:nth-child(even) {background-color: #f5f0f0c0;}
 	} 
 %>		
 	</table>
-
+	<br />
+<% 	if(memberLoggedIn != null && MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())){ %>
+	<input type="button" value="글쓰기" id="btn-add" 
+		   onclick="location.href='<%= request.getContextPath() %>/notice/insert';" />
+	<% 	} %>
+	<br /><br />
 	 <div class="align-middle flex justify-center">
 			         <div class="flex rounded-md mt-8">
 			             <%= request.getAttribute("pageBar") %>

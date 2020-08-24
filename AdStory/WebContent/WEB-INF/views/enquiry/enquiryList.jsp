@@ -21,39 +21,42 @@
 #enquiryImg{
 	width: 100%;
 	height:400px;
-	padding-left: 50px;
-	padding-right: 50px;
+	opacity: 0.9;
 }
 
-section#board-container{width:90%; margin:0 auto; text-align:center;}
-section#board-container h2{margin:10px 0; font-size: 30px;}
+section#board-container{width:100%; margin:0 auto; text-align:center;}
 table#tbl-board{width:100%; margin:0 auto; border-collapse:collapse; clear:both; }
 table#tbl-board th, table#tbl-board td { text-align: center;  padding: 8px;} 
-table#tbl-board th  { background-color: rgba(80, 199, 109, 0.781); color: rgba(64, 68, 70, 0.932);}
-table#tbl-board tr:nth-child(even) {background-color: #f5f0f0c0;}
+table#tbl-board th  { background-color: white; color:  rgba(36, 124, 58, 0.781);}
+table#tbl-board th {
+ 	background-color: white; 
+	border-top: 3px solid rgba(36, 124, 58, 0.5); 
+	border-bottom: 3px solid rgba(36, 124, 58, 0.5); 
+ 	color:  rgba(36, 124, 58, 0.781);}
+table#tbl-board tr:nth-child(even) {background-color: rgba(80, 199, 109, 0.13);}
 
 #btn-add{
- background-color: rgba(233, 190, 0, 0.87);
-  color: white;
+ background-color: white;
+  color: rgba(36, 124, 58, 0.781);
   padding: 10px 10px;
   border-radius: 12px;
-  border: none;
+  border: 3px solid rgba(36, 124, 58, 0.5);
   cursor: pointer;
   width: 80px;
   opacity: 0.9;
   float: right;
 
 }
+#btn-add:hover{
+	background-color: rgba(80, 199, 109, 0.4);
+	color: white;
+}
 
 </style>
 
 
 	<section id="board-container">
-		<h2>문의 게시판 </h2>
-		<% 	if(memberLoggedIn != null){ %>
-		<input type="button" value="글쓰기" id="btn-add" 
-			   onclick="location.href='<%= request.getContextPath() %>/enquiry/insert';" />
-		<% 	} %>
+		
 		<br /><br />	
 		<table id="tbl-board">
 			<tr>
@@ -79,7 +82,7 @@ table#tbl-board tr:nth-child(even) {background-color: #f5f0f0c0;}
 			|| MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())) ) { %>
 			<td><%= eq.getKey() %></td>
 			<td>
-				<a class= "font-bold text-green-900 float-left hover:underline" href="<%= request.getContextPath() %>/enquiry/view?enquiryNo=<%= eq.getKey() %>">
+				<a class= "font-bold text-gray-700 float-left hover:underline" href="<%= request.getContextPath() %>/enquiry/view?enquiryNo=<%= eq.getKey() %>">
 				<%= eq.getTitle() %>
 				</a>
 			</td>
@@ -87,9 +90,9 @@ table#tbl-board tr:nth-child(even) {background-color: #f5f0f0c0;}
 			<td><%= eq.getMemberId() %></td>
 			<td><%= eq.getEnrollDate() %></td> 				
 			<td><% if(eq.getStatus().equals("T")) { %>
-					<p class="font-bold text-red-700">답변완료</p>				 			
+					<p class="font-bold text-red-500">답변완료</p>				 			
 				<%} else {%>
-				답변중
+				<p class= "text-gray-700">답변중</p>
 				<%} %>
 			</td> 
 			<%} %>
@@ -101,6 +104,14 @@ table#tbl-board tr:nth-child(even) {background-color: #f5f0f0c0;}
 		} 
 	%>		
 		</table>
+	<br />
+	
+		<% 	if(memberLoggedIn != null){ %>
+		<input type="button" value="글쓰기" id="btn-add" 
+			   onclick="location.href='<%= request.getContextPath() %>/enquiry/insert';" />
+		<% 	} %>
+	<br />
+	<br />
 	
 			 <div class="align-middle flex justify-center">
 				         <div class="flex rounded-md mt-8">
