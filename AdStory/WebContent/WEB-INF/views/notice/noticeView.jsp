@@ -99,7 +99,6 @@ table#tbl-board-view tr:nth-child(odd) {background-color: rgba(152, 209, 236, 0.
 	<br />
 	<br />
 
-
 	<% if(memberLoggedIn!=null && MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())) { %>
 		<%--글작성자/관리자인경우 게시글 수정삭제버튼 보일수 있게 함 --%>
 					
@@ -108,23 +107,22 @@ table#tbl-board-view tr:nth-child(odd) {background-color: rgba(152, 209, 236, 0.
 							
 				
 	<br />
-	
 
 <form name="noticeDelFrm" 
-	  action="<%=request.getContextPath()%>/notice/delete" 
-	  method="post">
-	<input type="hidden" name="noticeNo" value="<%=n.getKey() %>" />
+     action="<%=request.getContextPath()%>/notice/delete" 
+     method="post">
+   <input type="hidden" name="noticeNo" value="<%=n.getKey() %>" />
 </form>
 <br />
 <br />
 <br />
 <script>
 function updateNotice(){
-	location.href="<%=request.getContextPath()%>/notice/update?noticeNo=<%=n.getKey() %>";
+   location.href="<%=request.getContextPath()%>/notice/update?noticeNo=<%=n.getKey() %>";
 }
 function deleteNotice(){
-	if(!confirm('이 게시글을 정말 삭제하시겠습니까?')) return;
-	$("[name=noticeDelFrm]").submit();
+   if(!confirm('이 게시글을 정말 삭제하시겠습니까?')) return;
+   $("[name=noticeDelFrm]").submit();
 }
 
 </script>
