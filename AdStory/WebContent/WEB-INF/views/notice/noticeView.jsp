@@ -87,35 +87,35 @@ table#tbl-board-view tr:nth-child(even) {background-color: #f2f2f2;}
 	<br />
 	<br />
 	
-		<%--글작성자/관리자인경우 게시글 수정삭제버튼 보일수 있게 함 --%>
-			<% if(MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())) { %>
-			
-					<input type="button" value="수정하기"  id="menuBtn"  onclick="updateNotice()">
-					<input type="button" value="삭제하기" id="menuBtn"  onclick="deleteNotice()">
-							
-			<%} %>	
-	<br />
-	
-<% if(memberLoggedIn!=null 	
-	|| MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())) { %>
+   <% if(memberLoggedIn!=null && MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())) { %>
+      <%--관리자인경우 게시글 수정삭제버튼 보일수 있게 함 --%>
+               
+               <input type="button" value="수정하기"  id="menuBtn"  onclick="updateNotice()">
+               <input type="button" value="삭제하기" id="menuBtn"  onclick="deleteNotice()">
+                     
+            
+   <br />
+   
+
 <form name="noticeDelFrm" 
-	  action="<%=request.getContextPath()%>/notice/delete" 
-	  method="post">
-	<input type="hidden" name="noticeNo" value="<%=n.getKey() %>" />
+     action="<%=request.getContextPath()%>/notice/delete" 
+     method="post">
+   <input type="hidden" name="noticeNo" value="<%=n.getKey() %>" />
 </form>
 <br />
 <br />
 <br />
 <script>
 function updateNotice(){
-	location.href="<%=request.getContextPath()%>/notice/update?noticeNo=<%=n.getKey() %>";
+   location.href="<%=request.getContextPath()%>/notice/update?noticeNo=<%=n.getKey() %>";
 }
 function deleteNotice(){
-	if(!confirm('이 게시글을 정말 삭제하시겠습니까?')) return;
-	$("[name=noticeDelFrm]").submit();
+   if(!confirm('이 게시글을 정말 삭제하시겠습니까?')) return;
+   $("[name=noticeDelFrm]").submit();
 }
 
 </script>
+
 <%} %>
 </section>
 </div>

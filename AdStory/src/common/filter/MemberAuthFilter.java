@@ -19,7 +19,7 @@ import member.model.vo.Member;
  * Servlet Filter implementation class MemberAuthFilter
  */
 @WebFilter(urlPatterns = {
-	"/myPage/view","/myPage/adRegisterList","/myPage/point","/myPage/adList"
+	"/myPage/view","/myPage/adRegisterList","/myPage/point","/myPage/adList","/myPage/updatePassword"
 })
 public class MemberAuthFilter implements Filter {
 

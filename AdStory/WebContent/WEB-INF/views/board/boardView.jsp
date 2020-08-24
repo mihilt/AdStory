@@ -234,7 +234,7 @@ $(function(){
 		%>
 		</div>
 
-        <%if(memberLoggedIn.getName().equals(b.getRefMemberName())){ %>
+        <%if(memberLoggedIn.getKey() == b.getUserKey()){ %>
 			<button class="px-10 m-auto my-5 cursor-pointer bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
 			 onclick=location.href="<%=request.getContextPath()%>/board/update?boardNo=<%=b.getKey()%>";>
 			   수정
