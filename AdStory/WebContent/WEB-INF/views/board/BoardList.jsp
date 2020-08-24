@@ -156,7 +156,25 @@ $(".unlike").click(function(){
          if (list == null || list.isEmpty()) {
       %>
 
-      <div class="m-auto text-xl">조회된 게시물이 없습니다.</div>
+      <div class="m-auto text-xl w-full text-center">
+                  조회된 게시물이 없습니다.
+                  
+       <%
+          if (memberLoggedIn != null && !memberLoggedIn.getMemberRole().equals("U")) {
+       %>
+       <div class="my-10">
+             <button
+                class="mx-12 text-base float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                onclick="location.href='<%=request.getContextPath()%>/board/insert';">
+                            글쓰기
+             </button>
+       </div>
+       <%
+          }
+       %>
+      </div>
+      
+      
 
       <%
          } else {

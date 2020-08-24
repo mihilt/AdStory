@@ -159,7 +159,7 @@ $(function(){
        %>
        <div class="my-10">
              <button
-                class="float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                class="mx-12 text-base float-right bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                 onclick="location.href='<%=request.getContextPath()%>/board/insert';">
                             글쓰기
              </button>
