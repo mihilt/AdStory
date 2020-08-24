@@ -1,4 +1,3 @@
-<%@page import="java.util.*" %>
 <%@page import="enquiry.model.vo.Enquiry" %>
 <%@page import="member.model.service.MemberService" %>
 
@@ -9,57 +8,74 @@
 	Enquiry eq = (Enquiry)request.getAttribute("enquiry");
 %>
 <div class = "max-w-screen-lg m-auto my-10">
-<img id="enquiryImg" src="<%=request.getContextPath() %>/images/enquiry.jpg" alt="공지사항" />
+
 <style>
 #enquiryImg{
-	width: 100%;
-	height:400px;
-	padding-left: 50px;
-	padding-right: 50px;
+	width: 200PX;
+	height:100px;
+	opacity: 0.45;
 }
-
-section#board-container{width:600px; margin:0 auto; text-align:center;}
-section#board-container h2{margin:10px 0; font-size: 30px;}
-table#tbl-board-view{width:100%; margin:0 auto; border:1px solid black; border-collapse:collapse; clear:both; }
-table#tbl-board-view th, table#tbl-board-view td { text-align: left;  padding: 15px;} 
-table#tbl-board-view th { border-right:1px solid black;} 
-table#tbl-board-view tr:nth-child(even) {background-color: #f2f2f2;}
-
-#backBtn{
- background-color: rgba(233, 190, 0, 0.87);
-  color: white;
+	
+	section#board-container{width:90%; margin:0 auto; text-align:center;}
+	section#board-container h2{margin:10px 0; font-size: 30px; padding-left:10px; float: left;}
+	table#tbl-board-view{width:90%; margin:0 auto;  border-collapse:collapse; clear:both;  }
+	table#tbl-board-view th { text-align: cnenter;  padding-top: 20px; padding-bottom: 20px; width:100px;}  
+	table#tbl-board-view td { text-align: left;  padding-top: 20px; padding-bottom: 20px; padding-left: 20px; width:600px;} 
+	table#tbl-board-view tr:nth-child(odd) {background-color: rgba(80, 199, 109, 0.13);}
+	
+	#backBtn{
+	 background-color: white;
+  color: rgba(233, 190, 0, 0.87);
+  padding: 9px 9px;
+  border-radius: 12px;
+  border: 3px solid rgba(233, 190, 0, 0.87);
+  cursor: pointer;
+  width: 100px;
+  opacity: 0.9;
+	float: right;
+  font-size: 17px;
+	}
+	
+	#menuBtn{
+	 background-color: white;
+  color: rgba(36, 124, 58, 0.781);
   padding: 10px 10px;
   border-radius: 12px;
-  border: none;
+  border: 3px solid rgba(36, 124, 58, 0.5);
   cursor: pointer;
   width: 100px;
   opacity: 0.9;
-  float: right;
-  font-size: 15px;
+
+	  font-size: 17px;
+	
+	
+	}
+	
+	#menuBtn:hover{
+	background-color: rgba(80, 199, 109, 0.4);
+	color: white;
 }
 
-#menuBtn{
- background-color: rgba(106, 199, 241, 0.842);
-  color: white;
-  padding: 8px 8px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  width: 100px;
-  opacity: 0.9;
-  font-size: 15px;}
+#backBtn:hover{
+	background-color: rgba(233, 190, 0, 0.5);
+	color: white;
+}
   
 #enquiryAnswer{
-  background-color: rgba(214, 214, 214, 0.589);
+  background-color: rgba(214, 214, 214, 0.3);
   height: 100px;
   width: 600px;
 }
 </style>
 <section id="board-container">
+<img id="enquiryImg" src="<%=request.getContextPath() %>/images/enquiry.jpg" alt="공지사항" />
+	<br />
 	<h2>문의 사항</h2>
+	<br /><br /><hr /><br /><br />
+	<script src="<%= request.getContextPath() %>/js/jquery-3.5.1.js"></script>
 		<input type="button" value="목록 보기" id="backBtn" 
 		   onclick="location.href='<%= request.getContextPath() %>/enquiry/elist';" />
-		   <br /><br />
+		  <br /><br /><br /><br />
 	<table id="tbl-board-view">
 		<tr>
 			<th class = "text-center w-1/5">글번호</th>
@@ -83,7 +99,7 @@ table#tbl-board-view tr:nth-child(even) {background-color: #f2f2f2;}
 			<th>답변내용</th>
 			<td style="height: 200px;">
 			<%if(null == eq.getAnswer()){ %>
-			<p class = "text-red-700">아직 관리자가 답글을 달지 않았습니다.</p>
+			<p class = "font-bold text-red-600">답변 대기중 입니다.</p>
 			<% } else { %>
 			<%=eq.getAnswer()%>
 			<% } %>
@@ -130,7 +146,8 @@ function deleteEnquiry(){
 	<% if(MemberService.ADMIN_MEMBER_ROLE.equals(memberLoggedIn.getMemberRole())) { %>
 	
 	
-		<p style="text-align: left; font-size: 20px;">답변작성</p>
+		<p style="text-align: left; padding-left:20px; font-size: 20px;">답변작성</p>
+		<hr /><br /><br />
 	<div class="answer-container">
 		<div class="answer-editor">
 			<form action="<%= request.getContextPath() %>/enquiry/answer"
@@ -141,7 +158,7 @@ function deleteEnquiry(){
 				
 				<textarea name="enquiryAnswer" 
 						  id="enquiryAnswer" 
-						  cols="60" rows="3"></textarea>
+						  cols="60" rows="3" style="width: 650px; height: 200px;"></textarea>
 						  <br />
 						  <br />
 				<button type="submit" id="menuBtn">답변등록</button>
