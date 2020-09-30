@@ -33,7 +33,6 @@ public class MvcFileRenamePolicy implements FileRenamePolicy {
 			newFile = new File(oldFile.getParent(),newName);
 			//후에 다시한번 겹치는지 createNewFile로 확인.
 		}while(!createNewFile(newFile));
-		System.out.println("newFile@mvcRenamePolicy = "+newFile);
 		return newFile;
 	}
 	private boolean createNewFile(File f) {

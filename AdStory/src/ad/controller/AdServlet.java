@@ -31,14 +31,11 @@ public class AdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num = Integer.parseInt(request.getParameter("num"));
-		System.out.println(num);
 		
 		String clientIp = null != request.getHeader("X-FORWARDED-FOR") ? request.getHeader("X-FORWARDED-FOR") : request.getRemoteAddr();
-		System.out.println(clientIp);
 		
 		AdClick adClick = new AdClickService().click(num ,clientIp);
 		
-		System.out.println(adClick.getURL());
 		response.sendRedirect(adClick.getURL());
 
 //		일단 광고 URL 접속시

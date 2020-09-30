@@ -65,7 +65,6 @@ public class AdClickDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("AdClick@dao = " + a);
 		
 		return a;
 	}
@@ -85,7 +84,6 @@ public class AdClickDAO {
 			rset = pstmt.executeQuery();
 
 			if(rset.next()) {
-				System.out.println("0이냐 1이냐"+rset.getInt("check"));
 				if (1 == rset.getInt("check")) {
 					result = true;
 				}
@@ -149,7 +147,6 @@ public class AdClickDAO {
 	}
 
 	public Boolean updatePostPoint(Connection conn, int postKey, int clickPrice) {
-		System.out.println("clickPrice@DAO 단가 = " + clickPrice);
 		int resultPstmt = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("updatePostPoint"); 

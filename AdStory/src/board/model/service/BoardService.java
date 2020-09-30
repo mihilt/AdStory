@@ -7,11 +7,14 @@ import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
 import board.model.vo.BoardCategory;
+import board.model.vo.BoardComment;
 import member.model.dao.MemberDAO;
+import member.model.vo.Member;
 
 public class BoardService {
 
@@ -31,9 +34,9 @@ public class BoardService {
 		return board;
 	}
 	
-	public List<Board> selectBoardList(int cPage, int numPerPage) {
+	public List<Board> selectBoardList(int cPage, int numPerPage,int userKey) {
 		Connection conn = getConnection();
-		List<Board> list= boardDAO.selectBoardList(conn, cPage, numPerPage);
+		List<Board> list= boardDAO.selectBoardList(conn, cPage, numPerPage,userKey);
 		close(conn);
 		return list;
 	}
@@ -92,6 +95,115 @@ public class BoardService {
 
 		return result;
 	}
+
+	public List<BoardComment> selectCommentList(int boardNo) {
+		Connection conn = getConnection();
+		List<BoardComment> commentList
+			= boardDAO.selectCommentList(conn, boardNo);
+		close(conn);
+		return commentList;
+	}
+
+	public int insertBoardComment(BoardComment boardComment) {
+		Connection conn = getConnection();
+		int result = boardDAO.insertBoardComment(conn, boardComment);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteBoardComment(int boardCommentNo,String role) {
+		Connection conn = getConnection();
+		int result = boardDAO.deleteBoardComment(conn, boardCommentNo,role);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateBoard(Board board) {
+		Connection conn = getConnection();
+		int result = boardDAO.updateBoard(conn, board);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	public int deleteBoard(int boardNo) {
+		Connection conn = getConnection();
+		int result = boardDAO.deleteBoard(conn, boardNo);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateBoardApply(int postKey) {
+		Connection conn = getConnection();
+		int result = boardDAO.updateBoardApply(conn, postKey);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<Board> searchBoard(Map<String, Object> param) {
+		Connection conn = getConnection();
+//		if(param.get("searchType").equals("memberName")) {
+//			System.out.println("memberName@service="+param.get("searchKeyword"));
+//			Member member = new MemberDAO().selectOne(conn,param.get("searchKeyword"));
+//			if(member !=null) {
+//				param.put("searchKeyword", member.getKey());				
+//			}else {
+//				param.put("searchKeyword", 0);
+//			}
+//		}
+//		System.out.println("userKey@service="+param.get("searchKeyword"));
+		List<Board> list = boardDAO.searchBoard(conn, param); 
+		close(conn);
+		return list;
+	}
+
+	public int getTotalContents(Map<String, Object> param) {
+		Connection conn = getConnection();
+//		if(param.get("searchType").equals("memberName")) {
+//			Member member = new MemberDAO().selectOne(conn,param.get("searchKeyword"));
+//			if(member !=null) {
+//				param.put("searchKeyword", member.getKey());				
+//			}else {
+//				param.put("searchKeyword", 0);
+//			}
+//		}
+
+//		System.out.println("userKey@service="+param.get("searchKeyword"));
+		int totalContents = boardDAO.getTotalContents(conn, param);
+		close(conn);
+		return totalContents;
+	}
+	public List<Board> selectMemberBoardList(int cPage, int numPerPage, String memberId) {
+        Connection conn = getConnection();
+        List<Board> list= boardDAO.selectMemberBoardList(conn, cPage, numPerPage, memberId);
+        close(conn);
+        return list;
+    }
+    public int selectMemberBoardListCount(String memberId) {
+        Connection conn = getConnection();
+        int totalBoardCount = boardDAO.selectMemberBoardListCount(conn, memberId);
+        close(conn);
+        return totalBoardCount;
+    }
+
 
 
 }

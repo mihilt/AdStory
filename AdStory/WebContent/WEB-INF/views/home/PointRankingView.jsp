@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="pointlog.vo.PointLogRanking"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -7,17 +8,17 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <% 
 String type = (String)request.getAttribute("servletType");
+ArrayList memberIdRank = new ArrayList<>();
+ArrayList rankPointAmount = new ArrayList<>();
 %>
 <div class = "m-12">  
     
     <!-- 상단 nav -->
     <nav class="mb-10 text-center font-bold sm:flex sm:justify-center sm:items-center mt-4">
         <div class="flex flex-col sm:flex-row">
-            <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>">회사소개</a>
+            <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>">사이트 소개</a>
             <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>/home/notice">공지사항</a>
             <span class="mt-3 text-blue-700 sm:mx-3 sm:mt-0">포인트 랭킹</span>
-            <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>/home/manual">초보자 가이드</a>
-            <a class="mt-3 text-gray-700 hover:text-blue-700 hover:underline sm:mx-3 sm:mt-0" href="<%= request.getContextPath() %>/home/FAQ">자주 묻는 질문(FAQ)</a>
         </div>
     </nav>
     
@@ -51,7 +52,7 @@ String type = (String)request.getAttribute("servletType");
             %> 
               
 <%  if(list == null || list.isEmpty()){  %>     
-            <div class = "m-auto text-xl text-red-700">오늘 날짜 기준 조회된 랭킹목록이 없습니다.</div>
+            <div class = "m-auto text-xl text-red-700">조회된 랭킹목록이 없습니다.</div>
             
             
 <%  } else { %>
@@ -68,10 +69,17 @@ String type = (String)request.getAttribute("servletType");
 		    <tbody>
 		    
 		    <%
+
+		        
+		    
 		    	int num = 0;
 		        for(PointLogRanking l : list){ %>
-		        
-                    <% num++; %>
+		            
+                    <% 
+                    num++;
+                    memberIdRank.add("\"" + num + "등 : " + l.getMemberId() + "\"");
+                    rankPointAmount.add(l.getSumPoint());
+                    %>
 
                     <% if(num%2==0){ %>
 				        <tr>
@@ -96,11 +104,49 @@ String type = (String)request.getAttribute("servletType");
                 </tr>
          </tbody>
         </table>
-            <% } %> 
+
+
+
+    
+<p class = "text-center my-10 text-red-600 text-sm">*일반회원이 게시글 홍보를 통해 얻은 포인트만 집계 처리한 순위입니다.</p>
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<div>
+	<div class = "w-1/2 m-auto">
+	    <div class="p-5">
+	        <canvas id="chartjs-1" class="chartjs" width="undefined" height="undefined"></canvas>
+	        <script>
+	        new Chart(document.getElementById("chartjs-1"), {
+	            "type": "bar",
+	            "data": {
+	                "labels": <%=memberIdRank.toString()%>,
+	                "datasets": [{
+	                    "label": "광고수익",
+	                    "data": <%=rankPointAmount.toString() %>,
+	                    "fill": false,
+	                    "backgroundColor": ["rgba(54, 162, 235, 0.2)"],
+	                    "borderColor": ["rgb(54, 162, 235)"],
+	                    "borderWidth": 1
+	                }]
+	            },
+	            "options": {
+	                "scales": {
+	                    "yAxes": [{
+	                        "ticks": {
+	                            "beginAtZero": true
+	                        }
+	                    }]
+	                }
+	            }
+	        });
+	        </script>
+	    </div>
+    </div>
+                <% } %> 
         </div>
         
     </div>
-    
-    <p class = "text-center my-10 text-red-600 text-sm">*일반회원이 게시글 홍보를 통해 얻은 포인트만 집계 처리한 순위입니다.</p>
+
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

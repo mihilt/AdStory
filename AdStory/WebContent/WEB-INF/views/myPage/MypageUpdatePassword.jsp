@@ -35,9 +35,9 @@ function passwordValidate(){
 </script>
 </head>
 <body>
-	<div id="updatePassword-container">
+	<div class = "m-auto" id="updatePassword-container">
 		<form name="updatePwdFrm" action="<%=request.getContextPath()%>/myPage/updatePassword" method="post" >
-			<table>
+			<table >
 				<tr>
 					<th>현재 비밀번호</th>
 					<td><input type="password" name="password" id="password" required></td>

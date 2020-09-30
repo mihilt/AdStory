@@ -46,9 +46,6 @@ public class MemberUpdatePasswordServlet extends HttpServlet {
 		String password = Utils.getEncryptedPassword(request.getParameter("password"));
 		String password_new = Utils.getEncryptedPassword(request.getParameter("password_new"));
 		
-		System.out.println(memberId);
-		System.out.println(password);
-		System.out.println(password_new);
 		
 		//2.서비스로직호출
 		Member member = new MemberService().selectOne(memberId);

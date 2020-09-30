@@ -44,7 +44,6 @@ public class MemberUpdateServlet extends HttpServlet {
 		
 		Member member = new Member(0, memberId, null, null, 0, phoneNum, accountName, accountNum, null, name, email, address, null);
 
-		System.out.println("입력한 회원정보 : "+member);
 		
 		//3.서비스로직호출
 		int result = new MemberService().updateMember(member);  

@@ -35,7 +35,6 @@ public class PointRankingViewTodayServlet extends HttpServlet {
 		
 		List<PointLogRanking> list = new PointLogService().PointLogRankingTodayList();
 		
-		System.out.println("list@servlet = " + list);
 		
 		String view = "/WEB-INF/views/home/PointRankingView.jsp";
 		

@@ -35,8 +35,6 @@ public class BoardFileDownloadServlet extends HttpServlet {
 		//1.사용자입력값처리
 		String rName = request.getParameter("rName");
 		String oName = request.getParameter("oName");
-		System.out.println("rNaame = "+rName);
-		System.out.println("oName = "+oName);
 		
 		//2.입출력 스트림 생성
 		// C:/.../WebContent/upload/board/20200803_171039_810.png
@@ -60,7 +58,6 @@ public class BoardFileDownloadServlet extends HttpServlet {
 			//utf-8인코딩을 iso-8859-1인코딩으로 변환
 			oName = new String(oName.getBytes("utf-8"),"iso-8859-1");
 		}
-		System.out.println(oName);
 		
 		
 		//utf-8 인코딩을 iso-8859-1인코딩으로 변환

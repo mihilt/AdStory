@@ -3,7 +3,7 @@
     
 <%
 	String result = (String)request.getAttribute("result");
-	System.out.println(result);
+	String businessNum = (String)request.getAttribute("BusinessNum");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,13 +16,12 @@
 <script>
 	$(function(){
 		
-		$("[name=checkIdDuplicateFrm]").submit(function(){
+		$("[name=checkBusinessNumFrm]").submit(function(){
 			//아이디 중복검사
-			var $memberId = $("#memberId");
+			var $BusinessNum = $("#BusinessNum_");
 			
-			if(/^\w{4,}$/.test($memberId.val()) == false){
-				alert("유효한 아이디를 입력해주세요.");
-				$memberId.select();
+			if(/^[\w]{4,}$/.test($BusinessNum.val()) == false){
+				alert("유효한 사업자번호를 입력하세요.");
 				return false;
 			}
 			
@@ -41,14 +40,14 @@
 		var $businessNum = $("[name=BusinessNum]");
 		console.log("numtest");
 	
-		var $frm = $(opener.document.memberEnrollFrm);
-		/* $frm.find("#BusinessNum_").val($businessNum.val()); */
+		var $frm = $(opener.document.bussinessEnrollFrm);
+		$frm.find("#BusinessNum_").val("<%=businessNum%>");
 		$frm.find("#BuisinessNumValid").val(1);
 		
 		console.log($businessNum.val());
 		console.log($frm.find("#BusinessNum_"));
 		
-		
+	
 		self.close();
 		
 		

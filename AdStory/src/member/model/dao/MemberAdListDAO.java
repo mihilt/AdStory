@@ -67,7 +67,6 @@ public class MemberAdListDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
 		return list;
 	}
 
@@ -123,5 +122,31 @@ public class MemberAdListDAO {
 		
 		return num;
 	}
+
+
+	public int selectNumInquiry(Connection conn) {
+		PreparedStatement pstmt = null;
+		int num = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectNumInquiry");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+	
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				num = rset.getInt("cnt");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return num;
+	}
+
 
 }

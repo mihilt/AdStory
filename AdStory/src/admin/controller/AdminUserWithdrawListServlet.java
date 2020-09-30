@@ -43,10 +43,8 @@ public class AdminUserWithdrawListServlet extends HttpServlet {
 		}
 		
 		List<MemberWithdraw> list = new MemberService().showAllWithdraw(cPage, numPerPage);
-		System.out.println("list@Servlet = "+list);
 		
 		int totalWithdrawCount = new MemberService().showAllWithdrawCount();
-		System.out.println("totalWithdrawCount@Servlet =" + totalWithdrawCount);
 		
 		
 		String url = request.getRequestURI();

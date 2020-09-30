@@ -4,7 +4,9 @@ import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import board.model.dao.BoardDAO;
 import board.model.vo.Board;
@@ -47,8 +49,7 @@ public class PointLogService {
 		Connection conn = getConnection();
 		List<PointLogRanking> list= pointLogDAO.PointLogRankingTodayList(conn);
 		
-		System.out.println("list@service = " + list);
-		
+	
 		close(conn);
 		return list;
 	}
@@ -57,7 +58,7 @@ public class PointLogService {
 		Connection conn = getConnection();
 		List<PointLogRanking> list= pointLogDAO.PointLogRankingWeekList(conn);
 		
-		System.out.println("list@service = " + list);
+	
 		
 		close(conn);
 		return list;
@@ -67,11 +68,21 @@ public class PointLogService {
 		Connection conn = getConnection();
 		List<PointLogRanking> list= pointLogDAO.PointLogRankingYearList(conn);
 		
-		System.out.println("list@service = " + list);
+
 		
 		close(conn);
 		return list;
 	}
+
+	public Map<String, Integer> selectSales() {
+		Connection conn = getConnection();
+		Map<String, Integer> sales = new HashMap<>();
+		sales = pointLogDAO.selectSales(conn);
+		
+		close(conn);
+		return sales;
+	}
+
 
 
 

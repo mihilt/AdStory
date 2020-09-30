@@ -33,13 +33,9 @@ public class MemberLoginServlet extends HttpServlet {
 		password = Utils.getEncryptedPassword(password);
 		
 		String saveId = request.getParameter("saveId");
-		System.out.println("memberId@servlet = " + memberId);
-		System.out.println("password@servlet = " + password);
-		System.out.println("saveId@servlet = " + saveId);
 		
 		//2. 업무로직
 		Member member = new MemberService().selectOne(memberId);
-		System.out.println("member@servlet = " + member);
 		
 		//3. 뷰단(응답)처리
 		//a. 아이디/비번 모두 맞은 경우: 로그인 성공

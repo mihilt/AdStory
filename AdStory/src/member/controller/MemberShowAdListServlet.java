@@ -49,7 +49,6 @@ public class MemberShowAdListServlet extends HttpServlet {
 		
 		//2.2 전체게시글수, 전체페이지수 구하기
 		int totalContents = new MemberAdListService().selectMemberAdListCount(memberId);
-		System.out.println("totalContents = " + totalContents);
 		
 		String url = request.getRequestURI()+"?memberId="+memberId;
 		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);

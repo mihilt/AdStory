@@ -41,9 +41,7 @@ public class AdminMemberListServlet extends HttpServlet {
 		}
 		
 		List<Member> list = new MemberService().selectAll(cPage, numPerPage);
-		System.out.println("list@servlet = " + list);
 		int totalContents = new MemberService().getTotalContents();
-		System.out.println("totalContents@servlet = " + totalContents);
 		
 
 		String url = request.getRequestURI();

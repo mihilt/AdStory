@@ -6,6 +6,7 @@ import java.util.Map;
 
 import member.model.dao.MemberDAO;
 import member.model.vo.Member;
+import member.model.vo.MemberWishList;
 import member.model.vo.MemberWithdraw;
 import pointlog.DAO.PointLogDAO;
 import pointlog.vo.PointLog;
@@ -22,14 +23,11 @@ public class MemberService {
 	private PointLogDAO pointLogDAO = new PointLogDAO();
 	
 	public Member selectOne(String memberId) {
-		System.out.println("memberId@service = " + memberId);
 		//1. DB Connection객체 생성
 		Connection conn = getConnection();
-		System.out.println("conn = " + conn);
 		//2. DAO 처리 요청
 		Member member = memberDAO.selectOne(conn, memberId);
 		
-		System.out.println("member@service = " + member);
 		//3. DML요청인 경우, Transaction 처리
 		//4. Connection 반납(close)
 		close(conn);
@@ -40,7 +38,6 @@ public class MemberService {
 	public int updateMemberPoint(String userId, int pointAmount) {
 		//1. DB Connection객체 생성
 		Connection conn = getConnection();
-		System.out.println("conn = " + conn);
 		//2. DAO 처리 요청
 		int result = memberDAO.updateMemberPoint(conn, userId, pointAmount);
 		
@@ -217,6 +214,95 @@ public class MemberService {
 			rollback(conn);
 		close(conn);
 		return result;
+	}
+
+
+	public Member selectMail(String email) {
+		//1. DB Connection객체 생성
+		Connection conn = getConnection();
+		//2. DAO 처리 요청
+		Member member = memberDAO.selectMail(conn, email);
+		
+		//3. DML요청인 경우, Transaction 처리
+		//4. Connection 반납(close)
+		close(conn);
+		
+		return member; 
+	}
+
+	public Member selectPW(String memberId, String name, String email) {
+
+		//1. DB Connection객체 생성
+		Connection conn = getConnection();
+		//2. DAO 처리 요청
+
+		Member member = memberDAO.selectPW(conn, memberId,name,email);
+
+		
+		//3. DML요청인 경우, Transaction 처리
+		//4. Connection 반납(close)
+		close(conn);
+
+		return member;
+
+	}
+
+
+	public Member selectId(String name, String email) {
+
+		//1. DB Connection객체 생성
+		Connection conn = getConnection();
+		//2. DAO 처리 요청
+
+		Member member = memberDAO.selectId(conn,name,email);
+
+		
+		//3. DML요청인 경우, Transaction 처리
+		//4. Connection 반납(close)
+		close(conn);
+
+		return member;
+	}
+
+	public List<MemberWishList> selectWishList(int cPage, int numPerPage, int userKey) {
+		Connection conn = getConnection();
+		List<MemberWishList> list = memberDAO.selectWishList(conn,cPage,numPerPage,userKey);
+		close(conn);
+		return list;
+	}
+
+	public int insertWishList(int userKey, int cUserKey) {
+		Connection conn = getConnection();
+		int result = memberDAO.insertWishList(conn,userKey,cUserKey);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+
+		close(conn);
+
+		return result;
+	}
+
+	public int deleteWishList(int userKey, int cUserKey) {
+		Connection conn = getConnection();
+		int result = memberDAO.deleteWishList(conn,userKey,cUserKey);
+		if (result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+
+		close(conn);
+
+		return result;
+	}
+
+	public int selectWishListCount(int userKey) {
+		Connection conn = getConnection();
+		int totalWishListCount = memberDAO.selectWishListCount(conn, userKey);
+		close(conn);
+		return totalWishListCount;
+
 	}
 	
 	

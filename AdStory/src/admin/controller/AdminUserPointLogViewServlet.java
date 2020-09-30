@@ -47,7 +47,6 @@ public class AdminUserPointLogViewServlet extends HttpServlet {
 		
 		//2.2 전체게시글수, 전체페이지수 구하기
 		int totalContents = new PointLogService().selectPointLogCount();
-		System.out.println("totalContents = " + totalContents);
 
 		String url = request.getRequestURI();
 		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);

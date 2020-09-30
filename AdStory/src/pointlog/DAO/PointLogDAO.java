@@ -10,11 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
-import board.model.dao.BoardDAO;
-import board.model.vo.Board;
 import pointlog.vo.PointLog;
 import pointlog.vo.PointLogRanking;
 
@@ -71,7 +71,7 @@ public class PointLogDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
+
 		return list;
 	}
 	
@@ -114,7 +114,7 @@ public class PointLogDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
+
 		return list;
 	}
 	
@@ -259,7 +259,7 @@ public class PointLogDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
+
 		return list;
 	}
 
@@ -272,16 +272,11 @@ public class PointLogDAO {
 		
 		try{
 			pstmt = conn.prepareStatement(query);
-
 			rset = pstmt.executeQuery();
-			
 			while(rset.next()){
 				PointLogRanking l = new PointLogRanking();
-
 				l.setMemberId(rset.getString("member_id"));
 				l.setSumPoint(rset.getInt("sum_point"));
-				
-				
 				list.add(l);
 			}
 		}catch(Exception e){
@@ -290,8 +285,38 @@ public class PointLogDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
+
 		return list;
+	}
+
+	public Map<String, Integer> selectSales(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Map<String, Integer> sales = new HashMap<>();
+		
+		String query = prop.getProperty("selectSales");
+
+		try{
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()){
+				sales.put("T1",rset.getInt("T1"));
+				sales.put("T2",rset.getInt("T2"));
+				sales.put("W1",rset.getInt("W1"));
+				sales.put("W2",rset.getInt("W2"));
+				sales.put("Y1",rset.getInt("Y1"));
+				sales.put("Y2",rset.getInt("Y2"));
+
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+
+		return sales;
 	}
 
 	

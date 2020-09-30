@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import member.model.vo.Member;
+import member.model.vo.MemberWishList;
 import member.model.vo.MemberWithdraw;
 import pointlog.vo.PointLog;
 
@@ -30,7 +31,6 @@ public class MemberDAO {
 		String fileName = "/sql/member/member-query.properties";
 		fileName =  MemberDAO.class.getResource(fileName)
 								   .getPath();
-		System.out.println("fileName@dao = " + fileName);
 		try {
 			prop.load(new FileReader(fileName));
 		} catch (IOException e) {
@@ -45,8 +45,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectOne");
-		System.out.println("sql@memberDAO = " + sql);
-		System.out.println("memberId@memberDAO = " + memberId);
 		
 		try {
 			//1. PreparedStatement객체생성, 미완성쿼리 전달
@@ -55,11 +53,9 @@ public class MemberDAO {
 			
 			//2. 실행 
 			rset = pstmt.executeQuery();
-			System.out.println("rset@memberDAO = " + rset);
 			
 			//3.ResultSet -> Member
 			if(rset.next()) {
-				System.out.println("sefsef" + rset.getDate("enroll_date"));
 				
 				member = new Member();
 				
@@ -86,7 +82,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("member@dao = " + member);
 		
 		return member;
 	}
@@ -97,14 +92,12 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("updateMemberPoint"); 
 		
-		System.out.println(query);
 		try {
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setInt(1, pointAmount);
 			pstmt.setString(2, userId);
 
-			System.out.println(pstmt);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -112,7 +105,6 @@ public class MemberDAO {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("result@DAO = " + result);
 		return result;
 	}
 
@@ -130,7 +122,6 @@ public class MemberDAO {
 			pstmt.setInt(2, pointAmount);
 			pstmt.setString(3, requirements);
 
-			System.out.println(pstmt);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -177,10 +168,6 @@ public class MemberDAO {
 		String query = prop.getProperty("selectMemberWithdrawList");
 		
 		
-		System.out.println("아뭐냐구");
-		System.out.println(memberId);
-		System.out.println((cPage-1)*numPerPage+1);
-		System.out.println(cPage*numPerPage);
 		
 		try{
 			pstmt = conn.prepareStatement(query);
@@ -203,7 +190,6 @@ public class MemberDAO {
 				w.setRequirements(rset.getString("requirements"));
 				w.setStatus(rset.getString("status"));
 				
-				System.out.println("w는"+w);
 				list.add(w);
 			}
 		}catch(Exception e){
@@ -212,7 +198,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
 		return list;
 	}
 
@@ -280,7 +265,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@boardDAO = " + list);
 		return list;
 	}
 
@@ -414,7 +398,6 @@ public class MemberDAO {
 		case "memberName" : col = "name"; break;
 		}
 		sql = sql.replace("●", col);
-		System.out.println("sql@dao = " + sql);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -454,7 +437,6 @@ public class MemberDAO {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println("list@dao = " + list);
 		return list;
 	}
 
@@ -464,7 +446,6 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("getSearchTotalContents");
-		System.out.println(sql);
 		String col = "";
 		switch(String.valueOf(param.get("searchType"))) {
 		case "memberId" : col = "member_id"; break;
@@ -494,7 +475,6 @@ public class MemberDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertMember"); 
-		System.out.println(member);
 		try {
 			
 			pstmt = conn.prepareStatement(query);
@@ -525,7 +505,6 @@ public class MemberDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String query = prop.getProperty("insertNomalMember"); 
-		System.out.println(member);
 		try {
 			
 			pstmt = conn.prepareStatement(query);
@@ -627,6 +606,272 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+
+
+	public Member selectMail(Connection conn, String email) {
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMail");
+		
+		try {
+			//1. PreparedStatement객체생성, 미완성쿼리 전달
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			
+			//2. 실행 
+			rset = pstmt.executeQuery();
+			
+			//3.ResultSet -> Member
+			if(rset.next()) {
+				
+				member = new Member();
+				
+				member.setKey(rset.getInt("key"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("password"));
+				member.setMemberRole(rset.getString("member_role"));
+				member.setPoint(rset.getInt("point"));
+				member.setPhoneNum(rset.getString("phone_num"));
+				member.setAccountName(rset.getString("account_name"));
+				member.setAccountNum(rset.getString("account_num"));
+				member.setBussinessNum(rset.getString("business_num"));
+				member.setName(rset.getString("name"));
+				member.setEmail(rset.getString("email"));
+				member.setAddress(rset.getString("address"));
+				member.setEnrollDate(rset.getDate("enroll_date"));
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return member;
+	}
+
+
+	public Member selectPW(Connection conn, String memberId, String name, String email) {
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPW");
+		
+		try {
+			//1. PreparedStatement객체생성, 미완성쿼리 전달
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, name);
+			pstmt.setString(3, email);
+
+			
+			//2. 실행 
+			rset = pstmt.executeQuery();
+			
+			//3.ResultSet -> Member
+			if(rset.next()) {
+				
+				member = new Member();
+				
+				member.setKey(rset.getInt("key"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("password"));
+				member.setMemberRole(rset.getString("member_role"));
+				member.setPoint(rset.getInt("point"));
+				member.setPhoneNum(rset.getString("phone_num"));
+				member.setAccountName(rset.getString("account_name"));
+				member.setAccountNum(rset.getString("account_num"));
+				member.setBussinessNum(rset.getString("business_num"));
+				member.setName(rset.getString("name"));
+				member.setEmail(rset.getString("email"));
+				member.setAddress(rset.getString("address"));
+				member.setEnrollDate(rset.getDate("enroll_date"));
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return member;
+	}
+	public List<MemberWishList> selectWishList(Connection conn, int cPage , int numPerPage,int userKey) {
+		List<MemberWishList> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectWishList");
+		String col = "";
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userKey);
+
+			int startRnum = (cPage-1) * numPerPage + 1;
+			int endRnum = cPage * numPerPage;
+			pstmt.setInt(2, startRnum);
+			pstmt.setInt(3, endRnum);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<>();
+			while(rset.next()) {
+				MemberWishList wishList = new MemberWishList();
+				wishList.setKey(rset.getInt("key"));
+				wishList.setUserKey(rset.getInt("user_key"));
+				wishList.setCUserKey(rset.getInt("c_user_key"));
+				wishList.setRefCUserName(rset.getString("name"));
+				wishList.setRefPhoneNum(rset.getString("phone_num"));
+				wishList.setRefEmail(rset.getString("email"));
+				wishList.setRefAddress(rset.getString("address"));
+				list.add(wishList);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+
+	public int insertWishList(Connection conn, int userKey, int cUserKey) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertWishList");
+		// insert into pnt_log values (seq_pnt_log.nextval,?,?,sysdate,?,?,(select point
+		// from member where key=?)-?)
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userKey);
+			pstmt.setInt(2, cUserKey);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+
+		return result;
+	}
+
+
+	public int deleteWishList(Connection conn, int userKey, int cUserKey) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteWishList");
+		// insert into pnt_log values (seq_pnt_log.nextval,?,?,sysdate,?,?,(select point
+		// from member where key=?)-?)
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userKey);
+			pstmt.setInt(2, cUserKey);
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+
+		return result;
+	}
+
+
+	public int selectWishListCount(Connection conn, int userKey) {
+		PreparedStatement pstmt = null;
+		int totalWishListCount = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("selectWishListCount");
+		
+		try{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userKey);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				totalWishListCount = rset.getInt("cnt");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalWishListCount;
+	}
+	
+
+
+	public Member selectId(Connection conn, String name, String email) {
+		Member member = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectId");
+		
+		try {
+			//1. PreparedStatement객체생성, 미완성쿼리 전달
+			pstmt = conn.prepareStatement(sql);
+
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+
+			
+			//2. 실행 
+			rset = pstmt.executeQuery();
+			
+			//3.ResultSet -> Member
+			if(rset.next()) {
+				
+				member = new Member();
+				
+				member.setKey(rset.getInt("key"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setPassword(rset.getString("password"));
+				member.setMemberRole(rset.getString("member_role"));
+				member.setPoint(rset.getInt("point"));
+				member.setPhoneNum(rset.getString("phone_num"));
+				member.setAccountName(rset.getString("account_name"));
+				member.setAccountNum(rset.getString("account_num"));
+				member.setBussinessNum(rset.getString("business_num"));
+				member.setName(rset.getString("name"));
+				member.setEmail(rset.getString("email"));
+				member.setAddress(rset.getString("address"));
+				member.setEnrollDate(rset.getDate("enroll_date"));
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return member;
 	}
 
 	

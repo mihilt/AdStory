@@ -4,16 +4,16 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <div class="m-12">
-    <p class = "text-3xl border-b-2">마이페이지 - 광고등록 현황</p>
+    <p class = "text-3xl border-b-2">마이페이지 - 광고신청 현황</p>
     
     <p class = "my-5">
         <a class = "text-blue-600 hover:underline" href="<%= request.getContextPath() %>/myPage">
                     마이페이지
         </a> 
-        > 광고등록 현황
+        > 광고신청 현황
     </p>
     <div>
-        <p class = "text-sm"><%= memberLoggedIn.getMemberId() %>님의 광고등록 현황을 조회합니다.</p>
+        <p class = "text-sm"><%= memberLoggedIn.getMemberId() %>님의 광고신청 현황을 조회합니다.</p>
     </div>
 
 <%

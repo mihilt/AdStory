@@ -1,6 +1,7 @@
 package home.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import common.Utils;
+import notice.model.service.NoticeService;
+import notice.model.vo.Notice;
 
 /**
  * Servlet implementation class NoticeServlet
@@ -28,10 +33,24 @@ public class NoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String view = "/WEB-INF/views/home/notice.jsp";
+		int numPerPage = 10;
+		int cPage = 1;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			
+		}
 		
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
-		reqDispatcher.forward(request, response);
+		List<Notice> list = new NoticeService().selectNoticeList(cPage,numPerPage);
+		int totalContents = new NoticeService().selectNoticeCount();
+	
+		String url = request.getRequestURI();
+		String pageBar = Utils.getPageBarHtml(cPage, numPerPage, totalContents, url);
+		
+		request.setAttribute("list", list);
+		request.setAttribute("pageBar", pageBar);
+		request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp")
+			   .forward(request, response);
 	}
 
 	/**

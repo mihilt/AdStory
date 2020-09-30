@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,11 +38,11 @@ public class CheckBusinessNumServlet extends HttpServlet {
 		
 		
 		
-		System.out.println("test");
 		String BusinessNum = request.getParameter("BusinessNum");
-		System.out.println(BusinessNum);
 		
 		//2. 업무로직
+		
+		
 		
 		ScrapingTaxTypeFromNts scrapingTaxTypeFromNts = new ScrapingTaxTypeFromNts();
 		List<String> listBusinessRegNo = new ArrayList<>();
@@ -52,12 +53,12 @@ public class CheckBusinessNumServlet extends HttpServlet {
 		for (String businessRegNo : listBusinessRegNo) {
 			String result = listResult.stream() .filter(map -> map.containsKey(businessRegNo)) .map(map -> map.get(businessRegNo)) 
 					.collect(Collectors.joining()); 
-			System.out.println(businessRegNo + " = " + result);
 			
 			
 		
 			request.setAttribute("result", result);
 		}
+		request.setAttribute("BusinessNum", BusinessNum);
 		request.getRequestDispatcher("/WEB-INF/views/member/checkBusinessNum.jsp")
 		.forward(request, response); 
 

@@ -33,11 +33,9 @@ public class MemberViewServlet extends HttpServlet {
 		
 		//1.사용자입력값 처리 
 		String memberId = request.getParameter("memberId");
-		System.out.println("memberId@servlet = " + memberId);
 		
 		//2. 업무로직
 		Member member = new MemberService().selectOne(memberId);
-		System.out.println("member@servlet = " + member);
 		
 		//3. view단 처리
 		String view = "";
